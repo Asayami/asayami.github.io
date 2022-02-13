@@ -76,20 +76,6 @@ html, body
     background-size: cover;
 }
 
-.welcome {
-    top:30%;
-    color:white;
-    position: relative;
-    margin-left:5% !important;
-}
-
-.welcome h1 {
-    font-weight:700;
-    font-size: 5vw;
-    opacity: 0.8;
-    text-shadow: 5px 5px 10px black;
-}
-
 /* PARAGRAPH */
 
 .paragraph {
