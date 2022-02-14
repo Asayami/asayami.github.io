@@ -67,7 +67,7 @@ html, body
 /* MAIN PICTURE */
 
 .mainPicture {
-    background-image: url('HackingBG.jpg');
+    background-image: url('mainPic.jpg');
     /* Full height */
     height:100% !important;
     /* Center and scale the image nicely */
@@ -80,8 +80,14 @@ html, body
 
 .paragraph {
     padding:7%;
+    font-size:20px;
 }
 
-.paragraph a {
-    text-decoration: none !important;
+.paratitle {
+    background-color:#1a53ff;
+    text-align:center;
+}
+
+.paratitle h2 {
+    color:white;
 }
