@@ -9,7 +9,10 @@ html, body
     {
         height: 70%;
     }
-    
+    .responsive_phone
+	{
+		width:90% !important;
+	}
 }
 
 
@@ -90,4 +93,10 @@ html, body
 
 .paratitle h2 {
     color:white;
+}
+
+/* RESPONSIVE PHONE */
+
+.responsive_phone {
+	
 }
