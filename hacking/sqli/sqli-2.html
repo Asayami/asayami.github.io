@@ -137,7 +137,7 @@
 			<font color="#009933">
 			&emsp;worldend.com/store.php?id=1') and false union select 1,version(),3,4--+
 			</font color="#009933"></p>
-			<p>Đầu tiên, chúng ta sẽ lấy danh sách toàn bộ database. Trong mỗi server, luôn luôn chứa một server
+			<p>Đầu tiên, chúng ta sẽ lấy danh sách toàn bộ database. Trong mỗi server, luôn luôn chứa một database
 			chứa nhiều thông tin chung, cốt lõi của cả server, đó là information_schema. Và danh sách cần tìm trong
 			database này đó là table schemata, cột schema_name. Do đó, URL sẽ là:</p>
 			<p><font color="#009933">&emsp;worldend.com/store.php?id=1') and false union select 1,schema_name,3,4 from information_schema.schemata--+</font color="#009933"></p>
@@ -165,7 +165,21 @@
 			<p>Hàm concat được sử dụng để nối output của nhiều cột, hay giá trị bên ngoài với nhau</p>
 			<img src="sqli_source/extracted_data.png" style="width:15%" class="img-fluid mx-auto d-block responsive_phone"></img>
 			<p><br><i class="fa-solid fa-triangle-exclamation"></i>
-			Như đã nói ở trên, nếu output chỉ cho phép in 1 dòng đầu thì sử dụng function LIMIT</p>
+			Như đã nói ở trên, nếu output chỉ cho phép in 1 dòng đầu thì sử dụng function LIMIT. Tuy nhiên,
+			việc phải liên tục thay giá trị tham số của LIMIT khá cực, nên chúng ta có cách khác như dưới đây</p>
+			<p>Chúng ta sẽ sử dụng SQL query:</p>
+			<p>&emsp;<font color="#009933">
+			SELECT 1,CAST(GROUP_CONCAT(name,0x3a,age,'&#60;br>') AS CHAR(2048)),3,4 FROM (SELECT name,age FROM sukabase.tablesuka LIMIT 0,2000)a;
+			</font color="#009933"></p>
+			<p>Khác với bên trên chúng ta gọi data các cột từ bảng, lần này chúng ta gọi 2 cột name, age từ một bảng
+			tạm thời a chứa thông tin mong muốn như lệnh SELECT trong ngoặc đơn, sau đó GROUP_CONCAT sẽ nối các hàng
+			ở kết quả lại. Tuy nhiên, hàm GROUP_CONCAT chỉ có giới hạn 1024 chữ cái thôi, nên bên ngoài phải sử dụng
+			thêm hàm CAST để nâng buffer tới 2048 chẳng hạn (có thể tăng giá trị buffer cho tới limit của một
+			packet POST là 8192)</p>
+			<p>URL sẽ trở thành:</p>
+			<p>&emsp;<font color="#009933">
+			worldend.com/store.php?id=1') and false union SELECT 1,CAST(GROUP_CONCAT(name,0x3a,age,'&#60;br>') AS CHAR(2048)),3,4 FROM (SELECT name,age FROM sukabase.tablesuka LIMIT 0,2000)a--+
+			</font color="#009933"></p>
 			<p>Và đó là toàn bộ nội dung cơ bản của Union Based SQL Injection &#128526;</p>
 		</div>
     </body>

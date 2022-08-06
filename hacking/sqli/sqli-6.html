@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SQLI (Part 6)</title>
+        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
+        <link rel="stylesheet" href="sqli_source/sqli_css.css">
+        <script src="sqli_source/sqli_js.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <meta name="description" content="Những bài viết, kinh nghiệm của mình về SQL Injection">
+		<meta name="keywords" content="Hacking, hack, SQLI, SQL Injection">
+		<meta name="author" content="Asayami Kurashin">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+                <script>window.onscroll = NavScroll;</script>
+                <a class="navbar-branch" href="https://asayami.github.io/">
+                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;"></img>
+                </a>
+                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active navitem">
+                            <a href="https://asayami.github.io/">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io/hacking.html">Hacking</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io#aboutanchor">About</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io#contactanchor">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="mainPicture"></div>
+		<div class="paragraph">
+			<h3>Oracle SQL Injection</h3>
+			<p>Bạn đọc tham khảo Union và DIOS tại:
+			<a href="http://www.securityidiots.com/Web-Pentest/SQL-Injection/Union-based-Oracle-Injection.html">Here</a>
+			và
+			<a href="http://www.securityidiots.com/Web-Pentest/SQL-Injection/oracle-sql-injection-dios-query.html">Here</a>
+			<h3>Guides about SQL Injection</h3>
+			<p>Không nhất thiết phải inject qua url (search box,...)<br>
+			Trong các website, có thể có các filter (bộ lọc) và có một số cách bypass cơ bản:</p>
+			<p>&emsp;- Có thể thay thế các khoảng trống (space) bằng các inline comment (/**/). Ví dụ như UNION SELECT sẽ thay bằng UNION/**/SELECT
+			<br>&emsp;- Do SQL không phân biệt chữ hoa thường nên thay vì sử dụng select và union có thể thay bằng SeLecT và uNiOn, tương tự với các lệnh khác nhằm bypass một số web chặn command string chúng ta nhập
+			<br>&emsp;- Thay vì đưa chuỗi 'text' vào chẳng hạn bạn có thể thay bằng mã hex 0x277465787427 hoặc thay bằng CHAR(116,101,120,116)</p>
+			<h3>Tools</h3>
+			<p>Một số tools phổ biến với đa dạng phương thức tấn công như: SQLMap, BBQSQL (Blind SQLi), NoSQLMap,...</p>
+			<p>Bên cạnh các tool tự động, với phương pháp truyền thống chúng ta có extension giúp tiết kiệm thời
+			gian như HackBar. Lợi ích khi sử dụng extension này là có thể thêm các kí tự vào URL mà không bị HTML encode/decode
+			cũng như reload trang không cần khởi động lại HackBar,...</p>
+			<h3>Các phương pháp chống SQL Injection</h3>
+			<p>&emsp;- Không bao giờ được tin tưởng những input người dùng nhập vào: Dữ liệu luôn phải được xác thực
+			trước khi sử dụng trong các câu lệnh SQL thông qua các filter
+			<br>&emsp;- Các thủ tục được lưu trữ (Stored Procedure): Những thủ tục này có thể trừu tượng hóa các lệnh SQL và xem xét toàn bộ
+			input như các tham số. Nhờ đó, nó không thể gây ảnh hưởng đến cú pháp lệnh SQL (không sử dụng các câu lệnh SQL trực tiếp).
+			Đối với ASP.NET, có cách ngăn chặn đơn giản là sử dụng các Parameters khi làm việc với object SqlCommand (hoặc OleDbCommand),
+			khi truyền data vào Parameters sẽ tự động validate kiểu dữ liệu
+			<br>&emsp;- Thông báo lỗi hợp lý: Thông báo lỗi phải tuyệt đối tránh tiết lộ những thông tin/chi tiết nhạy cảm và vị trí xảy ra lỗi trên thông báo lỗi
+			<br>&emsp;- Giới hạn quyền truy cập của người dùng đối với cơ sở dữ liệu
+			<br>&emsp;- Xóa các stored procedure trong database master mà không dùng như: xp_cmdshell, xp_startmail,
+			xp_sendmail, sp_makewebtask
+			<br>&emsp;- Thay đổi "Startup and run SQL Server" dùng mức low privilege user trong tab SQL Server Security</p>
+		</div>
+    </body>
+    
+</html>
