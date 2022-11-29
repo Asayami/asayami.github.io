@@ -60,24 +60,103 @@
             </div>
         </nav>
         <div class="mainPicture"></div>
+		<div class="paratitle">
+			<h2>Guides & Other Methods of SQL Injection</h2>
+		</div>
 		<div class="paragraph">
 			<h3>Oracle SQL Injection</h3>
 			<p>Bạn đọc tham khảo Union và DIOS tại:
 			<a href="http://www.securityidiots.com/Web-Pentest/SQL-Injection/Union-based-Oracle-Injection.html">Here</a>
 			và
 			<a href="http://www.securityidiots.com/Web-Pentest/SQL-Injection/oracle-sql-injection-dios-query.html">Here</a>
+			
+			
 			<h3>Guides about SQL Injection</h3>
 			<p>Không nhất thiết phải inject qua url (search box,...)<br>
 			Trong các website, có thể có các filter (bộ lọc) và có một số cách bypass cơ bản:</p>
 			<p>&emsp;- Có thể thay thế các khoảng trống (space) bằng các inline comment (/**/). Ví dụ như UNION SELECT sẽ thay bằng UNION/**/SELECT
 			<br>&emsp;- Do SQL không phân biệt chữ hoa thường nên thay vì sử dụng select và union có thể thay bằng SeLecT và uNiOn, tương tự với các lệnh khác nhằm bypass một số web chặn command string chúng ta nhập
-			<br>&emsp;- Thay vì đưa chuỗi 'text' vào chẳng hạn bạn có thể thay bằng mã hex 0x277465787427 hoặc thay bằng CHAR(116,101,120,116)</p>
-			<h3>Tools</h3>
-			<p>Một số tools phổ biến với đa dạng phương thức tấn công như: SQLMap, BBQSQL (Blind SQLi), NoSQLMap,...</p>
+			<br>&emsp;- Thay vì đưa chuỗi 'text' vào chẳng hạn bạn có thể thay bằng mã hex 0x277465787427 hoặc thay bằng CHAR(116,101,120,116)
+			<br>&emsp;- Nếu web server có sử dụng proxy caching thì bypass bằng cách thêm một loạt kí tự đặc biệt sau payload,
+			ví dụ payload#abcdef (proxy caching là cache và cũng gần tương tự như phía client, khác ở chỗ cache này thiết
+			lập cho phía server, bạn đọc có thể đọc thêm tại
+			<a href="https://zhost.vn/docs/cau-hinh-nginx-caching-centos-7/">Here</a>)</p>
+			
+			
+			<h3>SQL Injection using User Agent</h3>
+			<p>User Agent là một thông số có trong các packet, có dạng như:</p>
+			<p><font color="#009933">
+			Mozilla/5.0 (compatible; MSIE 11.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+			</font color="#009933"></p>
+			<p>Nghe có vẻ lạ nhưng ở một số nơi họ có thể thu thập thông tin UA để phân tích đánh giá lưu lượng truy cập
+			chẳng hạn. Do đó chúng ta có thể lợi dụng điều này</p>
+			<p>Ví dụ, chúng ta có 1 page visit.php như sau:</p>
+			<p><font color="#009933">
+			&#60;?php<br>
+			$link = new mysqli('localhost', 'root', 'root', 'analytics');<br>
+			$query = sprintf(&quot;INSERT INTO visits (ua, dt) VALUES ('%s', '%s')&quot;,<br>
+			$_SERVER[&quot;HTTP_USER_AGENT&quot;],<br>
+			date(&quot;Y-m-d h:i:s&quot;));<br>
+			$link->query($query);<br>
+			?><br>
+			</font color="#009933"></p>
+			<p>Do website chỉ thu thập dữ liệu chứ không hiển thị gì từ database nên chúng ta có thể dùng phương pháp Error
+			Based Injection hoặc Blind SQL Injection. Ví dụ mình sử dụng Blind SQL Injection trong trường hợp xấu hơn:</p>
+			<p><font color="#009933">
+			curl -A "Mozilla/5.0', (select sleep(20) from users where substring(name,1,1)='a')) #" http://worldend.com/visit.php
+			</font color="#009933"></p>
+			
+			
+			<h3>SQL Injection using Cookie</h3>
+			<p>Cookie cũng có thể tiềm ẩn những nguy cơ SQLi, lí do là vì có thể website muốn lưu lại thông tin gì đó vào
+			database, hoặc trong cookie có chứa thông tin, command về query SQL. Bạn đọc có thể tham khảo 1 case dưới đây,
+			đã bao gồm chi tiết các bước khai thác:
+			<a href="https://tradahacking.vn/sqli-on-cookie-header-fb6327be8dd7">Here</a></p>
+			
+			<h3>SQL Injection using XML Upload Form</h3>
+			<p>Đối với các form upload XML file, thường thì đầu tiên chúng ta sẽ cố gắng khai thác theo hướng như XXE chẳng
+			hạn. Tuy nhiên, nó cũng có thể tiềm ẩn lỗ hổng SQLi nếu server có lưu trữ thông tin hoặc có liên hệ với file XML
+			này. Với case này, bạn đọc có thể xem qua 1 vụ bug bounty với reward 4000$ trong hệ thống Starbucks tại:
+			<a href="https://hackerone.com/reports/531051">Here</a></p>
+			
+			<h3>SQL Injection at key of array</h3>
+			<p>Thông thường, chúng ta thường bypass và inject ở dạng:</p>
+			<p><font color="#009933">
+			worldend.com/store.php?id=1') blah blah
+			</font color="#009933"></p>
+			<p>Tuy nhiên đối với phương pháp này, bypass sẽ có dạng:</p>
+			<p><font color="#009933">
+			worldend.com/store.php?id[inject_here][]...=foo
+			</font color="#009933"></p>
+			<p>Dấu 3 chấm ở đây có nghĩa có thể inject số lượng chiều tuỳ ý cho mảng. Để hiểu thêm, các bạn đọc 2 cases tại:
+			<a href="https://tradahacking.vn/sqli-%E1%BB%9F-key-c%E1%BB%A7a-bi%E1%BA%BFn-m%E1%BA%A3ng-f31616e8206a">Here</a>
+			và
+			<a href="https://hackerone.com/reports/353784">Here</a></p>
+			<p>Mình sẽ giải thich sơ lược lối khai thác trong case thứ 2 ở hackerone. URL được craft có dạng:</p>
+			<p><font color="#009933">
+			worldend.com/profile/deleteInvitation?invitationID[1%3dbenchmark(40000000,sha(1))+and+1]=balisong
+			</font color="#009933"></p>
+			<p>Khi đó, website sẽ gán key của mảng vào $subField và giá trị tương ứng vào $subValue. Sau đấy 2 biến này
+			sẽ được đưa vào query SQL sau khi đi qua một số function. Cuối cùng query SQL sẽ có dạng:</p>
+			<p><font color="#009933">
+			delete from GDN_Invitation where 1=benchmark(40000000,sha(1)) and 1 = 'balisong'
+			</font color="#009933"></p>
+			<p>Hàm benchmark(count,expr) sẽ thực thi count lần expr. Mục đích của hàm này là để test tốc độ xử lí của database,
+			tuy nhiên ta có thể sử dụng nó như một cách để Blind SQL Injection</p>
+		</div>
+		<div class="paratitle">
+			<h2>Tools</h2>
+		</div>
+		<div class="paragraph">
+			<p>Một số tools phổ biến với đa dạng phương thức tấn công cũng như nhiều lựa chọn để craft query như: SQLMap, BBQSQL (Blind SQLi), NoSQLMap,...</p>
 			<p>Bên cạnh các tool tự động, với phương pháp truyền thống chúng ta có extension giúp tiết kiệm thời
 			gian như HackBar. Lợi ích khi sử dụng extension này là có thể thêm các kí tự vào URL mà không bị HTML encode/decode
 			cũng như reload trang không cần khởi động lại HackBar,...</p>
-			<h3>Các phương pháp chống SQL Injection</h3>
+		</div>
+		<div class="paratitle">
+			<h2>Các phương pháp chống SQL Injection</h2>
+		</div>
+		<div class="paragraph">
 			<p>&emsp;- Không bao giờ được tin tưởng những input người dùng nhập vào: Dữ liệu luôn phải được xác thực
 			trước khi sử dụng trong các câu lệnh SQL thông qua các filter
 			<br>&emsp;- Các thủ tục được lưu trữ (Stored Procedure): Những thủ tục này có thể trừu tượng hóa các lệnh SQL và xem xét toàn bộ

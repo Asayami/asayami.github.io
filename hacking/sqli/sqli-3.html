@@ -69,9 +69,9 @@
 			gây lỗi</p>
 			<p>Trong một số trường hợp, có thể Union SQLi không hoạt động một phần, chúng ta có thể có thể cố tình gây lỗi
 			và khiến website hiển thị thông báo lỗi có chứa data cần lấy</p>
-			<p>Vậy khi nào phương pháp này có thể hữu dụng ? Đó là khi chúng ta vẫn có thể thực hiện các bước đến
-			bước tìm số cột, nhưng sau đó không thể lấy data của các cột, các hàng trong bảng. Trường hợp này xảy ra
-			thường là do các function dùng để check validity input, tuy nhiên nó hiếm khi thành công vì yêu cầu nhiều
+			<p>Vậy khi nào phương pháp này có thể hữu dụng ? Có những lúc chúng ta vẫn có thể thực hiện các bước đến
+			bước inject code thành công hay tìm số cột, nhưng sau đó không thể lấy data của các cột, các hàng trong bảng hoặc không thể. Trường hợp này xảy ra
+			thường là do các function dùng để check validity input. Tuy nhiên Error Based Injection hiếm khi thành công vì yêu cầu nhiều
 			yếu tố cần thiết như:
 			<br>&emsp;- Có thể bypass thông qua funtion của XPATH
 			<br>&emsp;- Website hiển thị thông báo lỗi khi thực thi query SQL</p>
@@ -83,8 +83,7 @@
         </div>
         <div class="paragraph">
 			<p>Như đã nói ở trên, chúng ta có thể thao tác các bước bằng phương pháp Union SQLi cho đến hết bước tìm
-			số cột (Order By). Giả sử chúng ta có 4 cột được xuất trong query đó</p>
-			<p><font color="#009933">&emsp;worldend.com/store.php?id=1') union select 1,2,3,4--+</font color="#009933"></p>
+			cách để inject code vào truy vấn SQL</p>
 			<p>Hàm extractvalue được sử dụng như sau: extractvalue(xml_target,xpath_query). Và URL khi sử dụng hàm
 			extractvalue() sẽ là:</p>
 			<p><font color="#009933">&emsp;worldend.com/store.php?id=1') and extractvalue(0x0a,concat(0x0a,(select database())))--+</font color="#009933"></p>
