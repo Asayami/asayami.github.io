@@ -9,16 +9,19 @@ html, body
     {
         height: 70%;
     }
-    .about h1, .contact h1 {
-        font-size:30px;
+    .about h1, .contact h1, .mainPicture h1 {
+        font-size:30px !important;
     }
     
-    .about h2, .contact h2 {
+    .about h2, .contact h2, .terminal h2{
         font-size:20px;
     }
     .copyright h3 {
         font-size:15px;
     }
+	.terminal {
+	padding-left:10% !important;
+	}
 }
 
 
@@ -168,4 +171,31 @@ html, body
 .copyright {
     padding:5%;
     text-align: center;
+}
+
+/* TERMINAL */
+
+.terminal {
+	border: 3px solid green;
+	background-color:black;
+	font-family: 'Courier New', monospace;
+	padding-left:20%;
+	padding-top:3%;
+	padding-bottom:2%;
+}
+
+blink {
+  animation: 1s linear infinite condemned_blink_effect;
+}
+
+@keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
 }

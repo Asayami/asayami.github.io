@@ -4,13 +4,19 @@ html, body
     word-wrap: break-word;
 }
 
+/* RESPONSIVE */
 @media (max-width: 1000px) {
     html, body
     {
         height: 70%;
     }
-    
+    h4 {
+		margin-left: 0 !important;
+		background-color: #ffffff !important;
+		padding: 0rem 0rem 0rem !important;
+	}
 }
+
 
 
 /* NAVIGATION BAR */
@@ -85,3 +91,92 @@ html, body
 .paragraph a {
     text-decoration: none !important;
 }
+
+.minipara {
+	padding-left:5%;
+	padding-right:5%;
+	padding-top:2%;
+	padding-bottom:2%;
+	font-size:20px;
+}
+
+/* CONTENT BLOCK */
+.content-block {
+	margin-bottom: 5%;
+}
+
+/* POST */
+.row {
+	margin:1%;
+}
+
+h4 {
+    margin-left: -20%;
+    margin-top: 1rem !important;
+    background-color: #f2f2f2;
+    padding: 1rem 1.5rem 1rem;
+}
+
+.post-media {
+    position: relative;
+    overflow: hidden;
+}
+
+.post-media img {
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+
+.post-media:hover img {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.hovereffect {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    zoom: 1;
+    filter: alpha(opacity=0);
+    opacity: 0.5;
+    background: -moz-linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.1) 50%);
+    background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.1) 50%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.1) 50%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000', GradientType=1);
+}
+
+.post-media:hover .hovereffect span::before,
+.post-media:hover .hovereffect {
+    visibility: visible;
+    zoom: 1;
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+
+small {
+	color: #999;
+	font-weight:500 !important;
+}
+
+
+
