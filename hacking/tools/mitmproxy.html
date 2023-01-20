@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'G-3NTSMWGK5D');
+		</script>
+        <meta charset="UTF-8">
+        <title>Packet Analyzer</title>
+        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
+        <link rel="stylesheet" href="tools_source/tools_css.css">
+		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
+        <script src="tools_source/tools_js.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <meta name="description" content="">
+		<meta name="keywords" content="Hacking, hack, nmap, ping">
+		<meta name="author" content="Asayami Kurashin">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+		<div class="snowflakes" aria-hidden="true">
+			<div class="snowflake">❅</div>
+			<div class="snowflake"><img src="https://asayami.github.io/theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
+			<div class="snowflake">❆</div>
+			<div class="snowflake">❄</div>
+			<div class="snowflake"><img src="https://asayami.github.io/theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
+			<div class="snowflake">❅</div>
+			<div class="snowflake">❆</div>
+			<div class="snowflake"><img src="https://asayami.github.io/theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
+			<div class="snowflake">❄</div>
+		</div>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+                <script>window.onscroll = NavScroll;</script>
+                <a class="navbar-branch" href="https://asayami.github.io/">
+                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;"></img>
+                </a>
+                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active navitem">
+                            <a href="https://asayami.github.io/">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io/hacking.html">Hacking</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io#aboutanchor">About</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io#contactanchor">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="mainPicture"></div>
+		<div class="paratitle">
+			<h2>Introduction</h2>
+		</div>
+		<div class="paragraph">
+			<p>Có nhiều cách để phân tích, chặn gói tin, cách đơn giản nhất đó là đơn thuần "nghe" các packet vận chuyển qua lại
+			giữa client và server. Đối với các server không dùng TLS/SSL, ví dụ như webserver HTTP sử dụng port 80 chẳng hạn, việc
+			bắt các gói tin là hoàn toàn khả thi. Tuy nhiên, đa phần các server ngày nay đều mã hoá các packet lại (HTTPS port 443),
+			khi đó chúng ta không thể đọc được nội dung gói tin. Có 2 cách để giải quyết vấn đề này, một là kiếm được key mã hoá và
+			decrypt các gói tin, tuy nhiên cách này không phổ biến, cách còn lại là sử dụng proxy có certificate TLS/SSL. Cách 2 sẽ
+			tạo ra một server giả hợp lệ thông qua proxy trung gian. Burp Suite cũng đang sử dụng phương pháp này, và cả mitmproxy,
+			thứ chúng ta sẽ tìm hiểu hôm nay. Bạn đọc có thể tìm hiểu sâu hơn về cách vận hành mitmproxy ở
+			<a href="https://docs.mitmproxy.org/stable/concepts-howmitmproxyworks/">Here</a>.</p>
+			<img src="tools_source/ssl_bg.jpg" style="width:60%" class="img-fluid mx-auto d-block responsive_phone"></img>
+			<p><br>Mitmproxy (man in the middle) là một công cụ giống với Burp Suite hay Wireshark, thường được sử dụng để chặn và phân
+			tích các gói tin thông qua proxy. Bên ngoài việc có thể sử dụng trên nhiều hệ điều hành, một đặc điểm thú vị của Mitmproxy là khả năng tương thích cao với Python. Trong bài
+			viết này mình sẽ hướng dẫn cách sử dụng Mitmproxy bản Interactive và với Python.</p>
+		</div>
+		
+		<div class="paratitle">
+			<h2>Mitmproxy</h2>
+		</div>
+		<div class="paragraph">
+			<p>Khi tải xuống, các bạn sẽ thấy có 3 phiên bản Mitmproxy:
+			<br>&emsp;- mitmproxy (console ui) hay bản interactive: sử dụng và thao tác lệnh thông qua giao diện và các phím
+			<br>&emsp;- mitmdump (headless): phiên bản chúng ta thường xuyên làm việc khi sử dụng với Python nhất, bởi vì nó
+			không có giao diện hay thao tác qua phím được mà chỉ đơn giản tạo proxy và xử lí mọi thứ thông qua addon Python đính kèm
+			<br>&emsp;- mitmweb (web ui): phiên bản nhỏ gọn hơn interactive nhưng thiết kế đẹp hơn, sử dụng trong 1 tab của browser</p>
+			<img src="tools_source/proxy_bg.png" style="width:60%" class="img-fluid mx-auto d-block responsive_phone"></img>
+			<p><br>
+			Client Replay: bạn đọc có thể tìm hiểu cách dùng mitmproxy tự động request lại các gói tin tại:
+			<a href="https://docs.mitmproxy.org/stable/tute-clientreplay/">Here</a>
+			</p>
+		</div>
+		
+		<div class="paratitle">
+			<h2>Mitmproxy with Python</h2>
+		</div>
+		<div class="paragraph">
+			<p>Mitmproxy kết hợp với Python thông qua addon. Addon, ngược lại tương tác với mitmproxy thông qua các events, qua
+			đó thay đổi hoạt động của mitmproxy</p>
+			<p>Để sử dụng addon với file anatomy.py, chúng ta sử dụng lệnh trên cmd, terminal là:
+			<font color="#009933">
+			mitmproxy -s anatomy.py
+			</font color="#009933"> (bản interactive) hoặc
+			<font color="#009933">
+			mitmdump -s ./anatomy.py
+			</font color="#009933">(bản headless)</p>
+			<p>Bên trong anatomy.py code có dạng:</p>
+			<p><pre><font color="#009933"><code>
+	&quot;&quot;&quot;
+	Basic skeleton of a mitmproxy addon.
+
+	Run as follows: mitmproxy -s anatomy.py
+	&quot;&quot;&quot;
+	import logging
+
+
+	class Counter:
+		def __init__(self):
+			self.num = 0
+
+		def request(self, flow):
+			self.num = self.num + 1
+			logging.info(&quot;We&apos;ve seen %d flows&quot; % self.num)
+
+
+	addons = [Counter()]</font color="#009933"></code></pre>
+			</p>
+			<p>Hoặc cách tối giản hơn không dùng class là:
+			<font color="#009933"><pre><code>
+	&quot;&quot;&quot;An addon using the abbreviated scripting syntax.&quot;&quot;&quot;
+
+
+	def request(flow):
+	    flow.request.headers[&quot;myheader&quot;] = &quot;value&quot;
+			</font color="#009933"></pre></code></p>
+			<p>Bạn đọc xem thêm các thành phần có thể xem và sửa của event request và response tương ứng tại:
+			<a href="https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Request">Here</a> và
+			<a href="https://docs.mitmproxy.org/stable/api/mitmproxy/http.html#Response">Here</a></p>
+			<p>Các event đều nhận đầu vào là object flow, flow chính là 1 dòng chảy chứa request đi và response trở về. Ví dụ,
+			ở event response, chúng ta có thể gọi flow.request.host để lấy hostname, thứ không có trong thành phần của
+			response</p>
+		</div>
+    </body>
+    
+</html>

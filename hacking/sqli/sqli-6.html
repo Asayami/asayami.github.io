@@ -103,15 +103,19 @@
 			<p>Nghe có vẻ lạ nhưng ở một số nơi họ có thể thu thập thông tin UA để phân tích đánh giá lưu lượng truy cập
 			chẳng hạn. Do đó chúng ta có thể lợi dụng điều này</p>
 			<p>Ví dụ, chúng ta có 1 page visit.php như sau:</p>
-			<p><font color="#009933">
-			&#60;?php<br>
-			$link = new mysqli('localhost', 'root', 'root', 'analytics');<br>
-			$query = sprintf(&quot;INSERT INTO visits (ua, dt) VALUES ('%s', '%s')&quot;,<br>
-			$_SERVER[&quot;HTTP_USER_AGENT&quot;],<br>
-			date(&quot;Y-m-d h:i:s&quot;));<br>
-			$link->query($query);<br>
-			?><br>
-			</font color="#009933"></p>
+			<p><font color="#009933"><pre><code>
+	&#60;?php
+	
+	$link = new mysqli('localhost', 'root', 'root', 'analytics');
+	
+	$query = sprintf(&quot;INSERT INTO visits (ua, dt) VALUES ('%s', '%s')&quot;,
+	$_SERVER[&quot;HTTP_USER_AGENT&quot;],
+	date(&quot;Y-m-d h:i:s&quot;));
+	
+	$link->query($query);
+	
+	?>
+			</font color="#009933"></pre></code></p>
 			<p>Do website chỉ thu thập dữ liệu chứ không hiển thị gì từ database nên chúng ta có thể dùng phương pháp Error
 			Based Injection hoặc Blind SQL Injection. Ví dụ mình sử dụng Blind SQL Injection trong trường hợp xấu hơn:</p>
 			<p><font color="#009933">
