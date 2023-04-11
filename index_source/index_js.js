@@ -27,6 +27,7 @@ function elementInView(el) {
 };
 
 function handleScrollAnimation() {
+	getScrollElement();
     scrollElement.forEach(function(element) {
         if (elementInView(element)) {
             element.classList.add('scrolled');
@@ -42,4 +43,26 @@ window.addEventListener('scroll', handleScrollAnimation);
 function emailCopy() {
     var copyText = "asayamikurashin@gmail.com";
     navigator.clipboard.writeText(copyText);
+}
+
+// Terminal Animation
+
+
+function terminal() {
+	var container = document.getElementById("container");
+	var text = '\/\/ life motto\ninherit(thePast);\nfunction overcome(entity)\n{\n experience(entity);\n for (var obj in entity) {understand(obj);}\n if (sad() === true) {\n  sad().stop();\n  beAwesome();\n }\n struggle(entity);\n}\novercome(thePresent); _\ntowards(theFuture);';
+	var div = document.createElement('div');
+	container.appendChild(div);
+	var txt = text.split('');
+	txt[60] = "&emsp;";
+	var i = 0;
+	(function display() {
+		if(i < txt.length) {
+			if (txt[i] == '_') div.innerHTML += txt[i].blink();
+			else div.innerHTML += txt[i];
+			++i;
+			setTimeout(display, 30);
+		}
+	})();
+	var blink_item = document.createElement('blink');
 }

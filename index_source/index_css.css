@@ -20,7 +20,8 @@ html, body
         font-size:15px;
     }
 	.terminal {
-	padding-left:10% !important;
+		padding-left:10% !important;
+		font-size:15px !important;
 	}
 }
 
@@ -176,12 +177,13 @@ html, body
 /* TERMINAL */
 
 .terminal {
-	border: 3px solid green;
+	border: 2px solid green;
 	background-color:black;
-	font-family: 'Courier New', monospace;
+	font-family: 'Courier New';
 	padding-left:20%;
-	padding-top:3%;
-	padding-bottom:2%;
+	white-space: pre-line;
+	color:green;
+	font-size:20px;
 }
 
 blink {
