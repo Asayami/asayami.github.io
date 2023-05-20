@@ -11,31 +11,31 @@
 		  gtag('config', 'G-3NTSMWGK5D');
 		</script>
         <meta charset="UTF-8">
-        <title>Embedded</title>
-        <link rel="icon" type="image/png" href="favicon.png"/>
-        <link rel="stylesheet" href="embedded_source/embedded_css.css">
+        <title>XSS with AngularJS</title>
+        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
+        <link rel="stylesheet" href="xss_source/xss_css.css">
 		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
-        <script src="embedded_source/embedded_js.js"></script>
+        <script src="xss_source/xss_js.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <meta name="description" content="Những bài viết, kinh nghiệm của mình về mảng Embedded">
-		<meta name="keywords" content="embedded, arduino, esp">
+        <meta name="description" content="Những bài viết, kinh nghiệm của mình về XSS">
+		<meta name="keywords" content="Hacking, hack, XSS, Cross Site Scripting, Cheat Sheet">
 		<meta name="author" content="Asayami Kurashin">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
 		<div class="snowflakes" aria-hidden="true">
 			<div class="snowflake">❅</div>
-			<div class="snowflake"><img src="theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
+			<div class="snowflake"><img src="https://asayami.github.io/theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
 			<div class="snowflake">❆</div>
 			<div class="snowflake">❄</div>
-			<div class="snowflake"><img src="theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
+			<div class="snowflake"><img src="https://asayami.github.io/theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
 			<div class="snowflake">❅</div>
 			<div class="snowflake">❆</div>
-			<div class="snowflake"><img src="theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
+			<div class="snowflake"><img src="https://asayami.github.io/theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
 			<div class="snowflake">❄</div>
 		</div>
         <!-- Navigation Bar -->
@@ -43,7 +43,7 @@
             <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
                 <script>window.onscroll = NavScroll;</script>
                 <a class="navbar-branch" href="https://asayami.github.io/">
-                    <img src="transparent-favicon.png" style="width:50px;" class="link"></img>
+                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;" class="link"></img>
                 </a>
                 <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -76,33 +76,31 @@
                 </div>
             </div>
         </nav>
-        <div class="mainPicture" style="background-image: url('embedded_source/embedded_bg.jpg');"></div>
+        <div class="mainPicture"></div>
         <div class="paragraph">
-			<div class='content-block'>
-				<h1>Embedded System</h1>
-				<div class="minipara">
-						<p>Hệ thống nhúng là một loại hệ thống máy tính được thiết kế để thực hiện một số tác vụ như truy cập, xử lý, lưu trữ và
-						kiểm soát dữ liệu trong các hệ thống thiết bị điện tử khác nhau. Các hệ thống nhúng là sự kết hợp giữa phần cứng và phần
-						mềm (firmware), và ở đây phần mềm được nhúng vào phần cứng.</p>
-				</div>
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/embedded/esp32_cam.html" title="">
-								<img src="embedded_source/esp_32.jpg" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/embedded/esp32_cam.html" title="">ESP32-Deagle Security Camera</a></h4>
-						<p>ESP32 Security Camera (motion detect, send notification, web streaming & configuration)</p>
-						<small>20 May, 2023 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-			</div>
+            <p>AngularJS là một thư viện JS rất phổ biến hiện nay, nhưng đi kèm với nó là những lỗ hổng tiềm tàng. Thư viện này đã
+			bị khai thác qua nhiều phiên bản và phải cập nhật, bỏ bớt một số tính năng để đảm bảo tính bảo mật đối với các lỗ hổng
+			đã được tìm thấy. Trong bài viết này chúng ta sẽ xem tại sao AngularJS lại hay bị khai thác, cũng như xem cách khai thác
+			của các phiên bản AngularJS trước đây.</p>
+			<p>Đầu tiên, bạn đọc cần hiểu sơ qua AngularJS, bạn đọc có thể xem qua tại:
+			<a href="https://www.w3schools.com/angular/">W3SChools</a></p>
+			<p>Để test và exploit các lỗ hổng AngularJS, mình sử dụng một page PHP tên là search.php như dưới đây:</p>
+			<font color="#009933"><pre><code>
+&#60;script src='angular_1.0.8.js'>&#60;/script>
+&#60;form action="search.php" method="get">
+Name: &#60;input type="text" name="data">
+&#38;emsp;&#60;input type="submit">
+&#60;/form>
+&#60;div ng-app>
+	&#60;p>Hello Asayami, your prohibited goods:
+	&#60;?php
+		echo ($_GET['data']);
+	?>
+	&#60;/p>
+&#60;/div></font color="#009933"></pre></code>
         </div>
+		
+		
 		
     </body>
 </html>
