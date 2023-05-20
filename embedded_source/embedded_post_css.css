@@ -70,7 +70,6 @@ html, body
 /* MAIN PICTURE */
 
 .mainPicture {
-    background-image: url('xss_bg.jpg');
     /* Full height */
     height:100% !important;
     /* Center and scale the image nicely */
