@@ -86,10 +86,10 @@
 			đủ rồi nên mình sẽ chỉ thêm thắt và giải thích một số chỗ khó hiểu của series này.</p>
         </div>
 		<div class="paratitle">
-			<h2>Episode 1</h2>
+			<h2>Guides</h2>
 		</div>
 		<div class="paragraph">
-			<p>Episode 1:
+			<p>Link playlist AngularJS Security:
 			<a href="https://www.youtube.com/playlist?list=PLhixgUqwRTjwJTIkNopKuGLk3Pm9Ri1sF">Here</a></p>
 			<p>AngularJS là ngôn ngữ front-end thuần Javascript. Nó cung cấp khả năng data binding ở phía client thông qua {{expression}}.
 			Các expression này sẽ được đánh giá kỹ lưỡng, check xem đã khai báo ở scope đó chưa. Vì tính bảo mật này, tính chất này còn được
@@ -101,7 +101,7 @@
 			<font color="#009933"><pre><code>
 &#60;script src='angular_1.0.8.js'>&#60;/script>
 &#60;form action="search.php" method="get">
-Name: &#60;input type="text" name="data">
+Name: &#60;input type="text" name="data" style="width:40%;">
 &#38;emsp;&#60;input type="submit">
 &#60;/form>
 &#60;div ng-app>
@@ -114,11 +114,20 @@ Name: &#60;input type="text" name="data">
 			<p><br>Tuy nhiên, ví dụ trên không đúng với cách sử dụng AngularJS, vì ngôn ngữ này là front-end, hoạt động bên client, không nên dính
 			dáng tới ngôn ngữ back-end như PHP. Nhưng chúng ta vẫn có thể sử dụng nó để tiếp cận dễ dàng với AngularJS.</p>
 			<p>Các bạn đọc có thể tải thư viện phiên bản mong muốn ở trang chủ của angular.</p>
-			<p>Để có thể tìm ra hàm getterFn tuần tự, chúng ta có sử dụng kỹ thuật debugging. Sau khi load URL mong muốn, hãy mở
+			<p>Để có thể tìm ra hàm getterFn, Lexer tuần tự, chúng ta có thể mò theo dòng xử lý. Sau khi load URL mong muốn, hãy mở
 			Dev Tool, tab Sources, ở cột phải nhấn vô nút
 			<i class="fa-solid fa-pause"></i>
-			(pause script execution) và sử dụng nút mũi tên bên phải nó để lướt qua các function call. Mỗi lần dừng có thể chuyển qua tab console
-			để xem giá trị hiện tại của các object.</p>
+			(pause script execution) và sử dụng các nút mũi tên bên phải để lướt qua các function call. Step over là đi tới vị trí thực thi ngang hàng tiếp theo, step into
+			là đào sâu vào bên trong một hàm đang trỏ tới xem bên trong nó làm gì, step out of là ngược lại. Cộng thêm việc quan sát callback, cách đặt tên hàm và biến,
+			comment ở source code full mà chúng ta sẽ đoán được block code nào làm gì, có quan trọng không.
+			<br>Sau khi đã xác định được đoạn code
+			cần kiểm tra, hãy đặt break point ở cuối đoạn code đó để lần tới chạy sẽ biết thêm thông tin các giá trị của biến local. Bạn đọc có thể
+			đặt break point bằng cách click vào số dòng, thêm đoạn text "debugger;" vào vị trí mong muốn ở file js.	Mỗi lần dừng có thể trỏ vào object hoặc chuyển qua tab console
+			gọi object để xem giá trị hiện tại của các object đó.</p>
+			<p>Nếu xuất hiện error, chúng ta có thể tới luôn hàm kiểm tra gây sai cũng như các callbacks, việc này có thể giúp hiểu nhanh hơn cách
+			xử lí của file js đó. Ví dụ, ban đầu khi chưa biết sự tồn tại của Lexer, AST,... chúng ta có thể đưa vào input như sau:
+			{{&}}. Khi đó sẽ xuất hiện lỗi, và chúng ta có thể thấy được các hàm core được gọi.</p>
+			<img src="xss_source/angular_err.png" style="width:90%;" class="img-fluid mx-auto d-block responsive_phone"></img>
 		</div>
 		
 		
