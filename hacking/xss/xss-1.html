@@ -196,5 +196,23 @@
 			<p>Với object ẩn kích thước 0x0 ngoài onload onerror còn có accesskey và onclick.</p>
 			<p>insert null bytes %00 , /**/</p>
 		</div>
+		
+		<div class="paratitle">
+			<h2>Introduction to CSP</h2>
+		</div>
+		
+		<div class="paragraph">
+			<p>CSP là một biện pháp bảo mật từ phía trình duyệt, giúp ngăn chặn những request xấu được gọi từ website của chúng ta. CSP là tập hợp một danh sách an toàn (whitelist) những domain hay kiểu script, style, image, frame mà trình duyệt được load trên website của chúng ta. Điều này đảm bảo chỉ có những script, style, image, frame được chúng ta chỉ định có thể được tải, những request không nằm trong whitelist sẽ bị chặn ngay tức khắc.</p>
+			<p>Để biết thêm về cách sử dụng của CSP, bạn đọc có thể xem thêm tại:
+				<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Here</a>
+			</p>
+			<p>CSP là một cách tốt để ngăn chặn XSS, tuy nhiên bên trong nó cũng tiềm tàng những lỗ hổng. Một
+			số lỗ hổng nổi bật như: 
+			<a href="https://asayami.github.io/hacking/xss/xss-3.html">Angular JS</a> (cuối bài viết),
+			<a href="https://portswigger.net/web-security/cross-site-scripting/dangling-markup">Dangling markup injection</a>,
+			<a href="https://portswigger.net/research/bypassing-csp-with-policy-injection">policy injection</a>
+			</p>
+			
+		</div>
     </body>
 </html>

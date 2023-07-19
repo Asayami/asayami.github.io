@@ -129,8 +129,41 @@ Name: &#60;input type="text" name="data" style="width:40%;">
 			{{&}}. Khi đó sẽ xuất hiện lỗi, và chúng ta có thể thấy được các hàm core được gọi.</p>
 			<img src="xss_source/angular_err.png" style="width:90%;" class="img-fluid mx-auto d-block responsive_phone"></img>
 		</div>
+
+		
+		<div class="paratitle">
+			<h2>Training</h2>
+		</div>
+		<div class="paragraph">
+			<p>Bạn đọc có thể thử sức với lab AngularJS này của portswigger, xem tại:
+				<a href="https://portswigger.net/web-security/cross-site-scripting/contexts/client-side-template-injection/lab-angular-sandbox-escape-without-strings">Here</a>
+			</p>
+			<p>Hint: Đầu tiên vào lab thì tìm xem phiên bản angular js được sử dụng là phiên
+			bản nào, tìm kiếm payload tương ứng. Sau đó tìm cách inject đoạn mã có dạng a=b vào
+			DOM. Cuối cùng là quan sát cách xử lí đầu vào của JS thông qua debugger và sửa payload
+			phù hợp.</p>
+		</div>
 		
 		
-		
+		<div class="paratitle">
+			<h2>Bypass CSP using Angular JS</h2>
+		</div>
+		<div class="paragraph">
+			<p>Đối với trình duyệt chrome, các website sử dụng CSP có thể bị bypass nếu sử dụng
+			đồng thời với Angular JS. Sau đây là cách khai thác:</p>
+			<font color="#009933"><pre><code>
+&#60;input id=x ng-focus=$event.path|orderBy:'(y=alert)(1)'>
+			</font color="#009933"></pre></code>
+			<p>Để hiểu rõ hơn bạn đọc có thể xem tại:
+				<a href="https://stackoverflow.com/questions/60990031/plz-explain-this-angular-js-script">Here</a>
+			</p>
+			<p>Tuy nhiên từ Chrome 109 thuộc tính path đã không còn, chúng ta có cách khác như sau:</p>
+			<font color="#009933"><pre><code>
+&#60;input id=x ng-focus=$event.composedPath()|orderBy:'(y=alert)(1)'>
+			</font color="#009933"></pre></code>
+			<p>Bạn đọc có thể xem thêm lịch sử cách khai thác này tại:
+				<a href="https://portswigger.net/research/angularjs-csp-bypass-in-56-characters">Here</a>
+			</p>
+		</div>
     </body>
 </html>
