@@ -1,169 +1,316 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-		  gtag('config', 'G-3NTSMWGK5D');
-		</script>
-        <meta charset="UTF-8">
-        <title>XSS with AngularJS</title>
-        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
-        <link rel="stylesheet" href="xss_source/xss_css.css">
-		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
-        <script src="xss_source/xss_js.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <meta name="description" content="Những bài viết, kinh nghiệm của mình về XSS">
-		<meta name="keywords" content="Hacking, hack, XSS, Cross Site Scripting, Cheat Sheet">
-		<meta name="author" content="Asayami Kurashin">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-		<div class="snowflakes" aria-hidden="true">
-			<div class="snowflake">❅</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake">❄</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❅</div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❄</div>
-		</div>
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
-                <script>window.onscroll = NavScroll;</script>
-                <a class="navbar-branch" href="https://asayami.github.io/">
-                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;" class="link"></img>
-                </a>
-                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-						<div class="dropdown-divider"></div>
-                        <li class="nav-item active navitem">
-                            <a href="https://asayami.github.io/">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io/hacking.html">Hacking</a>
-                        </li>
-						<div class="dropdown-divider"></div>
-						<li class="nav-item navitem">
-                            <a href="https://asayami.github.io/embedded.html" class="link">Embedded</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#aboutanchor">About</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#contactanchor">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="mainPicture"></div>
-        <div class="paragraph">
-            <p>AngularJS là một thư viện JS rất phổ biến hiện nay, nhưng đi kèm với nó là những lỗ hổng tiềm tàng. Thư viện này đã
-			bị khai thác qua nhiều phiên bản và phải cập nhật, bỏ bớt một số tính năng để đảm bảo tính bảo mật đối với các lỗ hổng
-			đã được tìm thấy. Trong bài viết này chúng ta sẽ xem tại sao AngularJS lại hay bị khai thác, cũng như xem cách khai thác
-			của các phiên bản AngularJS trước đây.</p>
-			<p>Bài viết này mình sẽ dựa trên series AngularJS Security của LiveOverflow. Vì nội dung của series AngularJS Security đã khá đầy
-			đủ rồi nên mình sẽ chỉ thêm thắt và giải thích một số chỗ khó hiểu của series này.</p>
+      gtag("config", "G-3NTSMWGK5D");
+    </script>
+    <meta charset="UTF-8" />
+    <title>XSS with AngularJS</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://asayami.github.io/favicon.png"
+    />
+    <link rel="stylesheet" href="xss_source/xss_css.css" />
+    <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
+    <script src="xss_source/xss_js.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <meta
+      name="description"
+      content="Những bài viết, kinh nghiệm của mình về XSS"
+    />
+    <meta
+      name="keywords"
+      content="Hacking, hack, XSS, Cross Site Scripting, Cheat Sheet"
+    />
+    <meta name="author" content="Asayami Kurashin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">❅</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/1.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/2.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/3.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❄</div>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+        <script>
+          window.onscroll = NavScroll;
+        </script>
+        <a class="navbar-branch" href="https://asayami.github.io/">
+          <img
+            src="https://asayami.github.io/transparent-favicon.png"
+            style="width: 50px"
+            class="link"
+          />
+        </a>
+        <button
+          class="navbar-toggler ml-auto custom-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarSupportedContent-7"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <div class="dropdown-divider"></div>
+            <li class="nav-item active navitem">
+              <a href="https://asayami.github.io/"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/hacking.html">Hacking</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/embedded.html" class="link"
+                >Embedded</a
+              >
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#aboutanchor">About</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#contactanchor">Contact</a>
+            </li>
+          </ul>
         </div>
-		<div class="paratitle">
-			<h2>Guides</h2>
-		</div>
-		<div class="paragraph">
-			<p>Link playlist AngularJS Security:
-			<a href="https://www.youtube.com/playlist?list=PLhixgUqwRTjwJTIkNopKuGLk3Pm9Ri1sF">Here</a></p>
-			<p>AngularJS là ngôn ngữ front-end thuần Javascript. Nó cung cấp khả năng data binding ở phía client thông qua {{expression}}.
-			Các expression này sẽ được đánh giá kỹ lưỡng, check xem đã khai báo ở scope đó chưa. Vì tính bảo mật này, tính chất này còn được
-			gọi là Angular sandbox. Bên cạnh expression đã khai báo, AngularJS cũng cho phép truy cập Function constructor, window object,
-			DOM element, biến global, hoặc Object constructor.</p>
-			<p>Bạn đọc có thể tìm hiểu sâu hơn về AngularJS tại:
-			<a href="https://www.w3schools.com/angular/">W3SChools</a></p>
-			<p>Để test và exploit các lỗ hổng AngularJS, mình sử dụng một page PHP tên là search.php như dưới đây:</p>
-			<font color="#009933"><pre><code>
-&#60;script src='angular_1.0.8.js'>&#60;/script>
-&#60;form action="search.php" method="get">
-Name: &#60;input type="text" name="data" style="width:40%;">
-&#38;emsp;&#60;input type="submit">
-&#60;/form>
-&#60;div ng-app>
-	&#60;p>Hello Asayami, your prohibited goods:
-	&#60;?php
-		echo htmlspecialchars(($_GET['data']),ENT_QUOTES);
-	?>
-	&#60;/p>
-&#60;/div></font color="#009933"></pre></code>
-			<p><br>Tuy nhiên, ví dụ trên không đúng với cách sử dụng AngularJS, vì ngôn ngữ này là front-end, hoạt động bên client, không nên dính
-			dáng tới ngôn ngữ back-end như PHP. Nhưng chúng ta vẫn có thể sử dụng nó để tiếp cận dễ dàng với AngularJS.</p>
-			<p>Các bạn đọc có thể tải thư viện phiên bản mong muốn ở trang chủ của angular.</p>
-			<p>Để có thể tìm ra hàm getterFn, Lexer tuần tự, chúng ta có thể mò theo dòng xử lý. Sau khi load URL mong muốn, hãy mở
-			Dev Tool, tab Sources, ở cột phải nhấn vô nút
-			<i class="fa-solid fa-pause"></i>
-			(pause script execution) và sử dụng các nút mũi tên bên phải để lướt qua các function call. Step over là đi tới vị trí thực thi ngang hàng tiếp theo, step into
-			là đào sâu vào bên trong một hàm đang trỏ tới xem bên trong nó làm gì, step out of là ngược lại. Cộng thêm việc quan sát callback, cách đặt tên hàm và biến,
-			comment ở source code full mà chúng ta sẽ đoán được block code nào làm gì, có quan trọng không.
-			<br>Sau khi đã xác định được đoạn code
-			cần kiểm tra, hãy đặt break point ở cuối đoạn code đó để lần tới chạy sẽ biết thêm thông tin các giá trị của biến local. Bạn đọc có thể
-			đặt break point bằng cách click vào số dòng, thêm đoạn text "debugger;" vào vị trí mong muốn ở file js.	Mỗi lần dừng có thể trỏ vào object hoặc chuyển qua tab console
-			gọi object để xem giá trị hiện tại của các object đó.</p>
-			<p>Nếu xuất hiện error, chúng ta có thể tới luôn hàm kiểm tra gây sai cũng như các callbacks, việc này có thể giúp hiểu nhanh hơn cách
-			xử lí của file js đó. Ví dụ, ban đầu khi chưa biết sự tồn tại của Lexer, AST,... chúng ta có thể đưa vào input như sau:
-			{{&}}. Khi đó sẽ xuất hiện lỗi, và chúng ta có thể thấy được các hàm core được gọi.</p>
-			<img src="xss_source/angular_err.png" style="width:90%;" class="img-fluid mx-auto d-block responsive_phone"></img>
-		</div>
+      </div>
+    </nav>
+    <div class="mainPicture"></div>
+    <div class="paragraph">
+      <p>
+        AngularJS là một thư viện JS rất phổ biến hiện nay, nhưng đi kèm với nó
+        là những lỗ hổng tiềm tàng. Thư viện này đã bị khai thác qua nhiều phiên
+        bản và phải cập nhật, bỏ bớt một số tính năng để đảm bảo tính bảo mật
+        đối với các lỗ hổng đã được tìm thấy. Trong bài viết này chúng ta sẽ xem
+        tại sao AngularJS lại hay bị khai thác, cũng như xem cách khai thác của
+        các phiên bản AngularJS trước đây.
+      </p>
+      <p>
+        Bài viết này mình sẽ dựa trên series AngularJS Security của
+        LiveOverflow. Vì nội dung của series AngularJS Security đã khá đầy đủ
+        rồi nên mình sẽ chỉ thêm thắt và giải thích một số chỗ khó hiểu của
+        series này.
+      </p>
+    </div>
+    <div class="paratitle">
+      <h2>Guides</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Link playlist AngularJS Security:
+        <a
+          href="https://www.youtube.com/playlist?list=PLhixgUqwRTjwJTIkNopKuGLk3Pm9Ri1sF"
+          >Here</a
+        >
+      </p>
+      <p>
+        AngularJS là ngôn ngữ front-end thuần Javascript. Nó cung cấp khả năng
+        data binding ở phía client thông qua {{expression}}. Các expression này
+        sẽ được đánh giá kỹ lưỡng, check xem đã khai báo ở scope đó chưa. Vì
+        tính bảo mật này, tính chất này còn được gọi là Angular sandbox. Bên
+        cạnh expression đã khai báo, AngularJS cũng cho phép truy cập Function
+        constructor, window object, DOM element, biến global, hoặc Object
+        constructor.
+      </p>
+      <p>
+        Bạn đọc có thể tìm hiểu sâu hơn về AngularJS tại:
+        <a href="https://www.w3schools.com/angular/">W3SChools</a>
+      </p>
+      <p>
+        Để test và exploit các lỗ hổng AngularJS, mình sử dụng một page PHP tên
+        là search.php như dưới đây:
+      </p>
 
-		
-		<div class="paratitle">
-			<h2>Training</h2>
-		</div>
-		<div class="paragraph">
-			<p>Bạn đọc có thể thử sức với lab AngularJS này của portswigger, xem tại:
-				<a href="https://portswigger.net/web-security/cross-site-scripting/contexts/client-side-template-injection/lab-angular-sandbox-escape-without-strings">Here</a>
-			</p>
-			<p>Hint: Đầu tiên vào lab thì tìm xem phiên bản angular js được sử dụng là phiên
-			bản nào, tìm kiếm payload tương ứng. Sau đó tìm cách inject đoạn mã có dạng a=b vào
-			DOM. Cuối cùng là quan sát cách xử lí đầu vào của JS thông qua debugger và sửa payload
-			phù hợp.</p>
-		</div>
-		
-		
-		<div class="paratitle">
-			<h2>Bypass CSP using Angular JS</h2>
-		</div>
-		<div class="paragraph">
-			<p>Đối với trình duyệt chrome, các website sử dụng CSP có thể bị bypass nếu sử dụng
-			đồng thời với Angular JS. Sau đây là cách khai thác:</p>
-			<font color="#009933"><pre><code>
+      <!-- HTML generated using hilite.me -->
+      <div
+        style="
+          background: #ffffff;
+          overflow: auto;
+          width: auto;
+          border: solid gray;
+          border-width: 0.1em 0.1em 0.1em 0.8em;
+          padding: 0.2em 0.6em;
+        "
+      >
+        <pre
+          style="margin: 0; line-height: 125%"
+        ><span style="color: #007700">&lt;script </span><span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&#39;angular_1.0.8.js&#39;</span><span style="color: #007700">&gt;&lt;/script&gt;</span>
+<span style="color: #007700">&lt;form</span> <span style="color: #0000CC">action=</span><span style="background-color: #fff0f0">&quot;search.php&quot;</span> <span style="color: #0000CC">method=</span><span style="background-color: #fff0f0">&quot;get&quot;</span><span style="color: #007700">&gt;</span>
+Name: <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;data&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width:40%;&quot;</span><span style="color: #007700">&gt;</span>
+<span style="color: #880000; font-weight: bold">&amp;emsp;</span><span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;submit&quot;</span><span style="color: #007700">&gt;</span>
+<span style="color: #007700">&lt;/form&gt;</span>
+<span style="color: #007700">&lt;div</span> <span style="color: #0000CC">ng-app</span><span style="color: #007700">&gt;</span>
+  <span style="color: #007700">&lt;p&gt;</span>Hello Asayami, your prohibited goods:
+  <span style="color: #557799">&lt;?php</span>
+<span style="color: #557799">		echo htmlspecialchars(($_GET[&#39;data&#39;]),ENT_QUOTES);</span>
+<span style="color: #557799">	?&gt;</span>
+  <span style="color: #007700">&lt;/p&gt;</span>
+<span style="color: #007700">&lt;/div&gt;</span>
+  </pre>
+      </div>
+      <p>
+        <br />Tuy nhiên, ví dụ trên không đúng với cách sử dụng AngularJS, vì
+        ngôn ngữ này là front-end, hoạt động bên client, không nên dính dáng tới
+        ngôn ngữ back-end như PHP. Nhưng chúng ta vẫn có thể sử dụng nó để tiếp
+        cận dễ dàng với AngularJS.
+      </p>
+      <p>
+        Các bạn đọc có thể tải thư viện phiên bản mong muốn ở trang chủ của
+        angular.
+      </p>
+      <p>
+        Để có thể tìm ra hàm getterFn, Lexer tuần tự, chúng ta có thể mò theo
+        dòng xử lý. Sau khi load URL mong muốn, hãy mở Dev Tool, tab Sources, ở
+        cột phải nhấn vô nút
+        <i class="fa-solid fa-pause"></i>
+        (pause script execution) và sử dụng các nút mũi tên bên phải để lướt qua
+        các function call. Step over là đi tới vị trí thực thi ngang hàng tiếp
+        theo, step into là đào sâu vào bên trong một hàm đang trỏ tới xem bên
+        trong nó làm gì, step out of là ngược lại. Cộng thêm việc quan sát
+        callback, cách đặt tên hàm và biến, comment ở source code full mà chúng
+        ta sẽ đoán được block code nào làm gì, có quan trọng không.
+        <br />Sau khi đã xác định được đoạn code cần kiểm tra, hãy đặt break
+        point ở cuối đoạn code đó để lần tới chạy sẽ biết thêm thông tin các giá
+        trị của biến local. Bạn đọc có thể đặt break point bằng cách click vào
+        số dòng, thêm đoạn text "debugger;" vào vị trí mong muốn ở file js. Mỗi
+        lần dừng có thể trỏ vào object hoặc chuyển qua tab console gọi object để
+        xem giá trị hiện tại của các object đó.
+      </p>
+      <p>
+        Nếu xuất hiện error, chúng ta có thể tới luôn hàm kiểm tra gây sai cũng
+        như các callbacks, việc này có thể giúp hiểu nhanh hơn cách xử lí của
+        file js đó. Ví dụ, ban đầu khi chưa biết sự tồn tại của Lexer, AST,...
+        chúng ta có thể đưa vào input như sau: {{&}}. Khi đó sẽ xuất hiện lỗi,
+        và chúng ta có thể thấy được các hàm core được gọi.
+      </p>
+      <img
+        src="xss_source/angular_err.png"
+        style="width: 90%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+    </div>
+
+    <div class="paratitle">
+      <h2>Training</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Bạn đọc có thể thử sức với lab AngularJS này của portswigger, xem tại:
+        <a
+          href="https://portswigger.net/web-security/cross-site-scripting/contexts/client-side-template-injection/lab-angular-sandbox-escape-without-strings"
+          >Here</a
+        >
+      </p>
+      <p>
+        Hint: Đầu tiên vào lab thì tìm xem phiên bản angular js được sử dụng là
+        phiên bản nào, tìm kiếm payload tương ứng. Sau đó tìm cách inject đoạn
+        mã có dạng a=b vào DOM. Cuối cùng là quan sát cách xử lí đầu vào của JS
+        thông qua debugger và sửa payload phù hợp.
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>Bypass CSP using Angular JS</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Đối với trình duyệt chrome, các website sử dụng CSP có thể bị bypass nếu
+        sử dụng đồng thời với Angular JS. Sau đây là cách khai thác:
+      </p>
+      <pre><a style="color: #009933;"><code>
 &#60;input id=x ng-focus=$event.path|orderBy:'(y=alert)(1)'>
-			</font color="#009933"></pre></code>
-			<p>Để hiểu rõ hơn bạn đọc có thể xem tại:
-				<a href="https://stackoverflow.com/questions/60990031/plz-explain-this-angular-js-script">Here</a>
-			</p>
-			<p>Tuy nhiên từ Chrome 109 thuộc tính path đã không còn, chúng ta có cách khác như sau:</p>
-			<font color="#009933"><pre><code>
+			</code></a></pre>
+      <p>
+        Để hiểu rõ hơn bạn đọc có thể xem tại:
+        <a
+          href="https://stackoverflow.com/questions/60990031/plz-explain-this-angular-js-script"
+          >Here</a
+        >
+      </p>
+      <p>
+        Tuy nhiên từ Chrome 109 thuộc tính path đã không còn, chúng ta có cách
+        khác như sau:
+      </p>
+      <pre><a style="color: #009933;"><code>
 &#60;input id=x ng-focus=$event.composedPath()|orderBy:'(y=alert)(1)'>
-			</font color="#009933"></pre></code>
-			<p>Bạn đọc có thể xem thêm lịch sử cách khai thác này tại:
-				<a href="https://portswigger.net/research/angularjs-csp-bypass-in-56-characters">Here</a>
-			</p>
-		</div>
-    </body>
+			</code></a></pre>
+      <p>
+        Bạn đọc có thể xem thêm lịch sử cách khai thác này tại:
+        <a
+          href="https://portswigger.net/research/angularjs-csp-bypass-in-56-characters"
+          >Here</a
+        >
+      </p>
+    </div>
+  </body>
 </html>

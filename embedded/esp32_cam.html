@@ -1,151 +1,285 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-		  gtag('config', 'G-3NTSMWGK5D');
-		</script>
-        <meta charset="UTF-8">
-        <title>ESP32-Deagle</title>
-        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
-        <link rel="stylesheet" href="https://asayami.github.io/embedded_source/embedded_post_css.css">
-		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
-        <script src="https://asayami.github.io/embedded_source/embedded_js.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <meta name="description" content="Những bài viết, kinh nghiệm của mình về mảng Embedded, ESP32 Cam">
-		<meta name="keywords" content="embedded, arduino, esp, esp32, camera">
-		<meta name="author" content="Asayami Kurashin">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-		<div class="snowflakes" aria-hidden="true">
-			<div class="snowflake">❅</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake">❄</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❅</div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❄</div>
-		</div>
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
-                <script>window.onscroll = NavScroll;</script>
-                <a class="navbar-branch" href="https://asayami.github.io/">
-                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;" class="link"></img>
-                </a>
-                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-						<div class="dropdown-divider"></div>
-                        <li class="nav-item active navitem">
-                            <a href="https://asayami.github.io/">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io/hacking.html">Hacking</a>
-                        </li>
-						<div class="dropdown-divider"></div>
-						<li class="nav-item navitem">
-                            <a href="https://asayami.github.io/embedded.html" class="link">Embedded</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#aboutanchor">About</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#contactanchor">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="mainPicture" style="background-image: url('https://asayami.github.io/embedded_source/esp_32_bg.jpg');"></div>
-		<div class="paratitle">
-			<h2>Introduction</h2>
-		</div>
-        <div class="paragraph">
-            <p>ESP32 Cam là mạch thu phát Wifi có gắn camera, có nhiều biến thể khác nhau. ESP32-Deagle tương thích với đa số các biến thể và có
-			thể cấu hình code tương ứng với loại mạch sử dụng. Các tính năng chính của nó bao gồm:</p>
-			<p>&emsp;- Phát hiện chuyển động
-			<br>&emsp;- Gửi thông báo & ảnh về máy
-			<br>&emsp;- Stream thông qua web server
-			<br>&emsp;- Quản lí & cấu hình camera qua web server</p>
-			<img src="https://asayami.github.io/embedded_source/esp32_deagle_icon.png" style="width:20%" class="img-fluid mx-auto d-block responsive_phone"></img>
-			<p>Link repository:
-			<a href="https://github.com/Asayami/esp32-deagle">Here</a></p>
-		</div>
-		<div class="paratitle">
-			<h2>Hardware</h2>
-		</div>
-		<div class="paragraph">
-            <p>Mình sử dụng ESP32-S (AI-Thinker), camera OV2640 có đèn LED đi kèm với đế nạp code cũng như cấp nguồn ESP32-CAM-MB. ESP32-CAM-MB
-			cấp nguồn và nạp code bằng cổng Micro USB.<br><br></p>
-			<img src="https://asayami.github.io/embedded_source/esp32_cam.jpg" style="width:30%" class="img-fluid mx-auto d-block responsive_phone"></img>
-			<p><br><br>Về vỏ ngoài của cam, bạn đọc có thể in 3D theo mẫu:
-			<a href="https://www.thingiverse.com/thing:5316129">Here</a></p>
-		</div>
-		<div class="paratitle">
-			<h2>Software</h2>
-		</div>
-		<div class="paragraph">
-            <p>Về phần mềm, code của mình được xây dựng dựa trên thư viện EloquentSurveillance. EloquentSurveillance có chứa các tính năng
-			riêng lẻ cho camera như motion detect, web streaming, send notification. Code của ESP32-Deagle tích hợp và đồng bộ 3 tính
-			năng đó chạy song song, đồng thời thêm trình quản lí camera (ESP32-Deagle System Manager). Bên dưới mình sẽ nói chi tiết hơn
-			các thay đổi so với thư viện cũ.</p>
-			<h3>ESP32-CAM.ino</h3>
-			<p>Là file nạp code, file .ino này sẽ gọi đến (include) các file header (.h). Bên cạnh đó, việc khởi tạo hệ thống camera cũng
-			được thực thi ở file .ino này. Do đó, việc cài đặt & cấu hình sensor của camera mình đặt ở đây (thông qua hàm setSensor). Các
-			file header sẽ truy cập ngược đến file .ino và sử dụng function này.
-			<br>Mình cũng thêm một số điều kiện về tắt bật motion detect cũng như đồng bộ hoá giữa motion detect và streaming. Ban đầu,
-			nếu motion detect đang bật, máy ảnh đang được sử dụng để chụp ảnh liên tục và so sánh với ảnh trước. Nếu người dùng sử dụng
-			tính năng stream sẽ gây xung đột và có thể khiến camera ngừng hoạt động và phải khởi động lại mạch. Để giải quyết, mình
-			sử dụng một biến lưu trong globals.h để xác định khi nào có request stream (StreamServer.h), không cho phép motion detect
-			chiếm dụng camera và khởi chạy stream sau 5s.</p>
-			<h3>globals.h</h3>
-			<p>Ở globals.h, mình sử dụng nó như nơi lưu trữ data. Các data về cấu hình và trạng thái đều được lưu giữ ở đây, được lấy và gán
-			thông qua 2 hàm getSensorData và setSensorData. Hàm setSensor ở file .ino được chuyển ngược về đây với tên sensorPtr.</p>
-			<h3>StreamServer.h</h3>
-			<p>Ban đầu, server chỉ xử lí uri "/stream". Mình đã thêm handler cho uri "/" (ESP32-Deagle System Manager), "/set-sensor"
-			để thay đổi cấu hình từ xa, "/get-sensor" để mỗi khi vào ESP32-Deagle System Manager browser sẽ lấy cấu hình hiện tại từ server
-			cập nhật cho trình quản lý.</p>
-			<h3>index.h & index.html</h3>
-			<p>Ở handler cho uri "/", server phải trả về file html. Data file html đó được lưu trong index.h để tránh làm rối code StreamServer.h.
-			index.h là bản đã chuyển toàn bộ ngoặc kép qua ngoặc đơn và đưa về một dòng từ index.html.</p>
-		</div>
-		<div class="paratitle">
-			<h2>Installation</h2>
-		</div>
-		<div class="paragraph">
-            <p>Để cài đặt, bạn đọc sửa đổi các thông tin trong file .ino như sau:
-			<br>&emsp;- Tên và mật khẩu wifi
-			<br>&emsp;- Thông tin bot Telegram
-			<br>&emsp;- Loại camera, độ phân giải, độ rõ nét, thông số xác định chuyển động
-			</p>
-			<p>Sau đó chỉ cần nạp code vào ESP32 Cam là sẽ có tin nhắn gửi đến tài khoản Telegram về địa chỉ IP của web server</p>
-			<img src="https://asayami.github.io/embedded_source/esp32_sysmanager.png" style="width:60%" class="img-fluid mx-auto d-block responsive_phone"></img>
-			<p>Về cách tạo bot và lấy mã, bạn đọc xem tại
-			<a href="https://eloquentarduino.com/esp32-cam-motion-detection/">Here</a> ở cuối trang</p>
-			<p>Sau đó bạn đọc có thể public server bằng cách vào default gateway để foward IP đó.</p>
-			<p><i class="fa-solid fa-triangle-exclamation"></i>
-			Lưu ý: nếu kết nối esp32 cam bị lỗi serial port hãy vào device manager mục port và uninstall driver của esp32 (phải tích vào mục xoá
-			hết)</p>
-		</div>
-    </body>
+      gtag("config", "G-3NTSMWGK5D");
+    </script>
+    <meta charset="UTF-8" />
+    <title>ESP32-Deagle</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://asayami.github.io/favicon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://asayami.github.io/embedded_source/embedded_post_css.css"
+    />
+    <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
+    <script src="https://asayami.github.io/embedded_source/embedded_js.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <meta
+      name="description"
+      content="Những bài viết, kinh nghiệm của mình về mảng Embedded, ESP32 Cam"
+    />
+    <meta name="keywords" content="embedded, arduino, esp, esp32, camera" />
+    <meta name="author" content="Asayami Kurashin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">❅</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/1.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/2.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/3.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❄</div>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+        <script>
+          window.onscroll = NavScroll;
+        </script>
+        <a class="navbar-branch" href="https://asayami.github.io/">
+          <img
+            src="https://asayami.github.io/transparent-favicon.png"
+            style="width: 50px"
+            class="link"
+          />
+        </a>
+        <button
+          class="navbar-toggler ml-auto custom-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarSupportedContent-7"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <div class="dropdown-divider"></div>
+            <li class="nav-item active navitem">
+              <a href="https://asayami.github.io/"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/hacking.html">Hacking</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/embedded.html" class="link"
+                >Embedded</a
+              >
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#aboutanchor">About</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#contactanchor">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div
+      class="mainPicture"
+      style="
+        background-image: url('https://asayami.github.io/embedded_source/esp_32_bg.jpg');
+      "
+    ></div>
+    <div class="paratitle">
+      <h2>Introduction</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        ESP32 Cam là mạch thu phát Wifi có gắn camera, có nhiều biến thể khác
+        nhau. ESP32-Deagle tương thích với đa số các biến thể và có thể cấu hình
+        code tương ứng với loại mạch sử dụng. Các tính năng chính của nó bao
+        gồm:
+      </p>
+      <p>
+        &emsp;- Phát hiện chuyển động <br />&emsp;- Gửi thông báo & ảnh về máy
+        <br />&emsp;- Stream thông qua web server <br />&emsp;- Quản lí & cấu
+        hình camera qua web server
+      </p>
+      <img
+        src="https://asayami.github.io/embedded_source/esp32_deagle_icon.png"
+        style="width: 20%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        Link repository:
+        <a href="https://github.com/Asayami/esp32-deagle">Here</a>
+      </p>
+    </div>
+    <div class="paratitle">
+      <h2>Hardware</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Mình sử dụng ESP32-S (AI-Thinker), camera OV2640 có đèn LED đi kèm với
+        đế nạp code cũng như cấp nguồn ESP32-CAM-MB. ESP32-CAM-MB cấp nguồn và
+        nạp code bằng cổng Micro USB.<br /><br />
+      </p>
+      <img
+        src="https://asayami.github.io/embedded_source/esp32_cam.jpg"
+        style="width: 30%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        <br /><br />Về vỏ ngoài của cam, bạn đọc có thể in 3D theo mẫu:
+        <a href="https://www.thingiverse.com/thing:5316129">Here</a>
+      </p>
+    </div>
+    <div class="paratitle">
+      <h2>Software</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Về phần mềm, code của mình được xây dựng dựa trên thư viện
+        EloquentSurveillance. EloquentSurveillance có chứa các tính năng riêng
+        lẻ cho camera như motion detect, web streaming, send notification. Code
+        của ESP32-Deagle tích hợp và đồng bộ 3 tính năng đó chạy song song, đồng
+        thời thêm trình quản lí camera (ESP32-Deagle System Manager). Bên dưới
+        mình sẽ nói chi tiết hơn các thay đổi so với thư viện cũ.
+      </p>
+      <h3>ESP32-CAM.ino</h3>
+      <p>
+        Là file nạp code, file .ino này sẽ gọi đến (include) các file header
+        (.h). Bên cạnh đó, việc khởi tạo hệ thống camera cũng được thực thi ở
+        file .ino này. Do đó, việc cài đặt & cấu hình sensor của camera mình đặt
+        ở đây (thông qua hàm setSensor). Các file header sẽ truy cập ngược đến
+        file .ino và sử dụng function này. <br />Mình cũng thêm một số điều kiện
+        về tắt bật motion detect cũng như đồng bộ hoá giữa motion detect và
+        streaming. Ban đầu, nếu motion detect đang bật, máy ảnh đang được sử
+        dụng để chụp ảnh liên tục và so sánh với ảnh trước. Nếu người dùng sử
+        dụng tính năng stream sẽ gây xung đột và có thể khiến camera ngừng hoạt
+        động và phải khởi động lại mạch. Để giải quyết, mình sử dụng một biến
+        lưu trong globals.h để xác định khi nào có request stream
+        (StreamServer.h), không cho phép motion detect chiếm dụng camera và khởi
+        chạy stream sau 5s.
+      </p>
+      <h3>globals.h</h3>
+      <p>
+        Ở globals.h, mình sử dụng nó như nơi lưu trữ data. Các data về cấu hình
+        và trạng thái đều được lưu giữ ở đây, được lấy và gán thông qua 2 hàm
+        getSensorData và setSensorData. Hàm setSensor ở file .ino được chuyển
+        ngược về đây với tên sensorPtr.
+      </p>
+      <h3>StreamServer.h</h3>
+      <p>
+        Ban đầu, server chỉ xử lí uri "/stream". Mình đã thêm handler cho uri
+        "/" (ESP32-Deagle System Manager), "/set-sensor" để thay đổi cấu hình từ
+        xa, "/get-sensor" để mỗi khi vào ESP32-Deagle System Manager browser sẽ
+        lấy cấu hình hiện tại từ server cập nhật cho trình quản lý.
+      </p>
+      <h3>index.h & index.html</h3>
+      <p>
+        Ở handler cho uri "/", server phải trả về file html. Data file html đó
+        được lưu trong index.h để tránh làm rối code StreamServer.h. index.h là
+        bản đã chuyển toàn bộ ngoặc kép qua ngoặc đơn và đưa về một dòng từ
+        index.html.
+      </p>
+    </div>
+    <div class="paratitle">
+      <h2>Installation</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Để cài đặt, bạn đọc sửa đổi các thông tin trong file .ino như sau:
+        <br />&emsp;- Tên và mật khẩu wifi <br />&emsp;- Thông tin bot Telegram
+        <br />&emsp;- Loại camera, độ phân giải, độ rõ nét, thông số xác định
+        chuyển động
+      </p>
+      <p>
+        Sau đó chỉ cần nạp code vào ESP32 Cam là sẽ có tin nhắn gửi đến tài
+        khoản Telegram về địa chỉ IP của web server
+      </p>
+      <img
+        src="https://asayami.github.io/embedded_source/esp32_sysmanager.png"
+        style="width: 60%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        Về cách tạo bot và lấy mã, bạn đọc xem tại
+        <a href="https://eloquentarduino.com/esp32-cam-motion-detection/"
+          >Here</a
+        >
+        ở cuối trang
+      </p>
+      <p>
+        Sau đó bạn đọc có thể public server bằng cách vào default gateway để
+        foward IP đó.
+      </p>
+      <p>
+        <i class="fa-solid fa-triangle-exclamation"></i> Lưu ý: nếu kết nối
+        esp32 cam bị lỗi serial port hãy vào device manager mục port và
+        uninstall driver của esp32 (phải tích vào mục xoá hết)
+      </p>
+    </div>
+  </body>
 </html>

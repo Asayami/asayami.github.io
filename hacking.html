@@ -1,329 +1,716 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-		  gtag('config', 'G-3NTSMWGK5D');
-		</script>
-        <meta charset="UTF-8">
-        <title>Hacking</title>
-        <link rel="icon" type="image/png" href="favicon.png"/>
-        <link rel="stylesheet" href="hacking_source/hacking_css.css">
-		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
-        <script src="hacking_source/hacking_js.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <meta name="description" content="Những bài viết, kinh nghiệm của mình về mảng Hacking">
-		<meta name="keywords" content="Hacking, hack">
-		<meta name="author" content="Asayami Kurashin">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-		<div class="snowflakes" aria-hidden="true">
-			<div class="snowflake">❅</div>
-			<div class="snowflake"><img src="theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake">❄</div>
-			<div class="snowflake"><img src="theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❅</div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake"><img src="theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❄</div>
-		</div>
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
-                <script>window.onscroll = NavScroll;</script>
-                <a class="navbar-branch" href="https://asayami.github.io/">
-                    <img src="transparent-favicon.png" style="width:50px;" class="link"></img>
-                </a>
-                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-						<div class="dropdown-divider"></div>
-                        <li class="nav-item active navitem">
-                            <a href="https://asayami.github.io/">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io/hacking.html">Hacking</a>
-                        </li>
-						<div class="dropdown-divider"></div>
-						<li class="nav-item navitem">
-                            <a href="https://asayami.github.io/embedded.html" class="link">Embedded</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#aboutanchor">About</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#contactanchor">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="mainPicture"></div>
-        <div class="paragraph">
-			
-			<!-- Content Block-->
-			<div class='content-block'>
-				<h1>OSINT</h1>
-				<div class="minipara">
-						<p>Open-source intelligence, hay OSINT là việc thu thập và phân tích dữ liệu được thu thập từ các nguồn mở. Đây chính là bước đầu tiên
-						cho một cuộc tấn công. Bất kì thông tin về mục tiêu từ báo cáo, sách báo, mạng xã hội,... đều thuộc phạm trù OSINT. Có rất nhiều công cụ hỗ trợ
-						OSINT, có thể kể đến OSINT Framework (website chứa rất nhiều tools được Justin Nordine tổng hợp), Shodan,...</p>
-				</div>
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/osint/osint_tools.html" title="">
-								<img src="hacking_source/osint_tools.jpg" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/osint/osint_tools.html" title="">OSINT Tools</a></h4>
-						<p>OSINT (hay Open-Source Intelligence) là việc thu thập và phân tích dữ liệu thu thập được từ các nguồn mở, thường được sử dụng trong bảo mật, quân sự, tình báo, an ninh quốc gia,...</p>
-						<small>2 Mar, 2022 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-			</div>
-			
-			<!-- Content Block-->
-			<div class='content-block'>
-				<h1>SQL Injection</h1>
-				<div class="minipara">
-						<p>SQL injection là một kỹ thuật cho phép những kẻ tấn công lợi dụng lỗ hổng của việc kiểm tra dữ liệu đầu vào trong các ứng dụng web và các thông báo lỗi
-						của hệ quản trị cơ sở dữ liệu trả về để inject và thi hành các câu lệnh SQL bất hợp pháp</p>
-				</div>
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/sqli/sqli-1.html" title="">
-								<img src="hacking_source/sqli_bg.jpg" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/sqli/sqli-1.html" title="">Introduction</a></h4>
-						<p>SQL Injection: Introduction<br>Basic Knowledge About Database<br>How To Connect Database To Website</p>
-						<small>2 Mar, 2022 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-				
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/sqli/sqli-2.html" title="">
-								<img src="hacking_source/sqli_bg.jpg" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/sqli/sqli-2.html" title="">Union SQL Injection</a></h4>
-						<p>Sau khi đã có kiến thức nền tảng cơ bản, chúng ta sẽ bắt đầu inject</p>
-						<p>Main Structure<br>
-						Get Data From Database (UNION & ORDER BY)<br>
-						Data Extraction using SQLi</p>
-						<small>2 Mar, 2022 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/sqli/sqli-3.html" title="">
-								<img src="hacking_source/error_sql.png" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/sqli/sqli-3.html" title="">Error Based SQL Injection</a></h4>
-						<p>Trong một số trường hợp, có thể Union SQLi không hoạt động một phần, chúng ta có thể có thể cố tình gây lỗi và khiến website hiển thị thông báo lỗi có chứa data cần lấy</p>
-						<p>Introduction to SQL Injection using XPATH, extractvalue(), updatexml(), SubQuery</p>
-						<small>10 Apr, 2022 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-				
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/sqli/sqli-4.html" title="">
-								<img src="hacking_source/blind_sql.png" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/sqli/sqli-4.html" title="">DIOS & Blind SQL Injection</a></h4>
-						<p>DIOS có nghĩa Dump In One Shot là các query giúp dễ dàng và nhanh chóng dump các data trong bảng trong một nốt nhạc, còn
-						Blind SQL Injection thường được sử dụng khi pentest trong các case khó</p>
-						<small>11 Apr, 2022 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/sqli/sqli-5.html" title="">
-								<img src="hacking_source/mssql.jpg" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/sqli/sqli-5.html" title="">MSSQL Injection</a></h4>
-						<p>Ngoài MySQL, còn có các loại cơ sở dữ liệu khác. 1 CSDL cũng nổi tiếng không kém đó là MSSQL</p>
-						<p>Introduction<br>
-						MSSQL Union SQL Injection, DIOS, Error Based Injection</p>
-						<small>16 May, 2022 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-				
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/sqli/sqli-6.html" title="">
-								<img src="hacking_source/sqli_bg.jpg" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/sqli/sqli-6.html" title="">SQL Injection Guides & Prevention</a></h4>
-						<p>Guides & Other Methods of SQL Injection<br>
-						Tools<br>
-						Các phương pháp chống SQL Injection</p>
-						<small>5 Aug, 2022 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-			</div>
-			
-			<!-- Content Block-->
-			<div class='content-block'>
-				<h1>XSS</h1>
-				<div class="minipara">
-						<p>XSS là tên viết tắt của Cross-site scripting. Đây là một hình thức tấn công bằng mã độc phổ biến. Các hacker sẽ lợi dụng lỗ hổng trong bảo mật web để chèn các mã script, sau đó gửi cho người dùng để truy cập và mạo danh người dùng.</p>
-				</div>
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/xss/xss-1.html" title="">
-								<img src="hacking_source/xss_bg.jpg" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/xss/xss-1.html" title="">Introduction</a></h4>
-						<p>Introduction about XSS</p>
-						<small>14 Apr, 2023 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/xss/xss-2.html" title="">
-								<img src="hacking_source/xss_bg.jpg" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/xss/xss-2.html" title="">XSS Technique without parentheses</a></h4>
-						<p>XSS Technique without parentheses</p>
-						<small>22 May, 2023 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/xss/xss-3.html" title="">
-								<img src="hacking_source/angular_bg.jpg" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/xss/xss-3.html" title="">XSS with AngularJS</a></h4>
-						<p>AngularJS là một thư viện JS rất phổ biến hiện nay, nhưng đi kèm với nó là những lỗ hổng tiềm tàng. Thư viện này đã bị khai thác qua nhiều phiên bản và phải cập nhật, bỏ bớt một số tính năng để đảm bảo tính bảo mật đối với các lỗ hổng đã được tìm thấy.</p>
-						<small>20 Jun, 2023 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-			</div>
-			
-			<!-- Content Block-->
-			<div class='content-block'>
-				<h1>Tools</h1>
-				<div class="minipara">
-					<p>Trong mảng CNTT nói chung và Hacking nói riêng chúng ta phải sử dụng rất nhiều loại công cụ hỗ trợ khác nhau. Dưới đây là một số tools mình tham khảo
-					và biên soạn lại code</p>
-				</div>
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/tools/pingscanner.html" title="">
-								<img src="hacking_source/tools_bg.jpg" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/tools/pingscanner.html" title="">Ping Scanner</a></h4>
-						<p>Nmap là một công cụ hữu ích được sử dụng để thăm dò mạng máy tính, bao gồm phát hiện máy chủ, dịch vụ và hệ điều hành. Hôm nay chúng ta sẽ thử làm một tool có chức năng
-						cơ bản giống Ping Scanning bằng Python</p>
-						<small>24 Nov, 2022 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-				
-				<div class="row"><!-- blog-box -->
-					<div class="col-md-4">
-						<div class="post-media">
-							<a href="https://asayami.github.io/hacking/tools/mitmproxy.html" title="">
-								<img src="hacking_source/proxy_bg.png" class="img-fluid">
-								<div class="hovereffect link"></div>
-							</a>
-						</div><!-- end media -->
-					</div><!-- end col -->
-
-					<div class="col-md-8">
-						<h4><a href="https://asayami.github.io/hacking/tools/mitmproxy.html" title="">Mitmproxy & Python Packet Analyzer</a></h4>
-						<p>Mitmproxy là một công cụ giống với Burp Suite hay Wireshark, thường được sử dụng để chặn và phân tích các gói
-						tin thông qua proxy, với khả năng tích hợp mạnh mẽ với Python</p>
-						<small>19 Jan, 2023 / by Asayami</small>
-					</div><!-- end meta -->
-				</div><!-- end blog-box -->
-			</div>
+      gtag("config", "G-3NTSMWGK5D");
+    </script>
+    <meta charset="UTF-8" />
+    <title>Hacking</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="hacking_source/hacking_css.css" />
+    <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
+    <script src="hacking_source/hacking_js.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <meta
+      name="description"
+      content="Những bài viết, kinh nghiệm của mình về mảng Hacking"
+    />
+    <meta name="keywords" content="Hacking, hack" />
+    <meta name="author" content="Asayami Kurashin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">❅</div>
+      <div class="snowflake">
+        <img
+          src="theme/1.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">
+        <img
+          src="theme/2.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">
+        <img
+          src="theme/3.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❄</div>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+        <script>
+          window.onscroll = NavScroll;
+        </script>
+        <a class="navbar-branch" href="https://asayami.github.io/">
+          <img src="transparent-favicon.png" style="width: 50px" class="link" />
+        </a>
+        <button
+          class="navbar-toggler ml-auto custom-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarSupportedContent-7"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <div class="dropdown-divider"></div>
+            <li class="nav-item active navitem">
+              <a href="https://asayami.github.io/"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/hacking.html">Hacking</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/embedded.html" class="link"
+                >Embedded</a
+              >
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#aboutanchor">About</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#contactanchor">Contact</a>
+            </li>
+          </ul>
         </div>
-		
-    </body>
+      </div>
+    </nav>
+    <div class="mainPicture"></div>
+    <div class="paragraph">
+      <!-- Content Block-->
+      <div class="field_div">
+        <h1 data-toggle="collapse" data-target="#div1">OSINT</h1>
+        <h1 style="position: absolute; top: 1rem; right: 1rem">+</h1>
+      </div>
+      <div id="div1" class="collapse">
+        <div class="minipara">
+          <p>
+            Open-source intelligence, hay OSINT là việc thu thập và phân tích dữ
+            liệu được thu thập từ các nguồn mở. Đây chính là bước đầu tiên cho
+            một cuộc tấn công. Bất kì thông tin về mục tiêu từ báo cáo, sách
+            báo, mạng xã hội,... đều thuộc phạm trù OSINT. Có rất nhiều công cụ
+            hỗ trợ OSINT, có thể kể đến OSINT Framework (website chứa rất nhiều
+            tools được Justin Nordine tổng hợp), Shodan,...
+          </p>
+        </div>
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/osint/osint_tools.html"
+                title=""
+              >
+                <img src="hacking_source/osint_tools.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/osint/osint_tools.html"
+                title=""
+              >
+                OSINT Tools
+              </a>
+            </h4>
+            <p>
+              OSINT (hay Open-Source Intelligence) là việc thu thập và phân tích
+              dữ liệu thu thập được từ các nguồn mở, thường được sử dụng trong
+              bảo mật, quân sự, tình báo, an ninh quốc gia,...
+            </p>
+            <small>2 Mar, 2022 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+      </div>
+      <div class="content-block"></div>
+
+      <!-- Content Block-->
+      <div class="field_div">
+        <h1 data-toggle="collapse" data-target="#div2">SQL Injection</h1>
+        <h1 style="position: absolute; top: 1rem; right: 1rem">+</h1>
+      </div>
+      <div id="div2" class="collapse">
+        <div class="minipara">
+          <p>
+            SQL injection là một kỹ thuật cho phép những kẻ tấn công lợi dụng lỗ
+            hổng của việc kiểm tra dữ liệu đầu vào trong các ứng dụng web và các
+            thông báo lỗi của hệ quản trị cơ sở dữ liệu trả về để inject và thi
+            hành các câu lệnh SQL bất hợp pháp
+          </p>
+        </div>
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-1.html"
+                title=""
+              >
+                <img src="hacking_source/sqli_bg.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-1.html"
+                title=""
+                >Introduction</a
+              >
+            </h4>
+            <p>
+              SQL Injection: Introduction<br />Basic Knowledge About Database<br />How
+              To Connect Database To Website
+            </p>
+            <small>2 Mar, 2022 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-2.html"
+                title=""
+              >
+                <img src="hacking_source/sqli_bg.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-2.html"
+                title=""
+                >Union SQL Injection</a
+              >
+            </h4>
+            <p>
+              Sau khi đã có kiến thức nền tảng cơ bản, chúng ta sẽ bắt đầu
+              inject
+            </p>
+            <p>
+              Main Structure<br />
+              Get Data From Database (UNION & ORDER BY)<br />
+              Data Extraction using SQLi
+            </p>
+            <small>2 Mar, 2022 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-3.html"
+                title=""
+              >
+                <img src="hacking_source/error_sql.png" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-3.html"
+                title=""
+                >Error Based SQL Injection</a
+              >
+            </h4>
+            <p>
+              Trong một số trường hợp, có thể Union SQLi không hoạt động một
+              phần, chúng ta có thể có thể cố tình gây lỗi và khiến website hiển
+              thị thông báo lỗi có chứa data cần lấy
+            </p>
+            <p>
+              Introduction to SQL Injection using XPATH, extractvalue(),
+              updatexml(), SubQuery
+            </p>
+            <small>10 Apr, 2022 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-4.html"
+                title=""
+              >
+                <img src="hacking_source/blind_sql.png" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-4.html"
+                title=""
+                >DIOS & Blind SQL Injection</a
+              >
+            </h4>
+            <p>
+              DIOS có nghĩa Dump In One Shot là các query giúp dễ dàng và nhanh
+              chóng dump các data trong bảng trong một nốt nhạc, còn Blind SQL
+              Injection thường được sử dụng khi pentest trong các case khó
+            </p>
+            <small>11 Apr, 2022 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-5.html"
+                title=""
+              >
+                <img src="hacking_source/mssql.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-5.html"
+                title=""
+                >MSSQL Injection</a
+              >
+            </h4>
+            <p>
+              Ngoài MySQL, còn có các loại cơ sở dữ liệu khác. 1 CSDL cũng nổi
+              tiếng không kém đó là MSSQL
+            </p>
+            <p>
+              Introduction<br />
+              MSSQL Union SQL Injection, DIOS, Error Based Injection
+            </p>
+            <small>16 May, 2022 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-6.html"
+                title=""
+              >
+                <img src="hacking_source/sqli_bg.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/sqli/sqli-6.html"
+                title=""
+                >SQL Injection Guides & Prevention</a
+              >
+            </h4>
+            <p>
+              Guides & Other Methods of SQL Injection<br />
+              Tools<br />
+              Các phương pháp chống SQL Injection
+            </p>
+            <small>5 Aug, 2022 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+      </div>
+      <div class="content-block"></div>
+
+      <!-- Content Block-->
+      <div class="field_div">
+        <h1 data-toggle="collapse" data-target="#div3">XSS</h1>
+        <h1 style="position: absolute; top: 1rem; right: 1rem">+</h1>
+      </div>
+      <div id="div3" class="collapse">
+        <div class="minipara">
+          <p>
+            XSS là tên viết tắt của Cross-site scripting. Đây là một hình thức
+            tấn công bằng mã độc phổ biến. Các hacker sẽ lợi dụng lỗ hổng trong
+            bảo mật web để chèn các mã script, sau đó gửi cho người dùng để truy
+            cập và mạo danh người dùng.
+          </p>
+        </div>
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/xss/xss-1.html"
+                title=""
+              >
+                <img src="hacking_source/xss_bg.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/xss/xss-1.html"
+                title=""
+                >Introduction</a
+              >
+            </h4>
+            <p>Introduction about XSS</p>
+            <small>14 Apr, 2023 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/xss/xss-2.html"
+                title=""
+              >
+                <img src="hacking_source/xss_bg.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/xss/xss-2.html"
+                title=""
+                >XSS Technique without parentheses</a
+              >
+            </h4>
+            <p>XSS Technique without parentheses</p>
+            <small>22 May, 2023 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/xss/xss-3.html"
+                title=""
+              >
+                <img src="hacking_source/angular_bg.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/xss/xss-3.html"
+                title=""
+                >XSS with AngularJS</a
+              >
+            </h4>
+            <p>
+              AngularJS là một thư viện JS rất phổ biến hiện nay, nhưng đi kèm
+              với nó là những lỗ hổng tiềm tàng. Thư viện này đã bị khai thác
+              qua nhiều phiên bản và phải cập nhật, bỏ bớt một số tính năng để
+              đảm bảo tính bảo mật đối với các lỗ hổng đã được tìm thấy.
+            </p>
+            <small>20 Jun, 2023 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+      </div>
+      <div class="content-block"></div>
+
+      <!-- Content Block-->
+      <div class="field_div">
+        <h1 data-toggle="collapse" data-target="#div4">Tools</h1>
+        <h1 style="position: absolute; top: 1rem; right: 1rem">+</h1>
+      </div>
+      <div id="div4" class="collapse">
+        <div class="minipara">
+          <p>
+            Trong mảng CNTT nói chung và Hacking nói riêng chúng ta phải sử dụng
+            rất nhiều loại công cụ hỗ trợ khác nhau. Dưới đây là một số tools
+            mình tham khảo và biên soạn lại code
+          </p>
+        </div>
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/tools/pingscanner.html"
+                title=""
+              >
+                <img src="hacking_source/tools_bg.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/tools/pingscanner.html"
+                title=""
+                >Ping Scanner</a
+              >
+            </h4>
+            <p>
+              Nmap là một công cụ hữu ích được sử dụng để thăm dò mạng máy tính,
+              bao gồm phát hiện máy chủ, dịch vụ và hệ điều hành. Hôm nay chúng
+              ta sẽ thử làm một tool có chức năng cơ bản giống Ping Scanning
+              bằng Python
+            </p>
+            <small>24 Nov, 2022 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/tools/mitmproxy.html"
+                title=""
+              >
+                <img src="hacking_source/proxy_bg.png" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/tools/mitmproxy.html"
+                title=""
+                >Mitmproxy & Python Packet Analyzer</a
+              >
+            </h4>
+            <p>
+              Mitmproxy là một công cụ giống với Burp Suite hay Wireshark,
+              thường được sử dụng để chặn và phân tích các gói tin thông qua
+              proxy, với khả năng tích hợp mạnh mẽ với Python
+            </p>
+            <small>19 Jan, 2023 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <!-- end blog-box -->
+      </div>
+      <div class="content-block"></div>
+
+      <!-- Content Block-->
+      <div class="field_div">
+        <h1 data-toggle="collapse" data-target="#div5">Malware</h1>
+        <h1 style="position: absolute; top: 1rem; right: 1rem">+</h1>
+      </div>
+      <div id="div5" class="collapse">
+        <div class="minipara">
+          <p>
+            Malware (phần mềm độc hại) về cơ bản là bất kỳ loại phần mềm nào có
+            ý định làm hại vào máy tính (thu thập thông tin, truy cập dữ liệu
+            nhạy cảm…) Malware bao gồm virus, trojan, rootkit, worm, keylogger,
+            spyware, adware, v.v...
+          </p>
+        </div>
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/malware/malware-1.html"
+                title=""
+              >
+                <img src="hacking_source/malware.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/malware/malware-1.html"
+                title=""
+              >
+                Malware Introduction
+              </a>
+            </h4>
+            <p>
+              Malware (phần mềm độc hại) về cơ bản là bất kỳ loại phần mềm nào
+              có ý định làm hại vào máy tính (thu thập thông tin, truy cập dữ
+              liệu nhạy cảm…) Malware bao gồm virus, trojan, rootkit, worm,
+              keylogger, spyware, adware, v.v...
+              <br />Series này sẽ tập trung tìm hiểu về cách tạo ra một malware,
+              bypass AV (anti virus)
+            </p>
+            <small>28 Oct, 2023 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+        <div class="row">
+          <!-- blog-box -->
+          <div class="col-md-4">
+            <div class="post-media">
+              <a
+                href="https://asayami.github.io/hacking/malware/malware-2.html"
+                title=""
+              >
+                <img src="hacking_source/malware.jpg" class="img-fluid" />
+                <div class="hovereffect link"></div>
+              </a>
+            </div>
+            <!-- end media -->
+          </div>
+          <!-- end col -->
+
+          <div class="col-md-8">
+            <h4>
+              <a
+                href="https://asayami.github.io/hacking/malware/malware-2.html"
+                title=""
+              >
+                Reverse Shell
+              </a>
+            </h4>
+            <p>
+              Reverse shell là 1 loại RCE mà khi đó nạn nhân là phía mở cổng tới
+              máy hacker. Đây là loại tấn công có thể bypass firewall và khó để
+              ngăn chặn. Tuy nhiên, loại tấn công này sẽ khiến hacker bị lộ
+              thông tin server.
+            </p>
+            <small>19 Oct, 2023 / by Asayami</small>
+          </div>
+          <!-- end meta -->
+        </div>
+      </div>
+      <div class="content-block"></div>
+    </div>
+  </body>
 </html>

