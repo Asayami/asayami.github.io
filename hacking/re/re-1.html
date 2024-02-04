@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-3NTSMWGK5D");
+    </script>
+    <meta charset="UTF-8" />
+    <title>Reverse Engineering Overview</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://asayami.github.io/favicon.png"
+    />
+    <link rel="stylesheet" href="re_source/re_css.css" />
+    <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
+    <script src="re_source/re_js.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <meta
+      name="description"
+      content="Những bài viết, kinh nghiệm của mình về Reverse Engineering"
+    />
+    <meta
+      name="keywords"
+      content="Hacking, hack, Reverse Engineering, Cross Site Scripting, Cheat Sheet"
+    />
+    <meta name="author" content="Asayami Kurashin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">❅</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/1.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/2.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/3.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❄</div>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+        <script>
+          window.onscroll = NavScroll;
+        </script>
+        <a class="navbar-branch" href="https://asayami.github.io/">
+          <img
+            src="https://asayami.github.io/transparent-favicon.png"
+            style="width: 50px"
+            class="link"
+          />
+        </a>
+        <button
+          class="navbar-toggler ml-auto custom-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarSupportedContent-7"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <div class="dropdown-divider"></div>
+            <li class="nav-item active navitem">
+              <a href="https://asayami.github.io/"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/hacking.html">Hacking</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/embedded.html" class="link"
+                >Embedded</a
+              >
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#aboutanchor">About</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#contactanchor">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="mainPicture"></div>
+    <div class="paragraph">
+      <p>
+        Reverse engineering phần mềm là quá trình phân tích mã nguồn của một
+        phần mềm để tìm hiểu về cấu trúc, chức năng và cách hoạt động của nó.
+        Điều này có thể được thực hiện để: <br />&emsp;- Tìm hiểu về cách hoạt
+        động của một phần mềm: Điều này có thể hữu ích cho các nhà phát triển
+        phần mềm, những người muốn sửa lỗi hoặc cải thiện phần mềm.
+        <br />&emsp;- Sao chép hoặc sản xuất một phần mềm tương tự: Điều này có
+        thể được thực hiện để tiết kiệm chi phí hoặc để tạo ra một phiên bản cải
+        tiến của phần mềm. Tuy nhiên, việc sao chép phần mềm có bản quyền mà
+        không có sự cho phép của tác giả là bất hợp pháp. <br />&emsp;- Phân
+        tích bảo mật của một phần mềm: Điều này có thể giúp xác định các lỗ hổng
+        bảo mật có thể bị khai thác bởi tin tặc.
+      </p>
+      <p>
+        Khái niệm reverse engineering cũng tồn tại trong mảng phần cứng, với ý
+        nghĩa tương tự là phân tích và tái tạo lại phần cứng đó. Tuy nhiên chúng
+        ta sẽ chỉ nói về dịch ngược phần mềm trong bài viết này.
+      </p>
+      <p>
+        <i class="fa-solid fa-triangle-exclamation"></i> Trước khi tìm hiểu về
+        reverse engineering, bạn đọc cần có hiểu biết về kiến trúc máy tính và
+        assembly, nên tìm hiểu về tập lệnh x86 (định dạng Intel) vì tập lệnh và
+        định dạng này phổ biến. Chúng ta chỉ cần học tới mức hiểu syntax của
+        Assembly (dòng lệnh, if-else, loop,...) là đủ.
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>Types of Instruction Set Architecture</h2>
+    </div>
+
+    <div class="paragraph">
+      <p>
+        Các CPU hiện nay trên thị trường được gắn với một kiến trúc tập lệnh nào
+        đó. Kiến trúc tập lệnh (Instruction Set Architecture) là tập hợp các kỹ
+        thuật thiết kế bộ vi xử lý được sử dụng để thực hiện các tập lệnh. Máy
+        vi tính với CPU khác nhau có thể chia sẻ một tập lệnh phổ biến. Một số
+        kiến trúc tập lệnh phổ biến:
+        <br />&emsp;- x86: Kiến trúc x86 là kiến trúc tập lệnh phổ biến nhất
+        hiện nay, được sử dụng trong hầu hết các máy tính để bàn, máy tính xách
+        tay, máy chủ và các thiết bị nhúng. Kiến trúc x86 đã trải qua nhiều lần
+        cập nhật và mở rộng trong những năm qua, và hiện được hỗ trợ bởi một
+        loạt các nhà sản xuất bộ xử lý, bao gồm Intel, AMD và VIA. Có 2 định
+        dạng phổ biến của x86 là Intel và AT&T, 2 cách đọc này khác nhau đôi
+        chút.<br />&emsp;- ARM: Kiến trúc ARM là kiến trúc tập lệnh phổ biến
+        nhất trong các thiết bị di động, bao gồm điện thoại thông minh, máy tính
+        bảng và máy tính xách tay. Kiến trúc ARM được thiết kế để tiết kiệm điện
+        năng và hiệu suất trên mỗi watt, khiến nó trở nên lý tưởng cho các thiết
+        bị di động. <br />&emsp;- MIPS: Kiến trúc MIPS là kiến trúc tập lệnh phổ
+        biến trong một số thiết bị, bao gồm máy tính để bàn, máy tính xách tay,
+        máy chủ và các thiết bị nhúng. Kiến trúc MIPS được thiết kế để đơn giản
+        và hiệu quả, khiến nó trở nên lý tưởng cho các ứng dụng đòi hỏi tài
+        nguyên thấp. <br />&emsp;- PowerPC: Kiến trúc PowerPC là kiến trúc tập
+        lệnh phổ biến trong các máy chủ và thiết bị nhúng. Kiến trúc PowerPC
+        được thiết kế để hiệu suất cao, khiến nó trở nên lý tưởng cho các ứng
+        dụng đòi hỏi nhiều tài nguyên. <br />&emsp;- RISC-V: Kiến trúc RISC-V là
+        một kiến trúc tập lệnh mới đang trở nên phổ biến. Kiến trúc RISC-V là
+        kiến trúc tập lệnh mở, miễn phí, khiến nó trở nên lý tưởng cho các ứng
+        dụng yêu cầu chi phí thấp và linh hoạt.
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>Registers Overview</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        <br />EAX - stores function return values <br />EBX - base pointer to
+        the data section <br />ECX - counter for string and loop operations
+        <br />EDX - I/O pointer <br />ESI - source pointer for string operations
+        <br />EDI - destination pointer for string operations <br />ESP - stack
+        pointer <br />EBP - stack frame base pointer <br />EIP - pointer to next
+        instruction to execute - “instruction pointer”
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>Hex Characters Handling using Python</h2>
+    </div>
+    <div class="paragraph">
+      <h3>Note:</h3>
+      <pre><a style="color: #009933;"><code>
+s = hex((0x1f6ff5218c40de9c-0x55930dbbe)//0x4f5352)[2:] #hex calculator
+print(str(s))
+
+param = ''.join(reversed(''.join(map(chr, [int(s[i:i+2],16) for i in range(0,len(s),2)])))) #hex to string
+print(param)
+      </code></a></pre>
+    </div>
+
+    <div class="paratitle">
+      <h2>Specified Programming Language Reverse Engineering</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Một vài decompilers đối với một số ngôn ngữ:
+        <br />&emsp;- Python: <a href="https://github.com/zrax/pycdc">pycdc</a>,
+        <a href="https://github.com/jchristman/PyDA">PyDA</a>, dis module (dùng
+        để lấy bytecode instructions (một dạng opcode được sử dụng cho riêng
+        intepreter của Python)) <br />&emsp;- AutoIT:
+        <a href="https://github.com/nazywam/AutoIt-Ripper">AutoIT Ripper</a>
+        <br />&emsp;- C#: dnSpy <br />&emsp;- Lua: luadec, unluac
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>Portable Executable Reverse Engineering</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Để lấy thông tin cơ bản về thành phần của 1 file PE, chúng ta có thể sử
+        dụng tool như PE Info.
+      </p>
+      <p>
+        Với file PE (đa số là file exe), ngoài các tool như trên chúng ta thường
+        sử dụng các công cụ như IDA, GHidra, x64dbg,... nếu chưa biết ngôn ngữ
+        được sử dụng. IDA là một tool nổi tiếng vì có thể disassemble, decompile
+        rất nhiều kiểu file bao gồm file PE. IDA và x64dbg đều hỗ trợ debug với
+        nhiều tính năng cần thiết.
+      </p>
+      <p>
+        <img
+          src="re_source/ida.png"
+          style="width: 60%"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </p>
+
+      <p>
+        Một số file PE có thể bị packed. Đó là tình trạng source code bị mã hoá,
+        làm rối,... Các công cụ dùng để pack có thể kể tới UPX. Để lấy được code
+        trước khi bị packed bạn đọc có thể xem hướng dẫn tại:
+        <a href="https://hackmd.io/@antoinenguyen09/Hy0a2mb0t">Here</a>
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>ELF Reverse Engineering</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Bên cạnh Windows cũng có nền tảng các hệ điều hành thuộc họ Unix,
+        Unix-like. Những hệ điều hành này thay vì chạy file exe thì sử dụng file
+        elf (Executable and Linkable Format). Lí do windows không thể thực thi
+        file elf và ngược lại mặc dù có thể dùng chung kiến trúc x86 là bởi vì
+        không tương thích các thư viện mà hệ điều hành cung cấp.
+      </p>
+      <p>
+        Để disassemble, decompile loại file này có thể dùng GHidra và IDA. Để
+        debug, chúng ta có thể dùng gdb hay IDA. Mình thường sử dụng gdb, bạn
+        đọc có thể xem thêm cách debug bằng gdb tại:
+        <a
+          href="https://reverseengineering.stackexchange.com/questions/1935/how-to-handle-stripped-binaries-with-gdb-no-source-no-symbols-and-gdb-only-sho"
+          >StackExchange</a
+        >,
+        <a
+          href="https://www.youtube.com/watch?v=VroEiMOJPm8&list=PLhixgUqwRTjxglIswKp9mpkfPNfHkzyeN&index=6"
+          >LiveOverflow</a
+        >.
+      </p>
+      <p>
+        <img
+          src="re_source/ghidra.jpg"
+          style="width: 60%"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </p>
+
+      Một vài note khi sử dụng gdb:
+      <pre><a style="color: #009933;"><code>
+  x/32xb address
+  info functions
+  info
+  breakpoints (delete 1 2 3)
+  show args / set args
+  b* main+1
+  starti
+        </code></a></pre>
+    </div>
+
+    <div class="paratitle">
+      <h2>Android Reverse Engineering</h2>
+    </div>
+    <div class="paragraph">
+      <p>Disassemble / Decompile Tools: JADX, Android Studio, apktook,...</p>
+      <p>
+        Android Studio cũng được sử dụng để debug được file apk. Tuy nhiên 1
+        file apk thông thường sẽ chưa bật chế độ debug trong
+        AndroidManifest.xml, chúng ta phải tự làm điều đó.
+      </p>
+      <p>
+        Chúng ta cần decompile file apk ra các file nhỏ hơn bao gồm
+        AndroidManifest.xml, thêm chuỗi android:debuggable="true", recompile lại
+        các file nhỏ thành 1 file apk, cuối cùng là ký (sign) file apk mới. Mỗi
+        khi thay đổi dữ liệu trong file apk sẽ cần phải ký lại.
+      </p>
+      <p>
+        Decompile, modify, recompile using apktool:
+        <a href="https://www.youtube.com/watch?v=bisMnhLrIt4">Here</a> (có thể
+        sign nhanh hơn dùng cách bên dưới)
+        <br />
+        Sign apk using Uber Apk Signer:
+        <a href="https://github.com/patrickfav/uber-apk-signer">Here</a>
+      </p>
+      <p>
+        <img
+          src="re_source/android_studio.jpg"
+          style="width: 60%"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </p>
+      <p>
+        Trong lúc debug, có thể ngoài file smali chúng ta có thể gặp những file
+        thư viện .so (shared object). Những file này thường được code bằng C/C++
+        và được compile sẵn, gần như không thể debug trên Android Studio. Chúng
+        có thể so sánh với thư viện liên kết động (DLL) trên Windows. Bạn đọc có
+        thể xem sự khác biệt giữa một vài loại thư viện tại:
+        <a
+          href="https://stackoverflow.com/questions/9688200/difference-between-shared-objects-so-static-libraries-a-and-dlls-so"
+          >StackOverflow</a
+        >
+      </p>
+      <p>
+        Việc debug các file .so riêng biệt sẽ cần tốn công hơn. Chúng ta sử dụng
+        IDA Pro để debug và cần máy root để có thể thực thi file phát server cho
+        IDA kết nối từ xa. Việc thiết lập kết nối giữa IDA và thiết bị sẽ hoàn
+        toàn qua adb (Android Debug Bridge). Chi tiết bạn đọc xem tại:
+        <a href="https://www.youtube.com/watch?v=OiviK3VFGLw"
+          >Android AppSec Youtube</a
+        >
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>Reverse Engineering Guide</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Trong lúc dịch ngược và debug, chúng ta cần để ý đến các điểm mấu chốt
+        như: hàm bắt đầu (nếu có), ý nghĩa tên các hàm (nếu có), logic code (AI
+        như chatgpt cũng có thể hỗ trợ rất tốt trong việc đọc hiểu code
+        decompiled hay disassembled và giải thích ý nghĩa đoạn code), cài đặt
+        breakpoints như thế nào, tại các breakpoint thì xem và sửa các giá trị
+        trên thanh ghi và các biến trong function như thế nào, chọn và xử lí
+        đúng thread trong ứng dụng multi thread,...
+      </p>
+    </div>
+  </body>
+</html>

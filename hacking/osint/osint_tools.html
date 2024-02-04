@@ -1,183 +1,348 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-		  gtag('config', 'G-3NTSMWGK5D');
-		</script>
-        <meta charset="UTF-8">
-        <title>OSINT Tools</title>
-        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
-        <link rel="stylesheet" href="osint_tools_source/osint_tools_css.css">
-		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
-        <script src="osint_tools_source/osint_tools_js.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <meta name="description" content="Những bài viết, kinh nghiệm của mình về OSINT">
-		<meta name="keywords" content="Hacking, hack, OSINT">
-		<meta name="author" content="Asayami Kurashin">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-		<div class="snowflakes" aria-hidden="true">
-			<div class="snowflake">❅</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake">❄</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❅</div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❄</div>
-		</div>
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
-                <script>window.onscroll = NavScroll;</script>
-                <a class="navbar-branch" href="https://asayami.github.io/">
-                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;" class="link"></img>
-                </a>
-                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-						<div class="dropdown-divider"></div>
-                        <li class="nav-item active navitem">
-                            <a href="https://asayami.github.io/">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io/hacking.html">Hacking</a>
-                        </li>
-						<div class="dropdown-divider"></div>
-						<li class="nav-item navitem">
-                            <a href="https://asayami.github.io/embedded.html" class="link">Embedded</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#aboutanchor">About</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#contactanchor">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="mainPicture"></div>
-        <div class="paragraph">
-            <p>OSINT (hay Open-Source Intelligence) là việc thu thập và phân tích dữ liệu thu thập được từ các nguồn mở, thường
-            được sử dụng trong bảo mật, quân sự, tình báo, an ninh quốc gia,...</p>
-            <p>Có thể chia lĩnh vực này thành nhiều danh mục nhỏ hơn như:</p>
-            <div style="padding-left:3%">
-                <p>Media: báo chí, radio, TV<br>
-                Internet: blogs, thảo luận, cư dân mạng<br>
-                Public government data<br>
-                ...</p>
-            </div>
-            <p>Dưới đây mình sẽ liệt kê những tools hữu ích</p>
-			<h5>Username</h5>
-			<div style="padding-left:3%">
-                <p>
-                    <a href="https://github.com/sherlock-project/sherlock">Sherlock</a><br>
-                    <a href="https://whatsmyname.app/">whatsmyname.app</a> (exclude social media)<br>
-                </p>
-            </div>
-            <h5>Email</h5>
-            <div style="padding-left:3%">
-                <p>
-                    <a href="https://tools.epieos.com/email.php">EPIEOS Tool</a> (web version)<br>
-                    <a href="https://github.com/mxrch/GHunt">GHunt by mxrch</a> (python version, more features)
-                </p>
-            </div>
-            <h5>Facebook</h5>
-            <div style="padding-left:3%">
-                <p>
-                    Mỗi user, page, group hay event trên Facebook đều có một id riêng biệt, có thể thấy dễ dàng trong URL hoặc phải
-                    sử dụng các cách bên dưới
-                </p>
-                <p>Chúng ta mở source code (inspect) website và dùng tính năng find (Ctrl + F)</p>
-                <p>
-                "__typename":"User","id":" (when looking at an user)<br>
-                "pageID" (when looking at a page)<br>
-                "groupID" (when looking at a group)<br>
-                "eventID" (when looking at an event)<br>
-                </p>
-				<p><i class="fa-solid fa-triangle-exclamation"></i>
-				Cách tìm id trên sẽ bị thay đổi liên tục do các cập nhật mới của facebook, tuy nhiên việc tìm ra
-				keyword như vậy có lẽ không quá khó, bạn đọc có thể tự tìm kiếm keyword vào thời điểm osint.
-                </p>
-                <p><i class="fa-solid fa-triangle-exclamation"></i>
-                Nên lưu ý Facebook hỗ trợ search data của cả text trong image của posts (đối với những text dễ nhận diện)
-                </p>
-                <p>Một số tools khác: 
-                <a href="https://www.sowsearch.info/">Facebook Search</a> (s0wdust),
-                <a href="https://github.com/sqren/fb-sleep-stats">Facebook Sleep Stats</a>,
-                <a href="https://atpsoftware.vn/finduid/">FindUID</a> (Tỉ lệ thành công thấp)
-                <a href="https://osintcurio.us/2019/08/22/the-new-facebook-graph-search-part-1/">FB Search Engine Configuration</a>
-                </p>
-                <p>Có thể cần sử dụng thêm một số info khác như nickname, birthdate,... và dùng google để tra</p>
-            </div>
-            <h5>Google Search Engine</h5>
-            <div style="padding-left:3%">
-                <p>Google là một công cụ tìm kiếm mạnh mẽ, khi tìm kiếm bằng google có thể thêm các thuộc tính như dưới đây, và
-                có thể thêm dấu trừ đằng trước một thuộc tính để loại bỏ những URL chứa thuộc tính (thông tin) đó</p>
-                <p><font color="#009933">-filetype:pdf "sukasuka"</font color="#009933">: tìm những URL không phải file pdf và bắt buộc phải có cụm "sukasuka"<br>
-                <font color="#009933">site:facebook.com -"Chtholly" sukasuka</font color="#009933">: tìm những URL của Facebook về sukasuka mà không có cụm "Chtholly"<br>
-                Một số thuộc tính khác như: inurl, intitle cũng hoạt động tương tự</p>
-            </div>
-            <h5>Twitter</h5>
-            <div style="padding-left:3%">
-                <p><a href="http://tweetbeaver.com/">Tweet Beaver</a><br>
-                <a href="https://tinfoleak.com/">Tinfoleak</a><br>
-                <a href="http://sleepingtime.org/">Sleeping Time</a></p>
-            </div>
-            <h5>Youtube</h5>
-            <div style="padding-left:3%">
-                <p><a href="https://github.com/mxrch/GHunt">GHunt by mxrch</a><br>
-                <a href="https://mattw.io/youtube-geofind/location">Youtube Geofind</a> (Tìm các video youtube trong một khu vực bất kỳ)</p>
-            </div>
-            <h5>Website</h5>
-            <div style="padding-left:3%">
-                <p>Về website, chúng ta có nhiều tools như: whois (thuật ngữ chung hay keyword, nhiều app hỗ trợ),
-                nmap, dnsdumpster,...</p>
-                <p>Để kiểm tra một website là giả mạo hay không, có thể sử dụng các tools:</p>
-                <p style="padding-left:2%"><a href="https://urlscan.io/">URL Scan</a><br>
-                <a href="https://dnstwist.it/">DNSTwist</a> (list các permutation của domain)</p>
-            </div>
-            <h5>Reverse Image</h5>
-            <div style="padding-left:3%">
-                <p>Google Lens (đối với pc thì dùng kích hoạt trên google chrome, phone thì install app)<br>
-                <a href="https://yandex.com/images/">Yandex</a> (web version)<br>
-                <a href="https://saucenao.com/">Saucenao</a> (chuyên tìm kiếm ảnh trên deviant, pixiv,...)</p>
-                </p>
-            </div>
-            <h5>Other Tools</h5>
-            <div style="padding-left:3%">
-                <p><a href="https://www.shodan.io/">Shodan</a><br>
-                <a href="https://archive.org/web/">Wayback Machine</a> (có nhiều web tương tự)<br>
-                <a href="https://merricx.github.io/enigmator/cryptanalysis/crypto_identifier.html">Crypto Identifier</a> (xác định kiểu mã hóa)<br>
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                Một số loại mã hóa đặc biệt: Morse, Exif, Dotcode, Barcode, Steganography,...
-                </p>
-            </div>
-            <h5>Cryptography</h5>
-            <div style="padding-left:3%">
-                <p><a href="https://www.dcode.fr/tools-list#cryptography">Cipher Identifier & Crypto Tools</a><br></p>
-            </div>
-
+      gtag("config", "G-3NTSMWGK5D");
+    </script>
+    <meta charset="UTF-8" />
+    <title>OSINT Tools</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://asayami.github.io/favicon.png"
+    />
+    <link rel="stylesheet" href="osint_tools_source/osint_tools_css.css" />
+    <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
+    <script src="osint_tools_source/osint_tools_js.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <meta
+      name="description"
+      content="Những bài viết, kinh nghiệm của mình về OSINT"
+    />
+    <meta name="keywords" content="Hacking, hack, OSINT" />
+    <meta name="author" content="Asayami Kurashin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">❅</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/1.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/2.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/3.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❄</div>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+        <script>
+          window.onscroll = NavScroll;
+        </script>
+        <a class="navbar-branch" href="https://asayami.github.io/">
+          <img
+            src="https://asayami.github.io/transparent-favicon.png"
+            style="width: 50px"
+            class="link"
+          />
+        </a>
+        <button
+          class="navbar-toggler ml-auto custom-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarSupportedContent-7"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <div class="dropdown-divider"></div>
+            <li class="nav-item active navitem">
+              <a href="https://asayami.github.io/"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/hacking.html">Hacking</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/embedded.html" class="link"
+                >Embedded</a
+              >
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#aboutanchor">About</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#contactanchor">Contact</a>
+            </li>
+          </ul>
         </div>
-    </body>
+      </div>
+    </nav>
+    <div class="mainPicture"></div>
+    <div class="paragraph">
+      <p>
+        OSINT (hay Open-Source Intelligence) là việc thu thập và phân tích dữ
+        liệu thu thập được từ các nguồn mở, thường được sử dụng trong bảo mật,
+        quân sự, tình báo, an ninh quốc gia,...
+      </p>
+      <p>Có thể chia lĩnh vực này thành nhiều danh mục nhỏ hơn như:</p>
+      <div style="padding-left: 3%">
+        <p>
+          Media: báo chí, radio, TV<br />
+          Internet: blogs, thảo luận, cư dân mạng<br />
+          Public government data<br />
+          ...
+        </p>
+      </div>
+      <p>Dưới đây mình sẽ liệt kê những tools hữu ích</p>
+
+      <h3>Username</h3>
+      <div style="padding-left: 3%">
+        <p>
+          <a href="https://github.com/sherlock-project/sherlock">Sherlock</a
+          ><br />
+          <a href="https://whatsmyname.app/">whatsmyname.app</a> (exclude social
+          media)<br />
+        </p>
+      </div>
+
+      <h3>Email</h3>
+      <div style="padding-left: 3%">
+        <p>
+          <a href="https://tools.epieos.com/email.php">EPIEOS Tool</a> (web
+          version)<br />
+          <a href="https://github.com/mxrch/GHunt">GHunt by mxrch</a> (python
+          version, more features)
+        </p>
+      </div>
+
+      <h3>Facebook</h3>
+      <div style="padding-left: 3%">
+        <p>
+          Mỗi user, page, group hay event trên Facebook đều có một id riêng
+          biệt, có thể thấy dễ dàng trong URL hoặc phải sử dụng các cách bên
+          dưới
+        </p>
+        <p>
+          Chúng ta mở source code (inspect) website và dùng tính năng find (Ctrl
+          + F)
+        </p>
+        <p>
+          "__typename":"User","id":" (when looking at an user)<br />
+          "pageID" (when looking at a page)<br />
+          "groupID" (when looking at a group)<br />
+          "eventID" (when looking at an event)<br />
+        </p>
+        <p>
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          Cách tìm id trên sẽ bị thay đổi liên tục do các cập nhật mới của
+          facebook, tuy nhiên việc tìm ra keyword như vậy có lẽ không quá khó,
+          bạn đọc có thể tự tìm kiếm keyword vào thời điểm osint.
+        </p>
+        <p>
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          Nên lưu ý Facebook hỗ trợ search data của cả text trong image của
+          posts (đối với những text dễ nhận diện)
+        </p>
+        <p>
+          Một số tools khác:
+          <a href="https://www.sowsearch.info/">Facebook Search</a> (s0wdust),
+          <a href="https://github.com/sqren/fb-sleep-stats"
+            >Facebook Sleep Stats</a
+          >, <a href="https://atpsoftware.vn/finduid/">FindUID</a> (Tỉ lệ thành
+          công thấp)
+          <a
+            href="https://osintcurio.us/2019/08/22/the-new-facebook-graph-search-part-1/"
+            >FB Search Engine Configuration</a
+          >
+        </p>
+        <p>
+          Có thể cần sử dụng thêm một số info khác như nickname, birthdate,...
+          và dùng google để tra
+        </p>
+      </div>
+
+      <h3>Google Search Engine</h3>
+      <div style="padding-left: 3%">
+        <p>
+          Google là một công cụ tìm kiếm mạnh mẽ, khi tìm kiếm bằng google có
+          thể thêm các thuộc tính như dưới đây, và có thể thêm dấu trừ đằng
+          trước một thuộc tính để loại bỏ những URL chứa thuộc tính (thông tin)
+          đó
+        </p>
+        <p>
+          <a style="color: #009933">-filetype:pdf "sukasuka"</a>: tìm những URL
+          không phải file pdf và bắt buộc phải có cụm "sukasuka"<br />
+          <a style="color: #009933">site:facebook.com -"Chtholly" sukasuka</a>:
+          tìm những URL của Facebook về sukasuka mà không có cụm "Chtholly"<br />
+          Một số thuộc tính khác như: inurl, intitle cũng hoạt động tương tự
+        </p>
+      </div>
+
+      <h3>Twitter</h3>
+      <div style="padding-left: 3%">
+        <p>
+          <a href="http://tweetbeaver.com/">Tweet Beaver</a><br />
+          <a href="https://tinfoleak.com/">Tinfoleak</a><br />
+          <a href="http://sleepingtime.org/">Sleeping Time</a>
+        </p>
+      </div>
+      <h3>Youtube</h3>
+      <div style="padding-left: 3%">
+        <p>
+          <a href="https://github.com/mxrch/GHunt">GHunt by mxrch</a><br />
+          <a href="https://mattw.io/youtube-geofind/location"
+            >Youtube Geofind</a
+          >
+          (Tìm các video youtube trong một khu vực bất kỳ)
+        </p>
+      </div>
+
+      <h3>Website</h3>
+      <div style="padding-left: 3%">
+        <p>
+          Về website, chúng ta có nhiều tools như: whois (thuật ngữ chung hay
+          keyword, nhiều app hỗ trợ), nmap, dnsdumpster,...
+        </p>
+        <h5>Fake Websites</h5>
+        <p style="padding-left: 2%">
+          <a href="https://urlscan.io/">URL Scan</a>: lấy thông tin website<br />
+          <a href="https://dnstwist.it/">DNSTwist</a>: list các permutation của
+          domain
+        </p>
+        <h5>Subdomain Enumeration</h5>
+        <p style="padding-left: 2%">
+          <a href="https://dnsdumpster.com/">DNSdumpster</a>: website lấy thông
+          tin subdomain nhanh chóng và hiệu quả<br />
+          <a href="https://whatweb.net/">WhatWeb</a>: lấy thông tin các công
+          nghệ và phiên bản sử dụng<br />
+          <a href="https://searchdns.netcraft.com/">Netcraft</a>: lấy lịch sử
+          hosting<br />
+          <a href="https://github.com/mschwager/fierce">Fierce</a>: lấy thông
+          tin subdomain<br />
+          DNS cache snooper (module của recon-ng)<br />
+          recon-ng, theHarvester: các chương trình lớn về lấy thông tin website,
+          với nhiều module (tính năng) thú vị như tìm subdomain qua nhiều loại
+          search engine khác nhau.
+        </p>
+
+        <h5>Port Scanning & Fingerprinting</h5>
+        <p style="padding-left: 2%">
+          Nmap: công cụ nổi tiếng nhất về quét port
+          <br />Zmap: quét toàn bộ không gian mạng theo yêu cầu <br />masscan:
+          sở hữu các tính năng của 2 công cụ trên
+        </p>
+
+        <h5>Metadata Extraction</h5>
+        <p style="padding-left: 2%">
+          <a href="https://github.com/laramies/metagoofil">Metagoofil</a>: phân
+          tích thông tin người dùng, thiết bị, phần mềm, email, OS,... thông qua
+          metadata của các file tìm được trên website nào đó<br />
+          <a href="https://github.com/ElevenPaths/FOCA">FOCA</a>: là phiên bản
+          GUI dành cho Windows với các tính năng tương tự trên
+        </p>
+      </div>
+
+      <h3>Reverse Image</h3>
+      <div style="padding-left: 3%">
+        <p>
+          Google Lens (đối với pc thì dùng kích hoạt trên google chrome, phone
+          thì install app)<br />
+          <a href="https://yandex.com/images/">Yandex</a> (web version)<br />
+          <a href="https://saucenao.com/">Saucenao</a> (chuyên tìm kiếm ảnh trên
+          deviant, pixiv,...)
+        </p>
+      </div>
+
+      <h3>Other Tools</h3>
+      <div style="padding-left: 3%">
+        <p>
+          <a href="https://www.shodan.io/">Shodan</a><br />
+          <a href="https://archive.org/web/">Wayback Machine</a> (có nhiều web
+          tương tự)<br />
+          <a
+            href="https://merricx.github.io/enigmator/cryptanalysis/crypto_identifier.html"
+            >Crypto Identifier</a
+          >
+          (xác định kiểu mã hóa)<br />
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          Một số loại mã hóa đặc biệt: Morse, Exif, Dotcode, Barcode,
+          Steganography,...
+        </p>
+      </div>
+
+      <h3>Cryptography</h3>
+      <div style="padding-left: 3%">
+        <p>
+          <a href="https://www.dcode.fr/tools-list#cryptography"
+            >Cipher Identifier & Crypto Tools</a
+          ><br />
+        </p>
+      </div>
+    </div>
+  </body>
 </html>

@@ -70,7 +70,7 @@ html, body
 /* MAIN PICTURE */
 
 .mainPicture {
-    background-image: url('bg.jpg');
+    background-image: url('re_bg.jpg');
     /* Full height */
     height:100% !important;
     /* Center and scale the image nicely */
@@ -95,8 +95,10 @@ html, body
     color:white;
 }
 
-/* RESPONSIVE PHONE */
+pre {
+	margin-bottom:0px !important;
+}
 
 .responsive_phone {
-	
+    
 }
