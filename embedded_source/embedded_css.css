@@ -15,6 +15,10 @@ html, body
 		background-color: #ffffff !important;
 		padding: 0rem 0rem 0rem !important;
 	}
+
+    h2 {
+        font-size: 1.5rem !important;
+      }
 }
 
 
@@ -84,7 +88,7 @@ html, body
 /* PARAGRAPH */
 
 .paragraph {
-    padding:7%;
+    padding:5%;
 }
 
 .paragraph a {
