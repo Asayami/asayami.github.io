@@ -16,7 +16,7 @@
       gtag("config", "G-3NTSMWGK5D");
     </script>
     <meta charset="UTF-8" />
-    <title>ESP32-Deagle</title>
+    <title>ESP32-Eagle</title>
     <link
       rel="icon"
       type="image/png"
@@ -157,7 +157,7 @@
     <div class="paragraph">
       <p>
         ESP32 Cam là mạch thu phát Wifi có gắn camera, có nhiều biến thể khác
-        nhau. ESP32-Deagle tương thích với đa số các biến thể và có thể cấu hình
+        nhau. ESP32-Eagle tương thích với đa số các biến thể và có thể cấu hình
         code tương ứng với loại mạch sử dụng. Các tính năng chính của nó bao
         gồm:
       </p>
@@ -203,8 +203,8 @@
         Về phần mềm, code của mình được xây dựng dựa trên thư viện
         EloquentSurveillance. EloquentSurveillance có chứa các tính năng riêng
         lẻ cho camera như motion detect, web streaming, send notification. Code
-        của ESP32-Deagle tích hợp và đồng bộ 3 tính năng đó chạy song song, đồng
-        thời thêm trình quản lí camera (ESP32-Deagle System Manager). Bên dưới
+        của ESP32-Eagle tích hợp và đồng bộ 3 tính năng đó chạy song song, đồng
+        thời thêm trình quản lí camera (ESP32-Eagle System Manager). Bên dưới
         mình sẽ nói chi tiết hơn các thay đổi so với thư viện cũ.
       </p>
       <h3>ESP32-CAM.ino</h3>
@@ -233,8 +233,8 @@
       <h3>StreamServer.h</h3>
       <p>
         Ban đầu, server chỉ xử lí uri "/stream". Mình đã thêm handler cho uri
-        "/" (ESP32-Deagle System Manager), "/set-sensor" để thay đổi cấu hình từ
-        xa, "/get-sensor" để mỗi khi vào ESP32-Deagle System Manager browser sẽ
+        "/" (ESP32-Eagle System Manager), "/set-sensor" để thay đổi cấu hình từ
+        xa, "/get-sensor" để mỗi khi vào ESP32-Eagle System Manager browser sẽ
         lấy cấu hình hiện tại từ server cập nhật cho trình quản lý.
       </p>
       <h3>index.h & index.html</h3>
