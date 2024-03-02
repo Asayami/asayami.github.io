@@ -293,8 +293,26 @@
         <h5>Port Scanning & Fingerprinting</h5>
         <p style="padding-left: 2%">
           Nmap: công cụ nổi tiếng nhất về quét port
+          <br /><a href="https://www.shodan.io/dashboard">Shodan.io</a>: website
+          tiện lợi và hiệu quả để quét các port mở trên mạng với filter đa dạng,
+          bạn đọc có thể xem cheat sheet ở link này. Video giới thiệu:
+          <a href="https://www.youtube.com/watch?v=ZDie46TYQec">An0n Ali</a>.
           <br />Zmap: quét toàn bộ không gian mạng theo yêu cầu <br />masscan:
           sở hữu các tính năng của 2 công cụ trên
+        </p>
+
+        <h5>File / Path Discovery</h5>
+        <p style="padding-left: 2%">
+          <a href="https://github.com/maurosoria/dirsearch">dirsearch</a>: tool
+          bruteforce path các loại file config, sql, zip,... bên cạnh các file
+          html, css, js thông thường.
+        </p>
+        <pre><a style="color: #009933;"><code>
+dirsearch -u https://uet.vnu.edu.vn -e conf,config,bak,backup,swp,old,db,sql,asp,aspx,aspx~,asp~,py,py~,rb,rb~,php,php~,bkp,cache,cgi,csv,html,inc,jar,js,json,jsp,jsp~,lock,log,rar,sgl.gz,sql~,swp~,tar,tar.bz2,tar.gz,txt,wadl,zip,xml,js.,git,yaml,mysql --deep-recursive -t 100 -x 500,301,403,404
+        </code></a></pre>
+        <p>
+          Options: -u: URL target, -e: extension, -t: lượng threads, -x: exclude
+          status code
         </p>
 
         <h5>Metadata Extraction</h5>
@@ -304,6 +322,17 @@
           metadata của các file tìm được trên website nào đó<br />
           <a href="https://github.com/ElevenPaths/FOCA">FOCA</a>: là phiên bản
           GUI dành cho Windows với các tính năng tương tự trên
+        </p>
+        <h5>Vulnerability Scan</h5>
+        <p style="padding-left: 2%">
+          <a href="https://github.com/projectdiscovery/nuclei">Nuclei</a>:
+          Nuclei là một công cụ mã nguồn mở mạnh mẽ được sử dụng để quét lỗ hổng
+          bảo mật trong các ứng dụng web. Nó hoạt động bằng cách tự động gửi các
+          yêu cầu HTTP đến các URL được chỉ định và phân tích phản hồi để tìm
+          kiếm các dấu hiệu của các lỗ hổng phổ biến. Một số điểm tốt của
+          Nuclei: <br />&emsp;- Hỗ trợ nhiều loại lỗ hổng, cve,... <br />&emsp;-
+          Hệ thống template được cộng đồng xây dựng liên tục giúp quét lỗ hổng
+          thông qua các template này nhanh hơn
         </p>
       </div>
 
@@ -321,7 +350,6 @@
       <h3>Other Tools</h3>
       <div style="padding-left: 3%">
         <p>
-          <a href="https://www.shodan.io/">Shodan</a><br />
           <a href="https://archive.org/web/">Wayback Machine</a> (có nhiều web
           tương tự)<br />
           <a
@@ -332,6 +360,8 @@
           <i class="fa-solid fa-triangle-exclamation"></i>
           Một số loại mã hóa đặc biệt: Morse, Exif, Dotcode, Barcode,
           Steganography,...
+          <br /><a href="https://github.com/projectdiscovery/cvemap">CVEMap</a>:
+          công cụ tìm kiếm cve
         </p>
       </div>
 
