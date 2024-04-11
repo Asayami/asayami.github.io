@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-3NTSMWGK5D");
+    </script>
+    <meta charset="UTF-8" />
+    <title>Helical Bruteforcer</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://asayami.github.io/favicon.png"
+    />
+    <link rel="stylesheet" href="tools_source/tools_css.css" />
+    <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
+    <script src="tools_source/tools_js.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="description" content="" />
+    <meta
+      name="keywords"
+      content="Hacking, hack, wgen, brute force, dictionary"
+    />
+    <meta name="author" content="Asayami Kurashin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">❅</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/1.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">❄</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/2.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❅</div>
+      <div class="snowflake">❆</div>
+      <div class="snowflake">
+        <img
+          src="https://asayami.github.io/theme/3.png"
+          style="width: 24px"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </div>
+      <div class="snowflake">❄</div>
+    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
+        <script>
+          window.onscroll = NavScroll;
+        </script>
+        <a class="navbar-branch" href="https://asayami.github.io/">
+          <img
+            src="https://asayami.github.io/transparent-favicon.png"
+            style="width: 50px"
+            class="link"
+          />
+        </a>
+        <button
+          class="navbar-toggler ml-auto custom-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarSupportedContent-7"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <div class="dropdown-divider"></div>
+            <li class="nav-item active navitem">
+              <a href="https://asayami.github.io/"
+                >Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/hacking.html">Hacking</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io/embedded.html" class="link"
+                >Embedded</a
+              >
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#aboutanchor">About</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item navitem">
+              <a href="https://asayami.github.io#contactanchor">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="mainPicture"></div>
+    <div class="paratitle">
+      <h2>Introduction</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Dictionary Attack, hay còn gọi là tấn công bẻ khóa từ điển, là một kỹ
+        thuật tấn công được sử dụng để phá mã hoặc vượt qua các cơ chế xác thực
+        bằng cách thử tất cả các từ trong một danh sách dài được gọi là từ điển.
+      </p>
+      <img
+        src="tools_source/bruteforce.jpg"
+        style="width: 50%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        <br />Cách thức hoạt động: <br />&emsp;- Kẻ tấn công thu thập thông tin
+        về mục tiêu, bao gồm tên người dùng, mật khẩu được băm (hash), v.v.
+        <br />&emsp;- Chuẩn bị một từ điển chứa các từ phổ biến, tên riêng, mật
+        khẩu thường dùng, v.v. <br />&emsp;- Sử dụng phần mềm bẻ khóa để thử
+        từng từ trong từ điển với thuật toán băm tương ứng. <br />&emsp;- Nếu
+        mật khẩu được băm khớp với một từ trong từ điển, kẻ tấn công sẽ có quyền
+        truy cập vào tài khoản của mục tiêu.
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>Wordlist Generation</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Chúng ta sử dụng app
+        <a href="https://app.wgen.io/">WGen</a>
+        để tạo từ điển. Bạn đọc có thể tạo và chỉnh sửa các pattern dựa theo suy
+        đoán về mục tiêu. Hoặc có thể sử dụng config của mình bằng cách import
+        file wgen_config.json vào app. Tuy nhiên app cũng có một số khiếm khuyết
+        như không hỗ trợ tốt cho người có tên gồm 4 từ. Các bạn có thể tải xuống
+        bản WGen offline và chỉnh sửa lại source code theo ý mình để đạt được
+        kết quả mong muốn.
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>Bruteforce Time</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Sau khi đã tạo được từ điển, chúng ta có thể sử dụng nhiều công cụ, ví
+        dụ như Burp Suite Intruder chẳng hạn. Tuy nhiên, phản ứng của mỗi ứng
+        dụng khi bị bruteforce một tính năng nào đó sẽ khác nhau, do đó chúng ta
+        nên tự xây dựng request và bộ xử lý response thì hơn.
+      </p>
+      <p>
+        Trong repo mình có để file intruder.py, đó là bản mẫu cho một tool brute
+        force đơn giản. Bản mẫu này đọc từ điển từ 1 file .txt, có sử dụng multi
+        thread để đẩy nhanh tốc độ brute force bằng thư viện threading. Tool
+        cũng validate chuỗi mong muốn từ file từ điển, ví dụ có thể chỉ muốn
+        test các chuỗi có 8 - 12 ký tự trong khi từ điển có cả chuỗi 6 ký tự. Và
+        chức năng hiển thị tiến trình chạy của các thread, ngừng tool khi tìm
+        được chuỗi đúng cũng được xây dựng giúp người sử dụng dễ dàng hơn.
+      </p>
+      <p>
+        Bạn đọc có thể xây dựng tool mong muốn dựa trên các tính năng có sẵn này :3.
+      </p>
+    </div>
+  </body>
+</html>
