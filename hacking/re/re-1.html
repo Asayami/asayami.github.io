@@ -125,7 +125,7 @@
             </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item navitem">
-              <a href="https://asayami.github.io/hacking.html">Hacking</a>
+              <a href="https://asayami.github.io/hacking.html">Security</a>
             </li>
             <div class="dropdown-divider"></div>
             <li class="nav-item navitem">
@@ -224,21 +224,96 @@
     </div>
 
     <div class="paratitle">
-      <h2>Hex Characters Handling using Python</h2>
+      <h2>How a Program Works?</h2>
     </div>
     <div class="paragraph">
-      <h3>Note:</h3>
-      <pre><a style="color: #009933;"><code>
-s = hex((0x1f6ff5218c40de9c-0x55930dbbe)//0x4f5352)[2:] #hex calculator
-print(str(s))
+      <p>
+        Thông thường, một chương trình có thể được tạo ra bằng 2 cách: Compiling
+        và Interpreting.
+      </p>
 
-param = ''.join(reversed(''.join(map(chr, [int(s[i:i+2],16) for i in range(0,len(s),2)])))) #hex to string
-print(param)
-      </code></a></pre>
+      <h3>Compiling</h3>
+      <p>
+        Sau quá trình compile source thì còn có 2 bước nữa để chương trình có
+        thể thực thi được là: linker & loader.
+      </p>
+      <img
+        src="re_source/ll.png"
+        style="width: 50%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        Sau khi compile, chúng ta sẽ nhận được file object (.o) chứa source code
+        và thông tin cơ bản về các thư viện (file .h) như là tên các hàm, các
+        kiểu sử dụng. Từ đó có thể kiểm tra lỗi syntax trong source code. Sau đó
+        tại linker thông tin cụ thể các hàm của thư viện sẽ được thêm vào (file
+        .lib,.a). Cuối cùng, khi chương trình được khởi chạy, loader sẽ load
+        output của linker (.exe) vào memory và chương trình bắt đầu.
+      </p>
+      <h3>Interpreting</h3>
+      <p>
+        Đối với các chương trình sử dung thông dịch, quy trình sẽ khác với
+        compiling. Ví dụ, đối với python, bước đầu khi chạy 1 file source code
+        .py, trình thông dịch Python sẽ compile file .py thành dạng bytecode
+        (.pyc). Sau đó, ở bước tiếp theo, PVM (Python Virtual Machine) sẽ
+        interprete bytecode và thực thi chương trình.
+      </p>
+      <p>
+        Ở Python, có 2 cách để import một thư viện.
+        <br />Cách 1 là sử dụng từ khoá import (Ex: "import math"), thông tin sơ
+        lược về thư viện sẽ được thêm ở bước compile thành .pyc. Sau đó khi
+        thông dịch bytecode, thông tin chi tiết sẽ được đẩy vào memory của
+        chương trình (giống như ở Compiling nhưng bỏ bước linker, loader sẽ làm
+        luôn công việc của linker). <br />Cách 2 là import động (Dynamic
+        Loading). Khi đó trong lúc thực thi chương trình (loader), nếu cần sử
+        dụng thư viện nào thì lúc đó mới thêm vào thay vì phải cho biết trước
+        như cách 1. Để dùng cách 2 này, chúng ta có thể dùng hàm __import__ hay
+        module importlib.
+      </p>
+      <h3>DLL in compiled programs</h3>
+      <p>
+        Sau khi xem nội dung trên, các bạn có thể thấy Compiling đang thiếu hụt
+        hướng chạy thư viện cùng lúc với program giống như cả 2 cách của
+        Interpreting. DLL có thể giúp khắc phục điều này. DLL (Dynamic Link
+        Library) cũng có 2 cách tương ứng 2 cách của Interpreting, đó là:
+        Load-time dynamic linking (giống C1) và Runtime dynamic linking (giống
+        C2).
+        <br />Nếu dùng Load-time dynamic linking, khi compile source code chúng
+        ta phải đính kèm file thư viện. Còn nếu dùng Runtime dynamic linking,
+        chúng ta sử dụng các hàm như LoadLibrary hay GetProcAddress. <br />Bạn
+        đọc có thể xem qua syntax về DLLMain, exported functions tại:
+        <a href="https://www.tutorialspoint.com/dll/index.htm"
+          >tutorialspoint</a
+        >
+      </p>
+      <h3>SO (Shared Object) in ELF file</h3>
+      <p>
+        Bên trên chúng ta đã nói về ứng dụng trên Windows, vậy còn bên Unix thì
+        sao ? Các file thực thi trên Unix & Unix-like được gọi là ELF
+        (Executable and Linkable Format). Chúng đều có cách xây dựng thông qua
+        linker, loader giống Windows. Mỗi file ELF sẽ có header chứa magic byte,
+        endian, kiến trúc 32 hay 64 bit,... Chúng ta có thể xem các thông tin
+        này qua lệnh
+        <a style="color: #009933"> readelf -h filename </a>
+        <br />File ELF được chia thành các kiểu: ET_NONE, ET_REL, ET_EXEC,
+        ET_DYN, ET_CORE. Kiểu ET_EXEC là kiểu file thực thi thông thường. ET_REL
+        là các file .o được tạo ra sau khi compile, cần được linker kết hợp
+        thành file hoàn chỉnh. Còn ET_DYN là các file shared object, được gắn
+        vào chương trình bằng dynamic linker. <br />Các file ET_DYN lại được
+        chia nhỏ thành 2 kiểu: shared library và PIE. Shared library là các file
+        .so, đã qua bước linker, tuy nhiên không thể thực thi độc lập mà cần
+        chương trình khác gọi đến. Còn file PIE (Position Independent
+        Executable) cũng giống file .so nhưng lại có khả năng thực thi độc lập.
+        Đồng thời file PIE cũng tăng cường tính bảo mật do khi được chương trình
+        khác gọi và load vào memory, file này sẽ được cấp vùng nhớ ngẫu nhiên
+        thay vì nằm trong vùng nhớ của chương trình gọi. <br />Bạn đọc có thể
+        xem chi tiết về file ELF ở:
+        <a href="https://www.youtube.com/watch?v=nC1U1LJQL8o">Here</a>
+      </p>
     </div>
 
     <div class="paratitle">
-      <h2>Specified Programming Language Reverse Engineering</h2>
+      <h2>Reverse Engineering Decompilers</h2>
     </div>
     <div class="paragraph">
       <p>
@@ -248,7 +323,8 @@ print(param)
         để lấy bytecode instructions (một dạng opcode được sử dụng cho riêng
         intepreter của Python)) <br />&emsp;- AutoIT:
         <a href="https://github.com/nazywam/AutoIt-Ripper">AutoIT Ripper</a>
-        <br />&emsp;- C#: dnSpy <br />&emsp;- Lua: luadec, unluac
+        <br />&emsp;- .NET: dnSpy, ILSpy, dotPeek <br />&emsp;- Lua: luadec,
+        unluac
       </p>
     </div>
 
@@ -296,8 +372,9 @@ print(param)
       </p>
       <p>
         Để disassemble, decompile loại file này có thể dùng GHidra và IDA. Để
-        debug, chúng ta có thể dùng gdb hay IDA. Mình thường sử dụng gdb, bạn
-        đọc có thể xem thêm cách debug bằng gdb tại:
+        debug, chúng ta có thể dùng gdb hay IDA. Mình thường sử dụng gef - bản
+        nâng cấp giao diện của gdb, bạn đọc có thể xem thêm cách debug bằng gef
+        hay gdb tại:
         <a
           href="https://reverseengineering.stackexchange.com/questions/1935/how-to-handle-stripped-binaries-with-gdb-no-source-no-symbols-and-gdb-only-sho"
           >StackExchange</a
@@ -331,7 +408,7 @@ print(param)
       <h2>Android Reverse Engineering</h2>
     </div>
     <div class="paragraph">
-      <p>Disassemble / Decompile Tools: JADX, Android Studio, apktook,...</p>
+      <p>Disassemble / Decompile Tools: JADX, Android Studio, apktool,...</p>
       <p>
         Android Studio cũng được sử dụng để debug được file apk. Tuy nhiên 1
         file apk thông thường sẽ chưa bật chế độ debug trong
