@@ -1,7 +1,7 @@
 //NAVIGATION BAR SCROLL
 
 function loadNavbar() {
-  fetch("/clone/theme/navbar.html")
+  fetch("https://asayami.github.io/theme/navbar.html")
     .then((response) => response.text())
     .then((data) => {
       document.getElementById("themeSpace").innerHTML = data;

