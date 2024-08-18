@@ -1,133 +1,173 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-    <head>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3NTSMWGK5D"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-		  gtag('config', 'G-3NTSMWGK5D');
-		</script>
-        <meta charset="UTF-8">
-        <title>Asayami's Page</title>
-        <link rel="icon" type="image/png" href="favicon.png"/>
-        <link rel="stylesheet" href="index_source/index_css.css">
-		<link rel="stylesheet" href="https://asayami.github.io/theme/theme.css">
-        <script src="index_source/index_js.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <meta name="description" content="Asayami's Page là trang web chia sẻ kiến thức chất lượng về hacking cũng như các vấn đề bảo mật, công nghệ"/>
-		<meta name="keywords" content="Asayami's Page">
-		<meta name="author" content="Asayami Kurashin">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body onload="getScrollElement();handleScrollAnimation();">
-		<div class="snowflakes" aria-hidden="true">
-			<div class="snowflake">❅</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/1.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake">❄</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/2.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❅</div>
-			<div class="snowflake">❆</div>
-			<div class="snowflake"><img src="https://asayami.github.io/theme/3.png" style="width:24px" class="img-fluid mx-auto d-block responsive_phone"></img></div>
-			<div class="snowflake">❄</div>
-		</div>
-        <!-- Navigation Bar -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <div class="container-fluid navmain" id="navbar" onscroll="NavScroll()">
-                <script>window.onscroll = NavScroll;</script>
-                <a class="navbar-branch" href="#">
-                    <img src="transparent-favicon.png" style="width:50px;" class="link"></img>
-                </a>
-                <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"  aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-						<div class="dropdown-divider"></div>
-                        <li class="nav-item active navitem">
-                            <a href="#" class="link">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="hacking.html" class="link">Security</a>
-                        </li>
-						<div class="dropdown-divider"></div>
-						<li class="nav-item navitem">
-                            <a href="embedded.html" class="link">Embedded</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="#aboutanchor" class="link">About</a>
-                        </li>
-                        <div class="dropdown-divider"></div>
-                        <li class="nav-item navitem">
-                            <a href="#contactanchor" class="link">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="mainPicture">
-            <div class="welcome js-scroll fade-in-bottom">
-                <h1 class="h1-responsive">Welcome to</h1>
-                <h1 class="h1-responsive">Asayami's Page</h1>
-            </div>
+      gtag("config", "G-3NTSMWGK5D");
+    </script>
+    <meta charset="UTF-8" />
+    <title>Asayami's Page</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="index_source/index_css.css" />
+    <link rel="stylesheet" href="https://asayami.github.io/theme/theme.css" />
+    <script src="index_source/index_js.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Prism.js CSS for syntax highlighting -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Prism.js JavaScript library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+    <!-- Line numbers CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Optional: Font for coding -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta
+      name="description"
+      content="Asayami's Page là trang web chia sẻ kiến thức chất lượng về hacking cũng như các vấn đề bảo mật, công nghệ"
+    />
+    <meta name="keywords" content="Asayami's Page" />
+    <meta name="author" content="Asayami Kurashin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body onload="getScrollElement();handleScrollAnimation();blink_underscore();">
+    <div id="themeSpace"></div>
+    <script>
+      loadNavbar();
+    </script>
+
+    <div
+      class="mainPicture"
+      style="background-image: url('index_source/MoonBG.jpg')"
+    >
+      <div class="welcome js-scroll fade-in-bottom">
+        <h1 class="h1-responsive">Welcome to</h1>
+        <h1 class="h1-responsive">Asayami's Page</h1>
+      </div>
+    </div>
+
+    <div id="bigWrapper" style="background-color: #cce6ff; padding: 3%">
+      <div id="wrapper" class="js-scroll fade-in-bottom">
+        <div id="title-bar">
+          <div><i class="fa-solid fa-terminal"></i> life.js</div>
+          <div>
+            <i class="fa-regular fa-window-minimize"></i>
+            <i class="fa-regular fa-window-maximize"></i>
+            <i class="fa-solid fa-xmark"></i>
+          </div>
         </div>
-		<div class="container-fluid" style="height:auto;background-color:#33334d;color:white;">
-			<div style="display: inline-block !important;">
-				main.js
-			</div>
-			<div style="position:relative;float:right !important;display: inline-block !important;">
-				<i class="fa-regular fa-window-minimize"></i>
-				&nbsp;<i class="fa-regular fa-window-maximize"></i>
-				&nbsp;<i class="fa-solid fa-xmark"></i>
-			</div>
-		</div>
-		<div class="terminal">
-			<div id="container"></div>
-			<script>
-				terminal();
-			</script>
-		</div>
-        <div id="aboutanchor"></div>
-        <div class="about js-scroll fade-in-bottom">
-            <h1>About </h1>
-            <h1 style="color:#3399ff">Page</h1><br></br>
-            <h2>Là trang web chia sẻ, học hỏi về công nghệ thông tin, đặc biệt trong lĩnh vực bảo mật. Mọi
-            bài viết đóng góp, bình luận của các bạn đọc xin gửi về tài khoản bên dưới</h2>
+        <div id="code-container">
+          <pre class="line-numbers"><code class="language-javascript">
+  inherit(thePast);
+  function overcome(entity)
+  {
+      experience(entity);
+      for (var obj in entity) {understand(obj);}
+      if (sad() === true) {
+          sad().stop();
+          beAwesome();
+      }
+      struggle(entity);
+  }
+  overcome(thePresent);
+  towards(theFuture);
+          </code></pre>
         </div>
-        <div id="contactanchor"></div>
-        <div class="contact" id="contact">
-            <div class="js-scroll fade-in-bottom">
-                <h1 style="color:#0d6efd;">Contact </h1><h1>Info</h1><br><br>
-                <span class="mediaIcon">
-                    <a href="https://www.facebook.com/asayami.kurashin/">
-                        <i class="fab fa-facebook-square link"></i>
-                    </a>
-                    <a onclick="emailCopy()" data-toggle="tooltip" title="Click to copy" style="cursor: pointer;">
-                        <i class="fas fa-at link" style="color:#0069cc;"></i>
-                    </a>
-                    <a href="https://github.com/Asayami">
-                        <i class="fab fa-github link" style="color:black;"></i>
-                    </a>
-					<a href="https://steamcommunity.com/profiles/76561198313210231/">
-                        <i class="fa-brands fa-steam link" style="color:#000066;"></i>
-                    </a>
-                </span>
-            </div>
-        </div>
-        <div class="copyright">
-            <h3>All information in this website are for educational purpose only. I will not take any responsibilities for your activities</h3><br>
-            <h3>If you have a copyright or trademark issue, please contact me via above methods</h3>
-        </div>
-    </body>
+      </div>
+    </div>
+    <div id="aboutanchor"></div>
+    <div class="about js-scroll fade-in-bottom">
+      <h1>About</h1>
+      <h1 style="color: #3399ff">Page</h1>
+      <br /><br />
+      <h2>
+        Là trang web chia sẻ, học hỏi về công nghệ thông tin, đặc biệt trong
+        lĩnh vực bảo mật. Mọi bài viết đóng góp, bình luận của các bạn đọc xin
+        gửi về tài khoản bên dưới
+      </h2>
+    </div>
+    <div id="contactanchor"></div>
+    <div class="contact" id="contact">
+      <div class="js-scroll fade-in-bottom">
+        <h1 style="color: #0d6efd">Contact</h1>
+        <h1>Info</h1>
+        <br /><br />
+        <span class="mediaIcon">
+          <a href="https://www.facebook.com/asayami.kurashin/">
+            <i class="fab fa-facebook-square link"></i>
+          </a>
+          <a
+            onclick="emailCopy()"
+            data-toggle="tooltip"
+            title="Click to copy"
+            style="cursor: pointer"
+          >
+            <i class="fas fa-at link" style="color: #0069cc"></i>
+          </a>
+          <a href="https://github.com/Asayami">
+            <i class="fab fa-github link" style="color: black"></i>
+          </a>
+          <a href="https://steamcommunity.com/profiles/76561198313210231/">
+            <i class="fa-brands fa-steam link" style="color: #000066"></i>
+          </a>
+        </span>
+      </div>
+    </div>
+    <div class="copyright">
+      <h3>
+        All information in this website are for educational purpose only. I will
+        not take any responsibilities for your activities
+      </h3>
+      <br />
+      <h3>
+        If you have a copyright or trademark issue, please contact me via above
+        methods
+      </h3>
+    </div>
+  </body>
 </html>

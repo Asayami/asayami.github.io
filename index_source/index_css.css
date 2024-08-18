@@ -1,95 +1,102 @@
-html, body
-{
-    height: 100%;
-    word-wrap: break-word;
+html,
+body {
+  height: 100%;
+  word-wrap: break-word;
 }
 
 @media (max-width: 1000px) {
-    html, body
-    {
-        height: 70%;
-    }
-    .about h1, .contact h1, .mainPicture h1 {
-        font-size:30px !important;
-    }
-    
-    .about h2, .contact h2, .terminal h2{
-        font-size:20px;
-    }
-    .copyright h3 {
-        font-size:15px;
-    }
-	.terminal {
-		padding-left:10% !important;
-		font-size:15px !important;
-	}
-}
+  html,
+  body {
+    height: 70%;
+  }
+  .about h1,
+  .contact h1,
+  .mainPicture h1 {
+    font-size: 30px !important;
+  }
 
+  .about h2,
+  .contact h2,
+  .terminal h2 {
+    font-size: 20px;
+  }
+  .copyright h3 {
+    font-size: 15px;
+  }
+  .terminal {
+    padding-left: 10% !important;
+    font-size: 15px !important;
+    height: 400px !important;
+  }
+  #bigWrapper {
+    display: none;
+  }
+}
 
 /* NAVIGATION BAR */
 
 .navbar {
-    padding-top:0px !important;
-    padding-bottom:0px !important;
-    background-color: black;
-    transition: 0.2s;
-    position:sticky;
-    opacity:0.9;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  background-color: black;
+  transition: 0.2s;
+  position: sticky;
+  opacity: 0.9;
 }
 
 .navmain {
-    padding-top:15px;
-    padding-bottom:8px;
-    transition: 0.2s;
+  padding-top: 15px;
+  padding-bottom: 8px;
+  transition: 0.2s;
 }
 
 .custom-toggler.navbar-toggler {
-    border-color: #0073e6 !important;
+  border-color: #0073e6 !important;
 }
 .custom-toggler .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(128, 191, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(128, 191, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
 }
 
 .navtransition {
-    padding-top:8px;
-    top:0px;
-    transition: 0.2s;
+  padding-top: 8px;
+  top: 0px;
+  transition: 0.2s;
 }
 
 .navitem {
-    padding-right:20px;
-    font:Arial;
-    font-size:20px;
-    margin-bottom:4px;
+  padding-right: 20px;
+  font: Arial;
+  font-size: 20px;
+  margin-bottom: 4px;
 }
 
 .navitem a {
-    color:white !important;
-    border-bottom-color: #0080ff;
-    text-decoration: none !important;
-    cursor: pointer;
+  color: white !important;
+  border-bottom-color: #0080ff;
+  text-decoration: none !important;
+  cursor: pointer;
 }
 
 .navitem a:hover {
-    color:white;
-    text-decoration: none;
-    border-bottom-style: solid;
-    transition: 0.2s;
+  color: white;
+  text-decoration: none;
+  border-bottom-style: solid;
+  transition: 0.2s;
 }
 
 /* DIV SCROLL ANIMATION */
 
 .js-scroll {
-    opacity:0;
-    transition: 1000ms;
+  opacity: 0;
+  transition: 1000ms;
 }
 
 .scrolled {
-    opacity:1;
+  opacity: 1;
 }
 
 .scrolled.fade-in-bottom {
-    animation: fade-in-bottom 1s ease-in-out both;
+  animation: fade-in-bottom 1s ease-in-out both;
 }
 
 @keyframes fade-in-bottom {
@@ -105,88 +112,76 @@ html, body
 /* MAIN PICTURE */
 
 .mainPicture {
-    background-image: url('MoonBG.jpg');
-    /* Full height */
-    height:100% !important;
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  /* Full height */
+  height: 100% !important;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .welcome {
-    top:30%;
-    color:white;
-    position: relative;
-    margin-left:5% !important;
+  top: 30%;
+  color: white;
+  position: relative;
+  margin-left: 5% !important;
 }
 
 .welcome h1 {
-    font-weight:700;
-    font-size: 5vw;
-    opacity: 0.8;
-    text-shadow: 5px 5px 10px black;
+  font-weight: 700;
+  font-size: 5vw;
+  opacity: 0.8;
+  text-shadow: 5px 5px 10px black;
 }
 
 /* ABOUT DIV */
 
 .about {
-    margin:10%;
-    text-align:center;
+  margin: 10%;
+  text-align: center;
 }
 
 .about h1 {
-    display: inline;
+  display: inline;
 }
 
 /* CONTACT DIV */
 
 .contact {
-    transform: skewY(2deg);
-    background-color:#cce6ff;
-    padding:10%;
-    text-align:center;
+  transform: skewY(2deg);
+  background-color: #cce6ff;
+  padding: 10%;
+  text-align: center;
 }
 
 .contact h1 {
-    padding-bottom:20px;
-    display:inline;
+  padding-bottom: 20px;
+  display: inline;
 }
 
 .mediaIcon {
-    background-color:white;
-    padding:10px;
-    padding-top:30px;
+  background-color: white;
+  padding: 10px;
+  padding-top: 30px;
 }
 
 .mediaIcon i {
-    font-size:50px;
+  font-size: 50px;
 }
 
 .mediaIcon a {
-    padding:5px;
+  padding: 5px;
 }
 
 /* COPYRIGHT DIV */
 
 .copyright {
-    padding:5%;
-    text-align: center;
+  padding: 5%;
+  text-align: center;
 }
 
 /* TERMINAL */
-
-.terminal {
-	border: 2px solid green;
-	background-color:black;
-	font-family: 'Courier New';
-	padding-left:20%;
-	white-space: pre-line;
-	color:green;
-	font-size:20px;
-}
-
-blink {
+.blink {
   animation: 1s linear infinite condemned_blink_effect;
 }
 
@@ -200,4 +195,46 @@ blink {
   100% {
     visibility: visible;
   }
+}
+
+#wrapper {
+  max-width: 70%;
+  margin: 0px auto;
+  font-family: "Fira Code", monospace !important;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: #2d2d2d;
+  overflow: hidden;
+}
+
+#title-bar {
+  height: 30px;
+  background-color: #1e1e1e;
+  color: white;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+#code-container {
+  padding: 10px;
+}
+
+pre,
+code {
+  font-family: "Fira Code", monospace !important; /* Override Prism CSS with !important */
+}
+
+.fa-xmark:hover,
+.fa-window-maximize:hover,
+.fa-window-minimize:hover {
+  color: red;
+  cursor: pointer;
+}
+
+/* Optional: For better spacing between the window control icons */
+#title-bar i {
+  margin-left: 10px;
 }

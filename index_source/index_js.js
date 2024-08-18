@@ -1,5 +1,16 @@
 //NAVIGATION BAR SCROLL
 
+function loadNavbar() {
+  fetch("/clone/theme/navbar.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.getElementById("themeSpace").innerHTML = data;
+      document.getElementById("navbar").onscroll = NavScroll;
+      window.onscroll = NavScroll;
+      NavScroll();
+    });
+}
+
 function NavScroll() {
   // Get the navbarz
   var navbar = document.getElementById("navbar");
@@ -45,24 +56,23 @@ function emailCopy() {
   navigator.clipboard.writeText(copyText);
 }
 
-// Terminal Animation
+function blink_underscore() {
+  // Select all elements with class "token punctuation" containing a semicolon
+  var semicolonElements = document.querySelectorAll("span.token.punctuation");
+  var count = 0;
+  // Iterate over the NodeList and insert a blinking div after each semicolon
+  semicolonElements.forEach(function (element) {
+    if (element.textContent === ";") {
+      count++;
+      if (count === 7) {
+        // Create the blinking span
+        var blinkSpan = document.createElement("span");
+        blinkSpan.className = "blink";
+        blinkSpan.innerHTML = "_";
 
-function terminal() {
-  var container = document.getElementById("container");
-  var text =
-    "// life motto\ninherit(thePast);\nfunction overcome(entity)\n{\n experience(entity);\n for (var obj in entity) {understand(obj);}\n if (sad() === true) {\n  sad().stop();\n  beAwesome();\n }\n struggle(entity);\n}\novercome(thePresent); _\ntowards(theFuture);";
-  var div = document.createElement("div");
-  container.appendChild(div);
-  var txt = text.split("");
-  txt[60] = "&emsp;";
-  var i = 0;
-  (function display() {
-    if (i < txt.length) {
-      if (txt[i] == "_") div.innerHTML += txt[i].blink();
-      else div.innerHTML += txt[i];
-      ++i;
-      setTimeout(display, 30);
+        // Insert the blinking span after the 5th semicolon element
+        element.parentNode.insertBefore(blinkSpan, element.nextSibling);
+      }
     }
-  })();
-  var blink_item = document.createElement("blink");
+  });
 }
