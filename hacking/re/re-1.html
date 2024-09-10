@@ -96,13 +96,41 @@
         <i class="fa-solid fa-triangle-exclamation"></i> Trước khi tìm hiểu về
         reverse engineering, bạn đọc cần có hiểu biết về kiến trúc máy tính và
         assembly, nên tìm hiểu về tập lệnh x86 (định dạng Intel) vì tập lệnh và
-        định dạng này phổ biến. Chúng ta chỉ cần học tới mức hiểu syntax của
-        Assembly (dòng lệnh, if-else, loop,...) là đủ.
+        định dạng này phổ biến.
       </p>
     </div>
 
     <div class="paratitle">
-      <h2>Types of Instruction Set Architecture</h2>
+      <h2>Operating System</h2>
+    </div>
+    <div class="paragraph">
+      <p>
+        <img
+          src="re_source/os_tree.png"
+          style="width: 60%"
+          class="img-fluid mx-auto d-block responsive_phone"
+        />
+      </p>
+      <p>
+        Phía trên là cây hệ điều hành mô tả các nhánh phát triển từ cốt lõi của
+        các hệ điều hành ngày nay. Mọi hệ điều hành đều chứa kernel (nhân hệ
+        điều hành). Kernel thực hiện các chức năng quan trọng như:
+        <br />&emsp;- Quản lí tiến trình: tạo process, lập lịch tiến trình (cái
+        nào chạy trước ?), đồng bộ hoá tránh race condition (mutex,
+        critical-section,semaphores,...), deadlock, giao tiếp giữa các tiến
+        trình (IPC - Inter-Process Communication). <br />&emsp;- Quản lí bộ nhớ:
+        cấp phát bộ nhớ, phân trang,... <br />&emsp;- Quản lí hệ thống file
+        <br />&emsp;- Quản lí thiết bị (ổ cứng, máy in, bàn phím,...)
+        <br />&emsp;- Quản lí mạng: giao thức, quản lí gói tin,...
+        <br />&emsp;...<br />Các thành phần trên (user mode) sử dụng syscall
+        (lời gọi hệ thống) để giao tiếp với kernel. Từ syscall được gọi, kernel
+        sẽ làm việc với CPU, RAM, ổ cứng,... để đạt được mục tiêu của syscall
+        (kernel mode).
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>Instruction Set Architecture</h2>
     </div>
 
     <div class="paragraph">
@@ -133,6 +161,11 @@
         một kiến trúc tập lệnh mới đang trở nên phổ biến. Kiến trúc RISC-V là
         kiến trúc tập lệnh mở, miễn phí, khiến nó trở nên lý tưởng cho các ứng
         dụng yêu cầu chi phí thấp và linh hoạt.
+      </p>
+      <p>
+        Hầu hết mọi thứ chạy trên máy tính đều được có thể biểu diễn dưới tập
+        lệnh ISA. Chúng ta có thể nhét một file thực thi bất kì vô disassembler
+        để lấy tập lệnh ISA file đó thực thi.
       </p>
     </div>
 
@@ -218,10 +251,7 @@
         Bên trên chúng ta đã nói về ứng dụng trên Windows, vậy còn bên Unix thì
         sao ? Các file thực thi trên Unix & Unix-like được gọi là ELF
         (Executable and Linkable Format). Chúng đều có cách xây dựng thông qua
-        linker, loader giống Windows. Mỗi file ELF sẽ có header chứa magic byte,
-        endian, kiến trúc 32 hay 64 bit,... Chúng ta có thể xem các thông tin
-        này qua lệnh
-        <a style="color: #009933"> readelf -h filename </a>
+        linker, loader giống Windows.
         <br />File ELF được chia thành các kiểu: ET_NONE, ET_REL, ET_EXEC,
         ET_DYN, ET_CORE. Kiểu ET_EXEC là kiểu file thực thi thông thường. ET_REL
         là các file .o được tạo ra sau khi compile, cần được linker kết hợp
@@ -233,14 +263,24 @@
         Executable) cũng giống file .so nhưng lại có khả năng thực thi độc lập.
         Đồng thời file PIE cũng tăng cường tính bảo mật do khi được chương trình
         khác gọi và load vào memory, file này sẽ được cấp vùng nhớ ngẫu nhiên
-        thay vì nằm trong vùng nhớ của chương trình gọi. <br />Bạn đọc có thể
-        xem chi tiết về file ELF ở:
-        <a href="https://www.youtube.com/watch?v=nC1U1LJQL8o">Here</a>
+        thay vì nằm trong vùng nhớ của chương trình gọi.
+      </p>
+      <h3>Execute ?</h3>
+      <p>
+        Qua các bước ở trên, mã đã được chuyển từ các ngôn ngữ bậc cao sang mã
+        Assembly (ISA) rồi sang mã máy. Mã máy sẽ được đổ vào bộ nhớ, sau đó CPU
+        sẽ tiếp cận bộ nhớ và thực thi mã. Tuy nhiên, bên cạnh việc CPU chỉ sử
+        dụng mã máy từ ISA, CPU cũng cần sử dụng tới syscall. Thông qua syscall,
+        CPU sẽ nhờ kernel giao tiếp với các thành phần phần cứng còn lại trong
+        máy để thực hiện tác vụ như: đọc/ghi file ở ổ cứng, cấp phát bộ nhớ,
+        giao tiếp máy in,... Bên trong các syscall không chỉ chứa mỗi ISA mà có
+        thể chứa các phương thức giao tiếp trực tiếp với thành phần phần cứng
+        khác. Như vậy một chương trình đã được thực thi thành công.
       </p>
     </div>
 
     <div class="paratitle">
-      <h2>Reverse Engineering Decompilers</h2>
+      <h2>Reverse Engineering Guide</h2>
     </div>
     <div class="paragraph">
       <p>
@@ -253,12 +293,50 @@
         <br />&emsp;- .NET: dnSpy, ILSpy, dotPeek <br />&emsp;- Lua: luadec,
         unluac
       </p>
+      <p>
+        Rust:
+        <a
+          href="https://brightprogrammer.netlify.app/post/reverse-engineering-rustlang-binaries-0x1-empty-program/"
+          >Reverse Engineering Rustlang Binaries - A Series
+          (BrightProgrammer)</a
+        >
+      </p>
+      <p>
+        Trong lúc dịch ngược và debug, chúng ta cần để ý đến các điểm mấu chốt
+        như: hàm bắt đầu (nếu có), ý nghĩa tên các hàm (nếu có), logic code (AI
+        như chatgpt cũng có thể hỗ trợ rất tốt trong việc đọc hiểu code
+        decompiled hay disassembled và giải thích ý nghĩa đoạn code), cài đặt
+        breakpoints như thế nào, tại các breakpoint thì xem và sửa các giá trị
+        trên thanh ghi và các biến trong function như thế nào, chọn và xử lí
+        đúng thread trong ứng dụng multi thread,...
+      </p>
     </div>
 
     <div class="paratitle">
       <h2>Portable Executable Reverse Engineering</h2>
     </div>
     <div class="paragraph">
+      <p>
+        File PE là các file thực thi .exe trên Windows, file .dll,... Một file
+        PE có các thành phần:
+        <br />&emsp;- MS-DOS Headers (IMAGE_DOS_HEADER): Ban đầu file .exe được
+        sử dụng trong DOS mode (khá giống command prompt nhưng được trực tiếp
+        tiếp cận phần cứng như bộ nhớ,...) trong hệ điều hành MS-DOS. OS này
+        được phát triển bởi IBM và được Microsoft mua lại OS, sau này phát triển
+        lên thành Windows. Mặc dù đã lâu và hiếm khi dùng nhưng header MS-DOS
+        vẫn được giữ lại cho tới ngày nay. Header này sẽ giúp file có thể chạy
+        trong môi trường MS-DOS. Nó cũng có trường e_magic với giá trị 0x5A4D
+        hay "MZ", viết tắt của Mark Zbikowski - một kỹ sư MS-DOS. Trường
+        e_lfanew trỏ tới offset của PE header (chứa nội dung thực sự của file
+        PE).<br />&emsp;- MS-DOS Stub Program: Nếu file được chạy trong môi
+        trường MS-DOS, file sẽ không thực thi code thực sự của file đó mà sẽ
+        khởi chạy code trong MS-DOS Stub Program. Đơn giản nó sẽ in ra dòng chữ
+        "This program cannot be run in DOS mode.". <br />&emsp;- PE Header:
+        Header chứa nội dung thực sự của file PE. Header bắt đầu với PE
+        signature (PE\0\0), theo sau bởi COFF file header (giúp OS load file
+        PE), optional header và section table. Section table chứa thông tin các
+        section đơn lẻ (Ex: .text, .data,...) như offset, flag,...
+      </p>
       <p>
         Để lấy thông tin cơ bản về thành phần của 1 file PE, chúng ta có thể sử
         dụng tool như PE Info.
@@ -293,9 +371,45 @@
       <p>
         Bên cạnh Windows cũng có nền tảng các hệ điều hành thuộc họ Unix,
         Unix-like. Những hệ điều hành này thay vì chạy file exe thì sử dụng file
-        elf (Executable and Linkable Format). Lí do windows không thể thực thi
-        file elf và ngược lại mặc dù có thể dùng chung kiến trúc x86 là bởi vì
+        ELF (Executable and Linkable Format). Lí do windows không thể thực thi
+        file ELF và ngược lại mặc dù có thể dùng chung kiến trúc x86 là bởi vì
         không tương thích các thư viện mà hệ điều hành cung cấp.
+      </p>
+      <p>Một file ELF sẽ chứa các header, section và segment.</p>
+      <p>
+        Section chứa các kiểu dữ liệu như: .text (chứa mã thực thi), .data (chứa
+        biến global, biến tĩnh), .bss (chứa biến chưa khởi tạo),... Section
+        thường được thấy sau giai đoạn linker (.o).
+      </p>
+      <p>
+        Còn segment thì thường được thấy ở giai đoạn thực thi, chứa thông tin về
+        việc khởi tạo và thực thi các vùng nhớ cho file ELF. Khi file ELF được
+        thực thi, mỗi segment sẽ lấy thông tin của nó, tạo vùng nhớ cho segment
+        đó trong bộ nhớ. 1 vùng nhớ của 1 segment có thể chứa thông tin như
+        data, uninitialized, code,... Data, code ở đây có thể được lấy từ
+        section của file ELF hoặc các thư viện khác. Và 1 segment có thể chứa
+        nhiều section (Ex: .data + .rodata (read only data)).
+      </p>
+      <p>
+        Mỗi file ELF sẽ có header chứa magic byte, endian, kiến trúc 32 hay 64
+        bit,... Chúng ta có thể xem các thông tin này qua lệnh
+        <a style="color: #009933"> readelf -h filename </a>
+        <br />File ELF được chia thành các kiểu: ET_NONE, ET_REL, ET_EXEC,
+        ET_DYN, ET_CORE. Mình đã giải thích ý nghĩa các kiểu file ELF ở phần
+        "How a Program Works?".
+      </p>
+      <p>
+        Header file ELF chứa địa chỉ entry point của file thực thi hoặc địa chỉ
+        constructor của thư viện qua trường e_entry. Bên cạnh entry point,
+        header cũng chứa offset của program và section headers table thông qua
+        trường e_phoff và e_shoff.
+        <br />Bên trong program header table chứa các entry, mỗi entry chứa các
+        trường thông tin của một segment (type, offset,...). Tương tự với
+        section header table.
+      </p>
+      <p>
+        Bạn đọc có thể xem chi tiết về file ELF ở:
+        <a href="https://www.youtube.com/watch?v=nC1U1LJQL8o">Here</a>
       </p>
       <p>
         Để disassemble, decompile loại file này có thể dùng GHidra và IDA. Để
@@ -337,15 +451,16 @@
     <div class="paragraph">
       <p>Disassemble / Decompile Tools: JADX, Android Studio, apktool,...</p>
       <p>
-        Android Studio cũng được sử dụng để debug được file apk. Tuy nhiên 1
-        file apk thông thường sẽ chưa bật chế độ debug trong
-        AndroidManifest.xml, chúng ta phải tự làm điều đó.
+        Android Studio cũng được sử dụng để debug file apk. Tuy nhiên 1 file apk
+        thông thường sẽ chưa bật chế độ debug trong AndroidManifest.xml, chúng
+        ta phải tự làm điều đó.
       </p>
       <p>
-        Chúng ta cần decompile file apk ra các file nhỏ hơn bao gồm
-        AndroidManifest.xml, thêm chuỗi android:debuggable="true", recompile lại
-        các file nhỏ thành 1 file apk, cuối cùng là ký (sign) file apk mới. Mỗi
-        khi thay đổi dữ liệu trong file apk sẽ cần phải ký lại.
+        Chúng ta cần decompile file apk ra các file nhỏ hơn chứa
+        AndroidManifest.xml, thêm chuỗi android:debuggable="true" vào
+        AndroidManifest.xml, recompile lại các file nhỏ thành 1 file apk, cuối
+        cùng là ký (sign) file apk mới. Mỗi khi thay đổi dữ liệu trong file apk
+        sẽ cần phải sign lại.
       </p>
       <p>
         Decompile, modify, recompile using apktool:
@@ -381,21 +496,6 @@
         <a href="https://www.youtube.com/watch?v=OiviK3VFGLw"
           >Android AppSec Youtube</a
         >
-      </p>
-    </div>
-
-    <div class="paratitle">
-      <h2>Reverse Engineering Guide</h2>
-    </div>
-    <div class="paragraph">
-      <p>
-        Trong lúc dịch ngược và debug, chúng ta cần để ý đến các điểm mấu chốt
-        như: hàm bắt đầu (nếu có), ý nghĩa tên các hàm (nếu có), logic code (AI
-        như chatgpt cũng có thể hỗ trợ rất tốt trong việc đọc hiểu code
-        decompiled hay disassembled và giải thích ý nghĩa đoạn code), cài đặt
-        breakpoints như thế nào, tại các breakpoint thì xem và sửa các giá trị
-        trên thanh ghi và các biến trong function như thế nào, chọn và xử lí
-        đúng thread trong ứng dụng multi thread,...
       </p>
     </div>
   </body>
