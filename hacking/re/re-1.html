@@ -288,7 +288,8 @@
         <br />&emsp;- Python: <a href="https://github.com/zrax/pycdc">pycdc</a>,
         <a href="https://github.com/jchristman/PyDA">PyDA</a>, dis module (dùng
         để lấy bytecode instructions (một dạng opcode được sử dụng cho riêng
-        intepreter của Python)) <br />&emsp;- AutoIT:
+        intepreter của Python)) <br />&emsp;- Python lib: qiling (giả lập thực
+        thi), pwn (pwntools)<br />&emsp;- AutoIT:
         <a href="https://github.com/nazywam/AutoIt-Ripper">AutoIT Ripper</a>
         <br />&emsp;- .NET: dnSpy, ILSpy, dotPeek <br />&emsp;- Lua: luadec,
         unluac
@@ -355,8 +356,46 @@
           class="img-fluid mx-auto d-block responsive_phone"
         />
       </p>
-
       <p>
+        Cũng có thể disassemble file .exe bằng code python để tiện cho việc lập
+        trình bằng cách sử dụng thư viện pefile và capstone như code bên dưới:
+      </p>
+      <!-- HTML generated using hilite.me -->
+      <div
+        style="
+          background: #ffffff;
+          overflow: auto;
+          width: auto;
+          border: solid gray;
+          border-width: 0.1em 0.1em 0.1em 0.8em;
+          padding: 0.2em 0.6em;
+        "
+      >
+        <pre
+          style="margin: 0; line-height: 125%"
+        ><span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">pefile</span>
+<span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">capstone</span> <span style="color: #008800; font-weight: bold">import</span> <span style="color: #333333">*</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">disassemble</span>(file_path):
+    pe <span style="color: #333333">=</span> pefile<span style="color: #333333">.</span>PE(file_path)
+
+    eop <span style="color: #333333">=</span> pe<span style="color: #333333">.</span>OPTIONAL_HEADER<span style="color: #333333">.</span>AddressOfEntryPoint
+    code_section <span style="color: #333333">=</span> pe<span style="color: #333333">.</span>get_section_by_rva(eop)
+
+    code_dump <span style="color: #333333">=</span> code_section<span style="color: #333333">.</span>get_data()
+
+    code_addr <span style="color: #333333">=</span> pe<span style="color: #333333">.</span>OPTIONAL_HEADER<span style="color: #333333">.</span>ImageBase <span style="color: #333333">+</span> code_section<span style="color: #333333">.</span>VirtualAddress
+
+    md <span style="color: #333333">=</span> Cs(CS_ARCH_X86, CS_MODE_64)
+
+    <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> md<span style="color: #333333">.</span>disasm(code_dump, code_addr):
+        <span style="color: #008800; font-weight: bold">print</span>(<span style="background-color: #fff0f0">&quot;0x</span><span style="background-color: #eeeeee">%x</span><span style="background-color: #fff0f0">:</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\t</span><span style="background-color: #eeeeee">%s</span><span style="color: #666666; font-weight: bold; background-color: #fff0f0">\t</span><span style="background-color: #eeeeee">%s</span><span style="background-color: #fff0f0">&quot;</span> <span style="color: #333333">%</span>(i<span style="color: #333333">.</span>address, i<span style="color: #333333">.</span>mnemonic, i<span style="color: #333333">.</span>op_str))
+
+disassemble(<span style="background-color: #fff0f0">&quot;/path/to/pe/file&quot;</span>)
+</pre>
+      </div>
+      <p>
+        <br />
         Một số file PE có thể bị packed. Đó là tình trạng source code bị mã hoá,
         làm rối,... Các công cụ dùng để pack có thể kể tới UPX. Để lấy được code
         trước khi bị packed bạn đọc có thể xem hướng dẫn tại:
@@ -443,6 +482,15 @@
   b* main+1
   starti
         </code></a></pre>
+      <p>
+        Có 2 cách viết code python để chạy gdb. Cách 1 là sử dụng subprocess
+        (PIPE, run). Cách thứ 2 là sử dụng thư viện gdb và import file code .py
+        vào gdb, xem hướng dẫn ở
+        <a
+          href="https://stackoverflow.com/questions/4060565/how-to-script-gdb-with-python-example-add-breakpoints-run-what-breakpoint-d"
+          >Stackoverflow</a
+        >.
+      </p>
     </div>
 
     <div class="paratitle">
