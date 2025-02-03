@@ -68,12 +68,8 @@ body {
 /* MAIN PICTURE */
 
 .mainPicture {
-  /* Full height */
-  height: 100% !important;
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  width: 100%;
+  max-height: 100%;
 }
 
 /* PARAGRAPH */

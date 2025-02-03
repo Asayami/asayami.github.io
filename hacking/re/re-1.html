@@ -320,23 +320,30 @@
       <p>
         File PE là các file thực thi .exe trên Windows, file .dll,... Một file
         PE có các thành phần:
-        <br />&emsp;- MS-DOS Headers (IMAGE_DOS_HEADER): Ban đầu file .exe được
-        sử dụng trong DOS mode (khá giống command prompt nhưng được trực tiếp
-        tiếp cận phần cứng như bộ nhớ,...) trong hệ điều hành MS-DOS. OS này
-        được phát triển bởi IBM và được Microsoft mua lại OS, sau này phát triển
-        lên thành Windows. Mặc dù đã lâu và hiếm khi dùng nhưng header MS-DOS
-        vẫn được giữ lại cho tới ngày nay. Header này sẽ giúp file có thể chạy
-        trong môi trường MS-DOS. Nó cũng có trường e_magic với giá trị 0x5A4D
-        hay "MZ", viết tắt của Mark Zbikowski - một kỹ sư MS-DOS. Trường
+        <br /><br />&emsp;- MS-DOS Headers (IMAGE_DOS_HEADER): Ban đầu file .exe
+        được sử dụng trong DOS mode (khá giống command prompt nhưng được trực
+        tiếp tiếp cận phần cứng như bộ nhớ,...) trong hệ điều hành MS-DOS. OS
+        này được phát triển bởi IBM và được Microsoft mua lại OS, sau này phát
+        triển lên thành Windows. Mặc dù đã lâu và hiếm khi dùng nhưng header
+        MS-DOS vẫn được giữ lại cho tới ngày nay. Header này sẽ giúp file có thể
+        chạy trong môi trường MS-DOS. Nó cũng có trường e_magic với giá trị
+        0x5A4D hay "MZ", viết tắt của Mark Zbikowski - một kỹ sư MS-DOS. Trường
         e_lfanew trỏ tới offset của PE header (chứa nội dung thực sự của file
-        PE).<br />&emsp;- MS-DOS Stub Program: Nếu file được chạy trong môi
-        trường MS-DOS, file sẽ không thực thi code thực sự của file đó mà sẽ
+        PE).<br /><br />&emsp;- MS-DOS Stub Program: Nếu file được chạy trong
+        môi trường MS-DOS, file sẽ không thực thi code thực sự của file đó mà sẽ
         khởi chạy code trong MS-DOS Stub Program. Đơn giản nó sẽ in ra dòng chữ
-        "This program cannot be run in DOS mode.". <br />&emsp;- PE Header:
-        Header chứa nội dung thực sự của file PE. Header bắt đầu với PE
-        signature (PE\0\0), theo sau bởi COFF file header (giúp OS load file
-        PE), optional header và section table. Section table chứa thông tin các
-        section đơn lẻ (Ex: .text, .data,...) như offset, flag,...
+        "This program cannot be run in DOS mode.". <br /><br />&emsp;-
+        IMAGE_NT_HEADER: Phần này chứa thông tin chính của file PE, gồm 3 thành
+        phần: <br />&emsp;&emsp;+ Signature (4 bytes): Dấu hiệu nhận biết tệp PE
+        ("PE\0\0"). <br />&emsp;&emsp;+ IMAGE_FILE_HEADER: Chứa metadata về file
+        PE (số lượng section, loại máy, kích thước file, v.v.).
+        <br />&emsp;&emsp;+ IMAGE_OPTIONAL_HEADER: Chứa thông tin về địa chỉ
+        entry point, kích thước image, các vùng bộ nhớ cần thiết, v.v.
+        <br /><br />&emsp;- IMAGE_SECTION_HEADER: Mỗi section (Ex: .text,
+        .data,...) có một header riêng, mô tả kích thước, địa chỉ trong file và
+        địa chỉ khi load vào bộ nhớ. <br /><br />&emsp;- Section Data: Đây là
+        phần dữ liệu thực tế của từng section, được load vào bộ nhớ khi chương
+        trình chạy.
       </p>
       <p>
         Để lấy thông tin cơ bản về thành phần của 1 file PE, chúng ta có thể sử
