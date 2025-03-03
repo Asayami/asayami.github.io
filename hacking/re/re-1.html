@@ -119,7 +119,7 @@
         cấp phát bộ nhớ, phân trang,... <br />&emsp;- Quản lí hệ thống file
         <br />&emsp;- Quản lí thiết bị (ổ cứng, máy in, bàn phím,...)
         <br />&emsp;- Quản lí mạng: giao thức, quản lí gói tin,...
-        <br />&emsp;...<br />Các thành phần trên (user mode) sử dụng syscall
+        <br />&emsp;...<br />Các thành phần bên trên (user mode) sử dụng syscall
         (lời gọi hệ thống) để giao tiếp với kernel. Từ syscall được gọi, kernel
         sẽ làm việc với CPU, RAM, ổ cứng,... để đạt được mục tiêu của syscall
         (kernel mode).
@@ -163,6 +163,55 @@
         Hầu hết mọi thứ chạy trên máy tính đều được có thể biểu diễn dưới tập
         lệnh ISA. Chúng ta có thể nhét một file thực thi bất kì vô disassembler
         để lấy tập lệnh ISA file đó thực thi.
+      </p>
+    </div>
+
+    <div class="paratitle">
+      <h2>x86 Architecture</h2>
+    </div>
+
+    <div class="paragraph">
+      <p>
+        Kiến trúc x86 tuân theo mô hình máy tính Von Neumann. Mà theo đó, máy
+        tính là sự kết hợp các các thành phần: ALU, khối điều khiển Von Neumann
+        control unit, input/output, và một bộ nhớ có thể chứa cả lệnh và dữ
+        liệu. Các lệnh được thực hiện một cách tuần tự, mỗi thời điểm chỉ thực
+        hiện được một lệnh.
+      </p>
+      <img
+        src="re_source/von_neumann.png"
+        style="margin-bottom: 2rem; width: 30%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <h3>Memory layout</h3>
+      <p>
+        Về memory layout, bạn đọc có thể đọc tại:
+        <a
+          href="https://viblo.asia/p/memory-layout-cua-mot-chuong-trinh-cc-bWrZnWJwlxw"
+        >
+          Viblo</a
+        >. Trong đó có thể thấy các section trong file thực thi được chuyển
+        thành segment khi đi vào bộ nhớ. Bạn đọc cần chú ý phần stack, stack
+        frame, thứ tự & cấu trúc bên trong mỗi frame, và cũng có thể thử sức với
+        các bài CTF pwn căn bản về buffer overflow để hiểu rõ hơn về stack.
+      </p>
+
+      <h3>Endianess</h3>
+      <p>
+        Endianess là cách mà các byte được sắp xếp trong bộ nhớ. Có 2 loại
+        endianess phổ biến: Big-endian và Little-endian. Trong Big-endian, byte
+        cao nhất được lưu trước byte thấp nhất, trong khi trong Little-endian,
+        byte thấp nhất được lưu trước byte cao nhất. Trong x86, dữ liệu được lưu
+        theo Little-endian.
+      </p>
+      <img
+        src="re_source/endian.png"
+        style="margin-bottom: 2rem; width: 50%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+      <p>
+        Để dễ nhớ, mình thường nhớ little endian đọc từ địa chỉ cao xuống thấp
+        và ngược lại.
       </p>
     </div>
 
@@ -274,6 +323,98 @@
         thể chứa các phương thức giao tiếp trực tiếp với thành phần phần cứng
         khác. Như vậy một chương trình đã được thực thi thành công.
       </p>
+      <h3>What inside RAM ?</h3>
+      <p>
+        Khi process được đưa vào memory, địa chỉ chúng ta thấy trong IDA Pro và
+        thường xuyên làm việc với là địa chỉ ảo. Địa chỉ ảo này sẽ được kernel
+        dịch ngược thành địa chỉ thật (địa chỉ vật lý) trong RAM thông qua page
+        table. Mỗi process sẽ có một page table riêng, do đó có thể có 2 process
+        dùng chung địa chỉ ảo nhưng lại trỏ tới địa chỉ vật lý khác nhau. Cũng
+        có trường hợp 2 process dùng chung địa chỉ vật lý nhưng lại trỏ tới địa
+        chỉ ảo khác nhau, điều này xảy ra khi 2 process cùng sử dụng thư viện
+        chung hoặc khi 1 process fork ra 1 process khác.
+      </p>
+      <p>
+        Một cơ chế khác của RAM đó là ASLR (Address Space Layout Randomization).
+        ASLR là một kỹ thuật bảo mật được sử dụng để ngăn chặn các cuộc tấn công
+        như buffer overflow, heap overflow, v.v. Khi một chương trình được load
+        vào bộ nhớ, các vùng nhớ sẽ được cấp phát ngẫu nhiên, do đó các địa chỉ
+        ảo sẽ thay đổi mỗi lần chương trình được load. Điều này làm cho việc tìm
+        kiếm các vùng nhớ cố định trở nên khó khăn hơn.
+      </p>
+      <h3>Process - Thread ?</h3>
+      <p>
+        Process (tiến trình) là một đơn vị quản lý tài nguyên của hệ điều hành.
+        Nó chứa bộ nhớ, dữ liệu, mã chương trình và tài nguyên khác để thực thi
+        một chương trình. Mỗi tiến trình có không gian địa chỉ riêng và được hệ
+        điều hành cấp phát tài nguyên một cách độc lập.
+        <br />Thread (luồng) là đơn vị thực thi bên trong một tiến trình. Một
+        tiến trình có thể có nhiều luồng, và các luồng trong cùng một tiến trình
+        chia sẻ cùng không gian địa chỉ, bộ nhớ và tài nguyên. <br />Mỗi thread
+        sẽ có một stack riêng, các thread trong cùng một process sẽ chia sẻ cùng
+        một heap. Các thread trong cùng một process có thể chia sẻ dữ liệu với
+        nhau thông qua các biến toàn cục hoặc biến tĩnh.
+      </p>
+      <h3>Mutex</h3>
+      <p>
+        Mutex (Mutual Exclusion) là một cơ chế đồng bộ hóa giúp đảm bảo chỉ một
+        thread có thể truy cập tài nguyên chia sẻ tại một thời điểm, ngăn chặn
+        điều kiện tranh chấp (race condition). Mutex có 2 trạng thái: khóa và
+        mở. Khi một thread muốn truy cập tài nguyên, nó sẽ yêu cầu khóa mutex.
+        Nếu mutex đang mở, thread sẽ khóa mutex và truy cập tài nguyên. Khi
+        thread hoàn thành, nó sẽ mở mutex để cho thread khác truy cập tài
+        nguyên. Nếu mutex đang khóa, thread sẽ phải chờ cho đến khi mutex được
+        mở.
+      </p>
+      <h3>Service</h3>
+      <p>
+        Windows Service là một tiến trình chạy nền, thường khởi động cùng hệ
+        điều hành và không yêu cầu tương tác trực tiếp từ người dùng. Nó được
+        dùng để cung cấp các chức năng hệ thống như cập nhật, bảo mật, hoặc quản
+        lý thiết bị.
+      </p>
+      <p>
+        Service Type:
+        <br />&emsp;- SERVICE_WIN32_OWN_PROCESS: Chạy trong một tiến trình
+        riêng, code chứa trong file exe. <br />&emsp;-
+        SERVICE_WIN32_SHARE_PROCESS: Chia sẻ tiến trình với dịch vụ khác, code
+        chứa trong file dll. <br />&emsp;- SERVICE_KERNEL_DRIVER: Driver chế độ
+        kernel. <br />&emsp;- SERVICE_FILE_SYSTEM_DRIVER: Driver hệ thống tập
+        tin.
+      </p>
+      <p>
+        Thông tin của Windows Service được lưu trong Registry tại:
+        HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\&#60;ServiceName>.
+        Chúng ta có thể xem nhanh thông tin service bằng lệnh sc qc
+        &#60;ServiceName>, ví dụ: sc qc "VBoxSDS".
+      </p>
+      <h3>COM, CLSID, IID ?</h3>
+      <p>
+        COM (Component Object Model) là mô hình lập trình của Microsoft cho phép
+        các thành phần phần mềm giao tiếp mà không phụ thuộc vào ngôn ngữ lập
+        trình. COM sử dụng GUID (Globally Unique Identifier) để xác định các
+        thành phần phần mềm. GUID là một số duy nhất được tạo ra bằng thuật toán
+        đảm bảo không trùng lặp. GUID được biểu diễn dưới dạng chuỗi 32 ký tự
+        hexa, ví dụ: {00000000-0000-0000-0000-000000000000}.
+      </p>
+      <p>
+        CLSID (Class Identifier) là một GUID được sử dụng để xác định một class
+        COM. CLSID được lưu trữ trong Registry tại
+        HKEY_CLASSES_ROOT\CLSID\{&#60;CLSID>}.
+      </p>
+      <p>
+        IID (Interface Identifier) là một GUID được sử dụng để xác định một
+        interface COM. IID được lưu trữ trong Registry tại
+        HKEY_CLASSES_ROOT\Interface\{&#60;IID>}.
+      </p>
+      <p>
+        Ví dụ, để dùng function Navigate của IWebBrowser2, chúng ta cần biết
+        CLSID của IWebBrowser2 và IID của IWebBrowser2. CLSID của IWebBrowser2
+        sẽ được tìm trong registry thông qua Program ID
+        ("InternetExplorer.Application"), GUID này sẽ khác biệt trên mỗi máy.
+        Còn IID của IWebBrowser2 hay các interface khác sẽ là cố định trên các
+        máy, được đặt bởi developer của COM.
+      </p>
     </div>
 
     <div class="paratitle">
@@ -307,6 +448,20 @@
         breakpoints như thế nào, tại các breakpoint thì xem và sửa các giá trị
         trên thanh ghi và các biến trong function như thế nào, chọn và xử lí
         đúng thread trong ứng dụng multi thread,...
+      </p>
+      <h5>Call Conventions</h5>
+      <p>
+        Khi đọc code assembly, có thể bạn sẽ thấy các hàm được gọi theo cách
+        khác nhau. Call conventions chính là cách thức truyền tham số và trả về
+        giá trị của hàm giữa các hàm trong chương trình. Có nhiều loại call
+        conventions như: cdecl, stdcall, fastcall, thiscall, vectorcall,... Mỗi
+        loại call conventions sẽ có cách truyền tham số và trả về giá trị khác
+        nhau. Ví dụ, cdecl sẽ đẩy tham số vào stack từ phải qua trái, stdcall sẽ
+        đẩy tham số vào stack từ trái qua phải,...
+        <br />Bên cạnh call conventions, cách thức gọi hàm có thể ảnh hưởng bởi
+        compiler. Ví dụ, nếu được compile bởi Visual Studio, tham số sẽ được
+        push vào stack, trong khi đó nếu được compile bởi GCC, tham số sẽ được
+        mov vào.
       </p>
     </div>
 
