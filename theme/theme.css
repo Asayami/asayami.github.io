@@ -1,3 +1,65 @@
+html,
+body {
+  height: 100%;
+  word-wrap: break-word;
+}
+
+/* NAVIGATION BAR */
+
+.navbar {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+	background-color: black;
+	transition: 0.2s;
+	position: sticky;
+	opacity: 0.9;
+  }
+  
+  .navmain {
+	padding-top: 15px;
+	padding-bottom: 8px;
+	transition: 0.2s;
+  }
+  
+  .custom-toggler.navbar-toggler {
+	border-color: #0073e6 !important;
+  }
+  .custom-toggler .navbar-toggler-icon {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(128, 191, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+  }
+  
+  .navtransition {
+	padding-top: 8px;
+	top: 0px;
+	transition: 0.2s;
+  }
+  
+  .navitem {
+	padding-right: 20px;
+	font: Arial;
+	font-size: 20px;
+	margin-bottom: 4px;
+  }
+  
+  .navitem a {
+	color: white !important;
+	border-bottom-color: #0080ff;
+	text-decoration: none !important;
+	cursor: pointer;
+	background: linear-gradient(to right, #0080ff 100%, transparent 0);
+	background-size: 0% 3px;
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	padding-bottom: 1px;
+	transition: background-size 0.2s ease-in-out;
+  }
+  
+  .navitem a:hover {
+	color: white;
+	text-decoration: none;
+	background-size: 100% 3px;
+  }
+
 /* customizable snowflake styling */
 .snowflake {
 	color: #fff;

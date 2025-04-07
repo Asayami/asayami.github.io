@@ -1,26 +1,3 @@
-//NAVIGATION BAR SCROLL
-
-function loadNavbar() {
-  fetch("https://asayami.github.io/theme/navbar.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById("themeSpace").innerHTML = data;
-      document.getElementById("navbar").onscroll = NavScroll;
-      window.onscroll = NavScroll;
-      NavScroll();
-    });
-}
-
-function NavScroll() {
-  // Get the navbarz
-  var navbar = document.getElementById("navbar");
-  if (window.pageYOffset != 0) {
-    navbar.classList.add("navtransition");
-  } else {
-    navbar.classList.remove("navtransition");
-  }
-}
-
 //DIV SCROLL ANIMATION
 
 const scrollOffset = 100; //Minimum Space for animation
