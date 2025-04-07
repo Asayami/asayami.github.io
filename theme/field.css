@@ -63,13 +63,18 @@ body {
   border-bottom-color: #0080ff;
   text-decoration: none !important;
   cursor: pointer;
+  background: linear-gradient(to right, #0080ff 100%, transparent 0);
+  background-size: 0% 3px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  padding-bottom: 1px;
+  transition: background-size 0.2s ease-in-out;
 }
 
 .navitem a:hover {
   color: white;
   text-decoration: none;
-  border-bottom-style: solid;
-  transition: 0.2s;
+  background-size: 100% 3px;
 }
 
 /* MAIN PICTURE */

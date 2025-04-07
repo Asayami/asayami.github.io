@@ -705,5 +705,75 @@ disassemble(<span style="background-color: #fff0f0">&quot;/path/to/pe/file&quot;
         >
       </p>
     </div>
+
+    <div class="paratitle">
+      <h2>Debugging</h2>
+    </div>
+    <div class="paragraph">
+      <h3>Source-level Debugging vs. Assembly-level Debugging</h3>
+      <p>
+        <b>Source-level Debugging</b>: Là phương pháp debug trực tiếp trên mã
+        nguồn cấp cao như C, C++, Python,... với sự hỗ trợ của trình biên dịch
+        và trình gỡ lỗi (như GDB, LLDB). Người dùng có thể đặt breakpoint, kiểm
+        tra biến, gọi hàm và theo dõi luồng thực thi một cách dễ dàng.
+      </p>
+      <p>
+        <b>Assembly-level Debugging</b>: Là phương pháp debug trực tiếp trên mã
+        máy hoặc mã assembly. Cách này thường được sử dụng khi phân tích phần
+        mềm cấp thấp, khai thác lỗ hổng bảo mật, hoặc tối ưu hóa hiệu suất. Công
+        cụ phổ biến bao gồm GDB (với chế độ assembly), IDA Pro, Radare2 và
+        x64dbg.
+      </p>
+      <h3>Kernel Mode vs. User Mode Debugging</h3>
+      <p>
+        Debugging có thể được thực hiện ở hai cấp độ chính trong hệ điều hành:
+      </p>
+      <p>
+        User Mode Debugging: Debug ứng dụng thông thường chạy trong không gian
+        User Mode, sử dụng các trình debug như WinDbg, GDB, IDA,... để theo dõi
+        tiến trình, đặt breakpoint, kiểm tra bộ nhớ. Tuy nhiên nó không ảnh
+        hưởng trực tiếp đến hệ thống và không thể debug kernel hoặc driver.
+      </p>
+      <p>
+        Kernel Mode Debugging: Debug nhân hệ điều hành (kernel), driver, và lỗi
+        hệ thống, yêu cầu một môi trường đặc biệt vì kernel có toàn quyền kiểm
+        soát hệ thống. Để debug, chúng ta thường cần hai máy riêng biệt: target
+        machine (chạy kernel) và host machine (chạy debugger). Nhưng chúng ta
+        cũng có thể debug trên một máy duy nhất theo 2 cách:
+        <br />&emsp;- <b>WinDbg Local Kernel Debugging</b>: thực hiện trên một
+        máy nhưng bị hạn chế, không đặt được breakpoint hoặc debug crash dump mà
+        chỉ trích xuất được dữ liệu tại thời điểm mong muốn. <br />&emsp;-
+        <b>Virtual Machine Debugging</b>: máy ảo giả lập kernel riêng nên có thể
+        debug kernel bằng cách kết nối debugger từ host thông qua cổng COM ảo
+        hoặc KDNET. Hypervisor như VMware, Hyper-V hỗ trợ debug kernel mà không
+        cần máy vật lý thứ hai.
+      </p>
+      <h3>Software vs. Hardware Execution Breakpoint</h3>
+      <p>
+        <b>Software Execution Breakpoint</b>: Được thiết lập bằng cách thay thế
+        một lệnh trong mã với INT 3 (0xCC trên x86). Khi CPU thực thi lệnh này,
+        nó tạo ra một exception mà debugger có thể bắt. Phương pháp này dễ sử
+        dụng, không có giới hạn số lượng nhưng có thể bị phát hiện bởi
+        anti-debugging. <br />Software Execution Breakpoint cũng có khái niệm
+        conditional breakpoint: cho phép chương trình chỉ dừng khi một điều kiện
+        cụ thể được thỏa mãn, ví dụ như giá trị của một thanh ghi hoặc một biến
+        trong bộ nhớ. Điều này giúp tránh dừng không cần thiết và tối ưu quá
+        trình debug. IDA Pro cũng hỗ trợ tính năng này như ảnh dưới, với điều
+        kiện có thể đặt theo syntax của IDA Python.
+      </p>
+      <img
+        src="re_source/breakpoint_cond.png"
+        style="width: 50%"
+        class="img-fluid mx-auto d-block responsive_phone"
+      />
+
+      <p>
+        <br />
+        <b>Hardware Execution Breakpoint</b>: Sử dụng các thanh ghi debug của
+        CPU (DR0-DR3) để dừng chương trình khi một địa chỉ cụ thể được thực thi.
+        Không làm thay đổi mã chương trình, nhanh hơn và khó bị phát hiện hơn.
+        Tuy nhiên, số lượng hardware breakpoints bị giới hạn bởi kiến trúc CPU.
+      </p>
+    </div>
   </body>
 </html>

@@ -1,0 +1,14 @@
+.toggle-icon {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.toggle-icon.open {
+  transform: rotate(45deg);
+}
+
+.iconn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
