@@ -92,21 +92,30 @@
         Trong các website, có thể có các filter (bộ lọc) và có một số cách
         bypass cơ bản:
       </p>
-      <p>
-        &emsp;- Có thể thay thế các khoảng trống (space) bằng các inline comment
-        (/**/). Ví dụ như UNION SELECT sẽ thay bằng UNION/**/SELECT
-        <br />&emsp;- Do SQL không phân biệt chữ hoa thường nên thay vì sử dụng
-        select và union có thể thay bằng SeLecT và uNiOn, tương tự với các lệnh
-        khác nhằm bypass một số web chặn command string chúng ta nhập
-        <br />&emsp;- Thay vì đưa chuỗi 'text' vào chẳng hạn bạn có thể thay
-        bằng mã hex 0x277465787427 hoặc thay bằng CHAR(116,101,120,116)
-        <br />&emsp;- Nếu web server có sử dụng proxy caching thì bypass bằng
-        cách thêm một loạt kí tự đặc biệt sau payload, ví dụ payload#abcdef
-        (proxy caching là cache và cũng gần tương tự như phía client, khác ở chỗ
-        cache này thiết lập cho phía server, bạn đọc có thể đọc thêm tại
-        <a href="https://zhost.vn/docs/cau-hinh-nginx-caching-centos-7/">Here</a
-        >)
-      </p>
+      <ul>
+        <li>
+          Có thể thay thế các khoảng trống (space) bằng các inline comment
+          (/**/). Ví dụ như UNION SELECT sẽ thay bằng UNION/**/SELECT
+        </li>
+        <li>
+          Do SQL không phân biệt chữ hoa thường nên thay vì sử dụng select và
+          union có thể thay bằng SeLecT và uNiOn, tương tự với các lệnh khác
+          nhằm bypass một số web chặn command string chúng ta nhập
+        </li>
+        <li>
+          Thay vì đưa chuỗi 'text' vào chẳng hạn bạn có thể thay bằng mã hex
+          0x277465787427 hoặc thay bằng CHAR(116,101,120,116)
+        </li>
+        <li>
+          Nếu web server có sử dụng proxy caching thì bypass bằng cách thêm một
+          loạt kí tự đặc biệt sau payload, ví dụ payload#abcdef (proxy caching
+          là cache và cũng gần tương tự như phía client, khác ở chỗ cache này
+          thiết lập cho phía server, bạn đọc có thể đọc thêm tại
+          <a href="https://zhost.vn/docs/cau-hinh-nginx-caching-centos-7/"
+            >Here</a
+          >)
+        </li>
+      </ul>
 
       <h3>SQL Injection using User Agent</h3>
       <p>User Agent là một thông số có trong các packet, có dạng như:</p>
@@ -249,24 +258,35 @@
       <h2>SQL Injection Prevention</h2>
     </div>
     <div class="paragraph">
-      <p>
-        &emsp;- Không bao giờ được tin tưởng những input người dùng nhập vào: Dữ
-        liệu luôn phải được xác thực trước khi sử dụng trong các câu lệnh SQL
-        thông qua các filter <br />&emsp;- Các thủ tục được lưu trữ (Stored
-        Procedure): Những thủ tục này có thể trừu tượng hóa các lệnh SQL và xem
-        xét toàn bộ input như các tham số. Nhờ đó, nó không thể gây ảnh hưởng
-        đến cú pháp lệnh SQL (không sử dụng các câu lệnh SQL trực tiếp). Đối với
-        ASP.NET, có cách ngăn chặn đơn giản là sử dụng các Parameters khi làm
-        việc với object SqlCommand (hoặc OleDbCommand), khi truyền data vào
-        Parameters sẽ tự động validate kiểu dữ liệu <br />&emsp;- Thông báo lỗi
-        hợp lý: Thông báo lỗi phải tuyệt đối tránh tiết lộ những thông tin/chi
-        tiết nhạy cảm và vị trí xảy ra lỗi trên thông báo lỗi <br />&emsp;- Giới
-        hạn quyền truy cập của người dùng đối với cơ sở dữ liệu <br />&emsp;-
-        Xóa các stored procedure trong database master mà không dùng như:
-        xp_cmdshell, xp_startmail, xp_sendmail, sp_makewebtask <br />&emsp;-
-        Thay đổi "Startup and run SQL Server" dùng mức low privilege user trong
-        tab SQL Server Security
-      </p>
+      <ul>
+        <li>
+          Không bao giờ được tin tưởng những input người dùng nhập vào: Dữ liệu
+          luôn phải được xác thực trước khi sử dụng trong các câu lệnh SQL thông
+          qua các filter
+        </li>
+        <li>
+          Các thủ tục được lưu trữ (Stored Procedure): Những thủ tục này có thể
+          trừu tượng hóa các lệnh SQL và xem xét toàn bộ input như các tham số.
+          Nhờ đó, nó không thể gây ảnh hưởng đến cú pháp lệnh SQL (không sử dụng
+          các câu lệnh SQL trực tiếp). Đối với ASP.NET, có cách ngăn chặn đơn
+          giản là sử dụng các Parameters khi làm việc với object SqlCommand
+          (hoặc OleDbCommand), khi truyền data vào Parameters sẽ tự động
+          validate kiểu dữ liệu
+        </li>
+        <li>
+          Thông báo lỗi hợp lý: Thông báo lỗi phải tuyệt đối tránh tiết lộ những
+          thông tin/chi tiết nhạy cảm và vị trí xảy ra lỗi trên thông báo lỗi
+        </li>
+        <li>Giới hạn quyền truy cập của người dùng đối với cơ sở dữ liệu</li>
+        <li>
+          Xóa các stored procedure trong database master mà không dùng như:
+          xp_cmdshell, xp_startmail, xp_sendmail, sp_makewebtask
+        </li>
+        <li>
+          Thay đổi "Startup and run SQL Server" dùng mức low privilege user
+          trong tab SQL Server Security
+        </li>
+      </ul>
     </div>
   </body>
 </html>

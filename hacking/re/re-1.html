@@ -72,19 +72,28 @@
 
     <img class="mainPicture" src="re_source/re_bg.jpg" />
     <div class="paragraph">
-      <p>
-        Reverse engineering phần mềm là quá trình phân tích mã nguồn của một
-        phần mềm để tìm hiểu về cấu trúc, chức năng và cách hoạt động của nó.
-        Điều này có thể được thực hiện để: <br />&emsp;- Tìm hiểu về cách hoạt
-        động của một phần mềm: Điều này có thể hữu ích cho các nhà phát triển
-        phần mềm, những người muốn sửa lỗi hoặc cải thiện phần mềm.
-        <br />&emsp;- Sao chép hoặc sản xuất một phần mềm tương tự: Điều này có
-        thể được thực hiện để tiết kiệm chi phí hoặc để tạo ra một phiên bản cải
-        tiến của phần mềm. Tuy nhiên, việc sao chép phần mềm có bản quyền mà
-        không có sự cho phép của tác giả là bất hợp pháp. <br />&emsp;- Phân
-        tích bảo mật của một phần mềm: Điều này có thể giúp xác định các lỗ hổng
-        bảo mật có thể bị khai thác bởi tin tặc.
-      </p>
+      <ul>
+        <li>
+          Reverse engineering phần mềm là quá trình phân tích mã nguồn của một
+          phần mềm để tìm hiểu về cấu trúc, chức năng và cách hoạt động của nó.
+          Điều này có thể được thực hiện để:
+        </li>
+        <li>
+          Tìm hiểu về cách hoạt động của một phần mềm: Điều này có thể hữu ích
+          cho các nhà phát triển phần mềm, những người muốn sửa lỗi hoặc cải
+          thiện phần mềm.
+        </li>
+        <li>
+          Sao chép hoặc sản xuất một phần mềm tương tự: Điều này có thể được
+          thực hiện để tiết kiệm chi phí hoặc để tạo ra một phiên bản cải tiến
+          của phần mềm. Tuy nhiên, việc sao chép phần mềm có bản quyền mà không
+          có sự cho phép của tác giả là bất hợp pháp.
+        </li>
+        <li>
+          Phân tích bảo mật của một phần mềm: Điều này có thể giúp xác định các
+          lỗ hổng bảo mật có thể bị khai thác bởi tin tặc.
+        </li>
+      </ul>
       <p>
         Khái niệm reverse engineering cũng tồn tại trong mảng phần cứng, với ý
         nghĩa tương tự là phân tích và tái tạo lại phần cứng đó. Tuy nhiên chúng
@@ -109,21 +118,28 @@
           class="img-fluid mx-auto d-block responsive_phone"
         />
       </p>
+      <ul>
+        <li>
+          Phía trên là cây hệ điều hành mô tả các nhánh phát triển từ cốt lõi
+          của các hệ điều hành ngày nay. Mọi hệ điều hành đều chứa kernel (nhân
+          hệ điều hành). Kernel thực hiện các chức năng quan trọng như:
+        </li>
+        <li>
+          Quản lí tiến trình: tạo process, lập lịch tiến trình (cái nào chạy
+          trước ?), đồng bộ hoá tránh race condition (mutex,
+          critical-section,semaphores,...), deadlock, giao tiếp giữa các tiến
+          trình (IPC - Inter-Process Communication).
+        </li>
+        <li>Quản lí bộ nhớ: cấp phát bộ nhớ, phân trang,...</li>
+        <li>Quản lí hệ thống file</li>
+        <li>Quản lí thiết bị (ổ cứng, máy in, bàn phím,...)</li>
+        <li>Quản lí mạng: giao thức, quản lí gói tin,...</li>
+        <li>...</li>
+      </ul>
       <p>
-        Phía trên là cây hệ điều hành mô tả các nhánh phát triển từ cốt lõi của
-        các hệ điều hành ngày nay. Mọi hệ điều hành đều chứa kernel (nhân hệ
-        điều hành). Kernel thực hiện các chức năng quan trọng như:
-        <br />&emsp;- Quản lí tiến trình: tạo process, lập lịch tiến trình (cái
-        nào chạy trước ?), đồng bộ hoá tránh race condition (mutex,
-        critical-section,semaphores,...), deadlock, giao tiếp giữa các tiến
-        trình (IPC - Inter-Process Communication). <br />&emsp;- Quản lí bộ nhớ:
-        cấp phát bộ nhớ, phân trang,... <br />&emsp;- Quản lí hệ thống file
-        <br />&emsp;- Quản lí thiết bị (ổ cứng, máy in, bàn phím,...)
-        <br />&emsp;- Quản lí mạng: giao thức, quản lí gói tin,...
-        <br />&emsp;...<br />Các thành phần bên trên (user mode) sử dụng syscall
-        (lời gọi hệ thống) để giao tiếp với kernel. Từ syscall được gọi, kernel
-        sẽ làm việc với CPU, RAM, ổ cứng,... để đạt được mục tiêu của syscall
-        (kernel mode).
+        Các thành phần bên trên (user mode) sử dụng syscall (lời gọi hệ thống)
+        để giao tiếp với kernel. Từ syscall được gọi, kernel sẽ làm việc với
+        CPU, RAM, ổ cứng,... để đạt được mục tiêu của syscall (kernel mode).
       </p>
     </div>
 
@@ -132,34 +148,48 @@
     </div>
 
     <div class="paragraph">
-      <p>
-        Các CPU hiện nay trên thị trường được gắn với một kiến trúc tập lệnh nào
-        đó. Kiến trúc tập lệnh (Instruction Set Architecture) là tập hợp các kỹ
-        thuật thiết kế bộ vi xử lý được sử dụng để thực hiện các tập lệnh. Máy
-        vi tính với CPU khác nhau có thể chia sẻ một tập lệnh phổ biến. Một số
-        kiến trúc tập lệnh phổ biến:
-        <br />&emsp;- x86: Kiến trúc x86 là kiến trúc tập lệnh phổ biến nhất
-        hiện nay, được sử dụng trong hầu hết các máy tính để bàn, máy tính xách
-        tay, máy chủ và các thiết bị nhúng. Kiến trúc x86 đã trải qua nhiều lần
-        cập nhật và mở rộng trong những năm qua, và hiện được hỗ trợ bởi một
-        loạt các nhà sản xuất bộ xử lý, bao gồm Intel, AMD và VIA. Có 2 định
-        dạng phổ biến của x86 là Intel và AT&T, 2 cách đọc này khác nhau đôi
-        chút.<br />&emsp;- ARM: Kiến trúc ARM là kiến trúc tập lệnh phổ biến
-        nhất trong các thiết bị di động, bao gồm điện thoại thông minh, máy tính
-        bảng và máy tính xách tay. Kiến trúc ARM được thiết kế để tiết kiệm điện
-        năng và hiệu suất trên mỗi watt, khiến nó trở nên lý tưởng cho các thiết
-        bị di động. <br />&emsp;- MIPS: Kiến trúc MIPS là kiến trúc tập lệnh phổ
-        biến trong một số thiết bị, bao gồm máy tính để bàn, máy tính xách tay,
-        máy chủ và các thiết bị nhúng. Kiến trúc MIPS được thiết kế để đơn giản
-        và hiệu quả, khiến nó trở nên lý tưởng cho các ứng dụng đòi hỏi tài
-        nguyên thấp. <br />&emsp;- PowerPC: Kiến trúc PowerPC là kiến trúc tập
-        lệnh phổ biến trong các máy chủ và thiết bị nhúng. Kiến trúc PowerPC
-        được thiết kế để hiệu suất cao, khiến nó trở nên lý tưởng cho các ứng
-        dụng đòi hỏi nhiều tài nguyên. <br />&emsp;- RISC-V: Kiến trúc RISC-V là
-        một kiến trúc tập lệnh mới đang trở nên phổ biến. Kiến trúc RISC-V là
-        kiến trúc tập lệnh mở, miễn phí, khiến nó trở nên lý tưởng cho các ứng
-        dụng yêu cầu chi phí thấp và linh hoạt.
-      </p>
+      <ul>
+        <li>
+          Các CPU hiện nay trên thị trường được gắn với một kiến trúc tập lệnh
+          nào đó. Kiến trúc tập lệnh (Instruction Set Architecture) là tập hợp
+          các kỹ thuật thiết kế bộ vi xử lý được sử dụng để thực hiện các tập
+          lệnh. Máy vi tính với CPU khác nhau có thể chia sẻ một tập lệnh phổ
+          biến. Một số kiến trúc tập lệnh phổ biến:
+        </li>
+        <li>
+          x86: Kiến trúc x86 là kiến trúc tập lệnh phổ biến nhất hiện nay, được
+          sử dụng trong hầu hết các máy tính để bàn, máy tính xách tay, máy chủ
+          và các thiết bị nhúng. Kiến trúc x86 đã trải qua nhiều lần cập nhật và
+          mở rộng trong những năm qua, và hiện được hỗ trợ bởi một loạt các nhà
+          sản xuất bộ xử lý, bao gồm Intel, AMD và VIA. Có 2 định dạng phổ biến
+          của x86 là Intel và AT&#38;T, 2 cách đọc này khác nhau đôi chút.
+        </li>
+        <li>
+          ARM: Kiến trúc ARM là kiến trúc tập lệnh phổ biến nhất trong các thiết
+          bị di động, bao gồm điện thoại thông minh, máy tính bảng và máy tính
+          xách tay. Kiến trúc ARM được thiết kế để tiết kiệm điện năng và hiệu
+          suất trên mỗi watt, khiến nó trở nên lý tưởng cho các thiết bị di
+          động.
+        </li>
+        <li>
+          MIPS: Kiến trúc MIPS là kiến trúc tập lệnh phổ biến trong một số thiết
+          bị, bao gồm máy tính để bàn, máy tính xách tay, máy chủ và các thiết
+          bị nhúng. Kiến trúc MIPS được thiết kế để đơn giản và hiệu quả, khiến
+          nó trở nên lý tưởng cho các ứng dụng đòi hỏi tài nguyên thấp.
+        </li>
+        <li>
+          PowerPC: Kiến trúc PowerPC là kiến trúc tập lệnh phổ biến trong các
+          máy chủ và thiết bị nhúng. Kiến trúc PowerPC được thiết kế để hiệu
+          suất cao, khiến nó trở nên lý tưởng cho các ứng dụng đòi hỏi nhiều tài
+          nguyên.
+        </li>
+        <li>
+          RISC-V: Kiến trúc RISC-V là một kiến trúc tập lệnh mới đang trở nên
+          phổ biến. Kiến trúc RISC-V là kiến trúc tập lệnh mở, miễn phí, khiến
+          nó trở nên lý tưởng cho các ứng dụng yêu cầu chi phí thấp và linh
+          hoạt.
+        </li>
+      </ul>
       <p>
         Hầu hết mọi thứ chạy trên máy tính đều được có thể biểu diễn dưới tập
         lệnh ISA. Chúng ta có thể nhét một file thực thi bất kì vô disassembler
@@ -193,8 +223,8 @@
           Viblo</a
         >. Trong đó có thể thấy các section trong file thực thi được chuyển
         thành segment khi đi vào bộ nhớ. Bạn đọc cần chú ý phần stack, stack
-        frame, thứ tự & cấu trúc bên trong mỗi frame, và cũng có thể thử sức với
-        các bài CTF pwn căn bản về buffer overflow để hiểu rõ hơn về stack.
+        frame, thứ tự &#38; cấu trúc bên trong mỗi frame, và cũng có thể thử sức
+        với các bài CTF pwn căn bản về buffer overflow để hiểu rõ hơn về stack.
       </p>
 
       <h3>Endianess</h3>
@@ -242,7 +272,7 @@
       <h3>Compiling</h3>
       <p>
         Sau quá trình compile source thì còn có 2 bước nữa để chương trình có
-        thể thực thi được là: linker & loader.
+        thể thực thi được là: linker &#38; loader.
       </p>
       <img
         src="re_source/ll.png"
@@ -250,12 +280,17 @@
         class="img-fluid mx-auto d-block responsive_phone"
       />
       <p>
-        Sau khi compile, chúng ta sẽ nhận được file object (.o) chứa source code
-        và thông tin cơ bản về các thư viện (file .h) như là tên các hàm, các
-        kiểu sử dụng. Từ đó có thể kiểm tra lỗi syntax trong source code. Sau đó
-        tại linker thông tin cụ thể các hàm của thư viện sẽ được thêm vào (file
-        .lib,.a). Cuối cùng, khi chương trình được khởi chạy, loader sẽ load
-        output của linker (.exe) vào memory và chương trình bắt đầu.
+        Sau khi compile, chúng ta sẽ nhận được file object (.o) chứa mã máy và
+        thông tin cơ bản về các thư viện (file .h) như là tên các hàm, các kiểu
+        sử dụng. Từ đó có thể kiểm tra lỗi cú pháp (syntax) trong source code.
+        Sau đó, tại bước linker, nếu là static linking, thông tin về các hàm từ
+        thư viện sẽ được thêm vào chương trình (file .lib, .a sẽ chứa mã thực
+        thi thư viện). Nếu là dynamic linking, linker chỉ tạo ra các thông tin
+        về các hàm cần được nạp từ .dll trong lúc chạy, và không copy mã thực
+        thi vào chương trình. Cuối cùng, khi chương trình được khởi chạy, loader
+        sẽ nạp output của linker (file .exe) vào bộ nhớ và thực thi chương
+        trình, nếu có thư viện .dll, loader sẽ nạp .dll vào bộ nhớ và thực thi
+        các hàm trong đó.
       </p>
       <h3>Interpreting</h3>
       <p>
@@ -296,7 +331,7 @@
       <h3>SO (Shared Object) in ELF file</h3>
       <p>
         Bên trên chúng ta đã nói về ứng dụng trên Windows, vậy còn bên Unix thì
-        sao ? Các file thực thi trên Unix & Unix-like được gọi là ELF
+        sao ? Các file thực thi trên Unix &#38; Unix-like được gọi là ELF
         (Executable and Linkable Format). Chúng đều có cách xây dựng thông qua
         linker, loader giống Windows.
         <br />File ELF được chia thành các kiểu: ET_NONE, ET_REL, ET_EXEC,
@@ -374,15 +409,20 @@
         dùng để cung cấp các chức năng hệ thống như cập nhật, bảo mật, hoặc quản
         lý thiết bị.
       </p>
-      <p>
-        Service Type:
-        <br />&emsp;- SERVICE_WIN32_OWN_PROCESS: Chạy trong một tiến trình
-        riêng, code chứa trong file exe. <br />&emsp;-
-        SERVICE_WIN32_SHARE_PROCESS: Chia sẻ tiến trình với dịch vụ khác, code
-        chứa trong file dll. <br />&emsp;- SERVICE_KERNEL_DRIVER: Driver chế độ
-        kernel. <br />&emsp;- SERVICE_FILE_SYSTEM_DRIVER: Driver hệ thống tập
-        tin.
-      </p>
+      <p>Service Type:</p>
+      <ul>
+        <li>
+          SERVICE_WIN32_OWN_PROCESS: Chạy trong một tiến trình riêng, code chứa
+          trong file exe.
+        </li>
+        <li>
+          SERVICE_WIN32_SHARE_PROCESS: Chia sẻ tiến trình với dịch vụ khác, code
+          chứa trong file dll.
+        </li>
+        <li>SERVICE_KERNEL_DRIVER: Driver chế độ kernel.</li>
+        <li>SERVICE_FILE_SYSTEM_DRIVER: Driver hệ thống tập tin.</li>
+        <
+      </ul>
       <p>
         Thông tin của Windows Service được lưu trong Registry tại:
         HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\&#60;ServiceName>.
@@ -422,17 +462,22 @@
       <h2>Reverse Engineering Guide</h2>
     </div>
     <div class="paragraph">
-      <p>
-        Một vài decompilers đối với một số ngôn ngữ:
-        <br />&emsp;- Python: <a href="https://github.com/zrax/pycdc">pycdc</a>,
-        <a href="https://github.com/jchristman/PyDA">PyDA</a>, dis module (dùng
-        để lấy bytecode instructions (một dạng opcode được sử dụng cho riêng
-        intepreter của Python)) <br />&emsp;- Python lib: qiling (giả lập thực
-        thi), pwn (pwntools)<br />&emsp;- AutoIT:
-        <a href="https://github.com/nazywam/AutoIt-Ripper">AutoIT Ripper</a>
-        <br />&emsp;- .NET: dnSpy, ILSpy, dotPeek <br />&emsp;- Lua: luadec,
-        unluac
-      </p>
+      <p>Một vài decompilers đối với một số ngôn ngữ:</p>
+      <ul>
+        <li>
+          Python: <a href="https://github.com/zrax/pycdc">pycdc</a>,
+          <a href="https://github.com/jchristman/PyDA">PyDA</a>, dis module
+          (dùng để lấy bytecode instructions (một dạng opcode được sử dụng cho
+          riêng intepreter của Python))
+        </li>
+        <li>Python lib: qiling (giả lập thực thi), pwn (pwntools)</li>
+        <li>
+          AutoIT:
+          <a href="https://github.com/nazywam/AutoIt-Ripper">AutoIT Ripper</a>
+        </li>
+        <li>.NET: dnSpy, ILSpy, dotPeek</li>
+        <li>Lua: luadec, unluac</li>
+      </ul>
       <p>
         Rust:
         <a
@@ -473,31 +518,53 @@
       <p>
         File PE là các file thực thi .exe trên Windows, file .dll,... Một file
         PE có các thành phần:
-        <br /><br />&emsp;- MS-DOS Headers (IMAGE_DOS_HEADER): Ban đầu file .exe
-        được sử dụng trong DOS mode (khá giống command prompt nhưng được trực
-        tiếp tiếp cận phần cứng như bộ nhớ,...) trong hệ điều hành MS-DOS. OS
-        này được phát triển bởi IBM và được Microsoft mua lại OS, sau này phát
-        triển lên thành Windows. Mặc dù đã lâu và hiếm khi dùng nhưng header
-        MS-DOS vẫn được giữ lại cho tới ngày nay. Header này sẽ giúp file có thể
-        chạy trong môi trường MS-DOS. Nó cũng có trường e_magic với giá trị
-        0x5A4D hay "MZ", viết tắt của Mark Zbikowski - một kỹ sư MS-DOS. Trường
-        e_lfanew trỏ tới offset của PE header (chứa nội dung thực sự của file
-        PE).<br /><br />&emsp;- MS-DOS Stub Program: Nếu file được chạy trong
-        môi trường MS-DOS, file sẽ không thực thi code thực sự của file đó mà sẽ
-        khởi chạy code trong MS-DOS Stub Program. Đơn giản nó sẽ in ra dòng chữ
-        "This program cannot be run in DOS mode.". <br /><br />&emsp;-
-        IMAGE_NT_HEADER: Phần này chứa thông tin chính của file PE, gồm 3 thành
-        phần: <br />&emsp;&emsp;+ Signature (4 bytes): Dấu hiệu nhận biết tệp PE
-        ("PE\0\0"). <br />&emsp;&emsp;+ IMAGE_FILE_HEADER: Chứa metadata về file
-        PE (số lượng section, loại máy, kích thước file, v.v.).
-        <br />&emsp;&emsp;+ IMAGE_OPTIONAL_HEADER: Chứa thông tin về địa chỉ
-        entry point, kích thước image, các vùng bộ nhớ cần thiết, v.v.
-        <br /><br />&emsp;- IMAGE_SECTION_HEADER: Mỗi section (Ex: .text,
-        .data,...) có một header riêng, mô tả kích thước, địa chỉ trong file và
-        địa chỉ khi load vào bộ nhớ. <br /><br />&emsp;- Section Data: Đây là
-        phần dữ liệu thực tế của từng section, được load vào bộ nhớ khi chương
-        trình chạy.
       </p>
+      <ul>
+        <li>
+          MS-DOS Headers (IMAGE_DOS_HEADER): Ban đầu file .exe được sử dụng
+          trong DOS mode (khá giống command prompt nhưng được trực tiếp tiếp cận
+          phần cứng như bộ nhớ,...) trong hệ điều hành MS-DOS. OS này được phát
+          triển bởi IBM và được Microsoft mua lại OS, sau này phát triển lên
+          thành Windows. Mặc dù đã lâu và hiếm khi dùng nhưng header MS-DOS vẫn
+          được giữ lại cho tới ngày nay. Header này sẽ giúp file có thể chạy
+          trong môi trường MS-DOS. Nó cũng có trường e_magic với giá trị 0x5A4D
+          hay "MZ", viết tắt của Mark Zbikowski - một kỹ sư MS-DOS. Trường
+          e_lfanew trỏ tới offset của PE header (chứa nội dung thực sự của file
+          PE).
+        </li>
+        <li>
+          MS-DOS Stub Program: Nếu file được chạy trong môi trường MS-DOS, file
+          sẽ không thực thi code thực sự của file đó mà sẽ khởi chạy code trong
+          MS-DOS Stub Program. Đơn giản nó sẽ in ra dòng chữ "This program
+          cannot be run in DOS mode.".
+        </li>
+        <li>
+          IMAGE_NT_HEADER: Phần này chứa thông tin chính của file PE, gồm 3
+          thành phần:
+          <ul>
+            <li>Signature (4 bytes): Dấu hiệu nhận biết tệp PE ("PE\0\0").</li>
+            <li>
+              IMAGE_FILE_HEADER: Chứa metadata về file PE (số lượng section,
+              loại máy, kích thước file, v.v.).
+            </li>
+            <li>
+              IMAGE_OPTIONAL_HEADER: Chứa thông tin về địa chỉ entry point, kích
+              thước image, các vùng bộ nhớ cần thiết, v.v.
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          IMAGE_SECTION_HEADER: Mỗi section (Ex: .text, .data,...) có một header
+          riêng, mô tả kích thước, địa chỉ trong file và địa chỉ khi load vào bộ
+          nhớ. <br />
+        </li>
+        <li>
+          Section Data: Đây là phần dữ liệu thực tế của từng section, được load
+          vào bộ nhớ khi chương trình chạy.
+        </li>
+      </ul>
+
       <p>
         Để lấy thông tin cơ bản về thành phần của 1 file PE, chúng ta có thể sử
         dụng tool như PE Info.
@@ -741,14 +808,20 @@ disassemble(<span style="background-color: #fff0f0">&quot;/path/to/pe/file&quot;
         soát hệ thống. Để debug, chúng ta thường cần hai máy riêng biệt: target
         machine (chạy kernel) và host machine (chạy debugger). Nhưng chúng ta
         cũng có thể debug trên một máy duy nhất theo 2 cách:
-        <br />&emsp;- <b>WinDbg Local Kernel Debugging</b>: thực hiện trên một
-        máy nhưng bị hạn chế, không đặt được breakpoint hoặc debug crash dump mà
-        chỉ trích xuất được dữ liệu tại thời điểm mong muốn. <br />&emsp;-
-        <b>Virtual Machine Debugging</b>: máy ảo giả lập kernel riêng nên có thể
-        debug kernel bằng cách kết nối debugger từ host thông qua cổng COM ảo
-        hoặc KDNET. Hypervisor như VMware, Hyper-V hỗ trợ debug kernel mà không
-        cần máy vật lý thứ hai.
       </p>
+      <ul>
+        <li>
+          <b>WinDbg Local Kernel Debugging</b>: thực hiện trên một máy nhưng bị
+          hạn chế, không đặt được breakpoint hoặc debug crash dump mà chỉ trích
+          xuất được dữ liệu tại thời điểm mong muốn.
+        </li>
+        <li>
+          <b>Virtual Machine Debugging</b>: máy ảo giả lập kernel riêng nên có
+          thể debug kernel bằng cách kết nối debugger từ host thông qua cổng COM
+          ảo hoặc KDNET. Hypervisor như VMware, Hyper-V hỗ trợ debug kernel mà
+          không cần máy vật lý thứ hai.
+        </li>
+      </ul>
       <h3>Software vs. Hardware Execution Breakpoint</h3>
       <p>
         <b>Software Execution Breakpoint</b>: Được thiết lập bằng cách thay thế
